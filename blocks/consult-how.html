@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Індивідуальні консультації · Як проходить терапія</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:          #F5F9FF;
+    --surface:     #FFFFFF;
+    --surface-alt: #EBEEF8;
+    --text:        #1B1550;
+    --text-mute:   #565B7E;
+    --primary:     #5055BE;
+    --border:      #DCE1F0;
+
+    --cat-blue:  #2F6FED;
+    --cat-mint:  #0E9F6E;
+    --cat-peach: #EA7A2C;
+
+    --r-card: 16px;
+    --r-pill: 999px;
+  }
+
+  body {
+    background: var(--surface-alt);
+    font-family: var(--font-body);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .how { padding: clamp(64px, 11vh, 112px) 24px; background: var(--surface-alt); }
+  .how-inner { max-width: 780px; margin: 0 auto; }
+
+  .eyebrow {
+    display: inline-block;
+    font-weight: 800; font-size: .74rem;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 1.85rem);
+    line-height: 1.22;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin-bottom: 34px;
+  }
+
+  .how-list { display: flex; flex-direction: column; }
+
+  .how-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+  }
+  .how-row:last-child { border-bottom: 1px solid var(--border); }
+
+  .how-row dt {
+    font-weight: 800; font-size: .76rem;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--text-mute);
+    padding-top: 3px;
+  }
+  .how-row dd { font-size: 1.05rem; font-weight: 600; line-height: 1.6; color: var(--text); }
+  .how-row dd .price { white-space: nowrap; }
+
+  /* ── «Докладніше» ── */
+  .how-more { margin-top: 26px; }
+  .how-more > summary {
+    list-style: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    font-weight: 700; font-size: .96rem;
+    color: var(--primary);
+    padding: 4px 0;
+  }
+  .how-more > summary::-webkit-details-marker { display: none; }
+  .how-more > summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
+  .how-more > summary .chev { width: 14px; height: 14px; transition: transform .2s ease; }
+  .how-more[open] > summary .chev { transform: rotate(180deg); }
+  .how-more .s-less { display: none; }
+  .how-more[open] .s-more { display: none; }
+  .how-more[open] .s-less { display: inline; }
+
+  .stages {
+    margin-top: 22px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .stage { display: grid; grid-template-columns: 44px 1fr; gap: 16px; }
+  .stage .n {
+    font-family: var(--font-head);
+    font-weight: 700; font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--sc, var(--primary));
+  }
+  .stage:nth-child(1) .n { --sc: var(--cat-blue); }
+  .stage:nth-child(2) .n { --sc: var(--cat-mint); }
+  .stage:nth-child(3) .n { --sc: var(--cat-peach); }
+  .stage p { font-size: 1.02rem; line-height: 1.6; color: var(--text); }
+  .stage p strong { font-weight: 800; }
+
+  .how-note {
+    margin-top: 24px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--text-mute);
+  }
+  .how-note em { font-style: italic; font-weight: 700; color: var(--text); }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { transition: opacity .3s ease; transform: none; }
+    .how-more > summary .chev { transition: none; }
+  }
+
+  @media (max-width: 640px) {
+    .how-row { grid-template-columns: 1fr; gap: 6px; }
+    .how-row dd { font-size: 1rem; }
+    .stage { grid-template-columns: 34px 1fr; gap: 14px; }
+    h2 { margin-bottom: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="how">
+  <div class="how-inner">
+    <span class="eyebrow fade-up">Формат роботи</span>
+    <h2 class="fade-up" style="transition-delay:.06s">Як проходить терапія зі мною</h2>
+
+    <dl class="how-list">
+      <div class="how-row fade-up" style="transition-delay:.04s">
+        <dt>Формат</dt>
+        <dd>Індивідуальні відеозустрічі онлайн, українською або англійською.</dd>
+      </div>
+      <div class="how-row fade-up" style="transition-delay:.1s">
+        <dt>Сесія</dt>
+        <dd>50 хвилин, <span class="price">2500 грн</span>.</dd>
+      </div>
+      <div class="how-row fade-up" style="transition-delay:.16s">
+        <dt>Ритм і тривалість</dt>
+        <dd>Одна зустріч на тиждень. Курс буває коротким (наприклад, 12–16 сесій) або тривалішим — залежно від запиту, плану роботи та вашого темпу.</dd>
+      </div>
+    </dl>
+
+    <details class="how-more fade-up" style="transition-delay:.2s">
+      <summary>
+        <span class="s-more">Докладніше про етапи</span>
+        <span class="s-less">Згорнути</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </summary>
+
+      <div class="stages">
+        <div class="stage">
+          <span class="n">1</span>
+          <p><strong>Перша зустріч — знайомство із запитом.</strong> Розбираємо, з чим ви прийшли, формулюємо цілі й очікування від терапії.</p>
+        </div>
+        <div class="stage">
+          <span class="n">2</span>
+          <p><strong>Друга зустріч — формулювання випадку.</strong> Складаємо разом карту ваших труднощів: що їх підтримує і в якому напрямку працювати.</p>
+        </div>
+        <div class="stage">
+          <span class="n">3+</span>
+          <p><strong>Далі — робота за стратегією.</strong> Крок за кроком пробуємо й закріплюємо інші способи думати та діяти.</p>
+        </div>
+      </div>
+
+      <p class="how-note">
+        Між сесіями — вправи й техніки для самостійної роботи. Це <em>важлива частина</em> процесу:
+        саме так нові навички переходять у повсякденне життя.
+      </p>
+    </details>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

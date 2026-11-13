@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Ліцеї · Цикл (варіант 1: До/Після)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:      #F5F9FF;
+    --alt:     #EBEEF8;
+    --surface: #FFFFFF;
+    --text:    #14132B;
+    --text-mute: #565B7E;
+    --primary: #5055BE;
+    --primary-2: #4A6CF5;
+    --border:  #E1E6F2;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .section { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 32px; background: var(--alt); text-align: center; }
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; margin: 0 auto; }
+  .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
+  .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); }
+
+  .compare { max-width: 1088px; margin: 20px auto 0; width: 100%; }
+  .compare-grid { display: flex; flex-direction: column; gap: 20px; }
+
+  .panel {
+    background: var(--surface); border-radius: 24px; padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 20px; text-align: left;
+  }
+  .panel--before { border: 1px solid var(--border); }
+  .panel--after { border: 2px solid var(--primary); box-shadow: 0 16px 40px rgba(80,85,190,.14); }
+
+  .panel-eyebrow { font-family: var(--font-head); font-weight: 700; font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; }
+  .panel--before .panel-eyebrow { color: #9A4B2C; }
+  .panel--after .panel-eyebrow { color: var(--primary); }
+  .panel-heading { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; line-height: 1.3; }
+
+  .stack { display: flex; flex-direction: column; gap: 0; }
+  .card {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    border-radius: 14px; background: var(--bg); font-family: var(--font-head); font-weight: 600; font-size: .9375rem;
+  }
+  .panel--after .card { background: #EEF0FB; }
+  .card-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 999px; background: #C96A3A; }
+  .panel--after .card-dot { background: var(--primary); }
+
+  .arrow-down { align-self: center; color: #B9BEE6; padding: 2px 0; }
+  .panel--before .arrow-down { color: #E3B59A; }
+  .arrow-down svg { width: 16px; height: 20px; display: block; }
+
+  .pill-end {
+    margin-top: 4px; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px; font-family: var(--font-head); font-weight: 700; font-size: .8125rem;
+  }
+  .panel--before .pill-end { background: #FDF0E6; color: #9A4B2C; }
+  .panel--after .pill-end { background: var(--primary); color: #fff; }
+  .pill-end svg { width: 14px; height: 14px; }
+
+  .divider { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .divider-badge {
+    flex-shrink: 0; width: 48px; height: 48px; border-radius: 999px; background: var(--primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: .75rem;
+  }
+  .divider svg { width: 18px; height: 18px; color: var(--primary); transform: rotate(90deg); }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } }
+
+  @media (min-width: 860px) {
+    .compare-grid { flex-direction: row; align-items: stretch; gap: 0; }
+    .panel { flex: 1; }
+    .divider { flex-direction: column; flex-shrink: 0; width: 72px; }
+    .divider svg { transform: none; }
+  }
+
+  @media (max-width: 620px) {
+    .section { padding: 68px 20px; }
+    .head h2 { font-size: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="head fade-up">
+    <h2>Цикл зростання і розвитку вашого ліцею</h2>
+    <p>Як психологічна підтримка змінює ліцей</p>
+  </div>
+
+  <div class="compare fade-up" style="transition-delay:.1s">
+    <div class="compare-grid">
+      <div class="panel panel--before">
+        <div>
+          <div class="panel-eyebrow">Без підтримки</div>
+          <h3 class="panel-heading">Коло, що не розривається</h3>
+        </div>
+        <div class="stack">
+          <div class="card"><span class="card-dot"></span>Вигорання педагогів</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>Напружена атмосфера на уроках</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>Учні не довіряють педагогам</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>Нестабільність ліцею</div>
+        </div>
+        <div class="pill-end"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9a6 6 0 1 1-2-4.5M13.5 1.5V5H10"/></svg>Коло замикається знову</div>
+      </div>
+
+      <div class="divider" aria-hidden="true">
+        <div class="divider-badge">КПТ</div>
+        <svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg>
+      </div>
+
+      <div class="panel panel--after">
+        <div>
+          <div class="panel-eyebrow">З психологічною підтримкою</div>
+          <h3 class="panel-heading">Коло розривається</h3>
+        </div>
+        <div class="stack">
+          <div class="card"><span class="card-dot"></span>Педагоги мають мотивацію</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>На уроках панує безпека та натхнення</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>Учні довіряють педагогам</div>
+          <div class="arrow-down"><svg viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v14M2 10l6 6 6-6"/></svg></div>
+          <div class="card"><span class="card-dot"></span>Стабільність у житті ліцею</div>
+        </div>
+        <div class="pill-end"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 7 13.5 15 4.5"/></svg>Коло розірване</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

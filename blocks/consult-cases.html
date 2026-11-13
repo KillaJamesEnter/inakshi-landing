@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Індивідуальні консультації · З чим приходять</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:        #F5F9FF;
+    --surface:   #FFFFFF;
+    --text:      #1B1550;
+    --text-mute: #565B7E;
+    --primary:   #5055BE;
+    --primary-a08: rgba(80, 85, 190, .08);
+    --border:    #E1E6F2;
+
+    --cat-blue:  #2F6FED;
+    --cat-mint:  #0E9F6E;
+    --cat-peach: #EA7A2C;
+    --cat-sun:   #C99A0A;
+    --cat-blush: #E2497E;
+    --cat-lilac: #8256E0;
+
+    --r-badge: 12px;
+    --r-card: 16px;
+  }
+
+  body {
+    background: var(--surface);
+    font-family: var(--font-body);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .cases { padding: clamp(64px, 11vh, 112px) 24px; background: var(--surface); }
+  .cases-inner { max-width: 780px; margin: 0 auto; }
+
+  .eyebrow {
+    display: inline-block;
+    font-weight: 800; font-size: .74rem;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 1.85rem);
+    line-height: 1.22;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin-bottom: 36px;
+  }
+
+  .cases-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 44px;
+  }
+
+  .cases-list li {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+    font-size: 1.04rem; font-weight: 600;
+    line-height: 1.5;
+  }
+  .cases-list li::before {
+    content: ''; flex: none;
+    width: 8px; height: 8px; margin-top: 6px;
+    border-radius: 50%;
+    background: var(--dot, var(--primary));
+  }
+  .cases-list li:nth-child(6n+1) { --dot: var(--cat-blue); }
+  .cases-list li:nth-child(6n+2) { --dot: var(--cat-mint); }
+  .cases-list li:nth-child(6n+3) { --dot: var(--cat-peach); }
+  .cases-list li:nth-child(6n+4) { --dot: var(--cat-sun); }
+  .cases-list li:nth-child(6n+5) { --dot: var(--cat-blush); }
+  .cases-list li:nth-child(6n+6) { --dot: var(--cat-lilac); }
+
+  .cases-note {
+    margin-top: 40px;
+    padding: 22px 26px;
+    background: var(--primary-a08);
+    border-radius: var(--r-card);
+    font-size: .96rem;
+    line-height: 1.65;
+    color: var(--text-mute);
+  }
+  .cases-note strong { color: var(--text); font-weight: 800; }
+  .cases-note a { color: var(--primary); text-decoration: none; font-weight: 700; }
+  .cases-note a:hover { text-decoration: underline; }
+  .cases-note a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { transition: opacity .3s ease; transform: none; }
+  }
+
+  @media (max-width: 640px) {
+    .cases-list { grid-template-columns: 1fr; }
+    .cases-list li { font-size: 1rem; }
+    h2 { margin-bottom: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="cases">
+  <div class="cases-inner">
+    <span class="eyebrow fade-up">З чим приходять</span>
+    <h2 class="fade-up" style="transition-delay:.06s">Запити, з якими я працюю</h2>
+
+    <ul class="cases-list">
+      <li class="fade-up" style="transition-delay:.04s">Тривога, напруження, надмірне занепокоєння</li>
+      <li class="fade-up" style="transition-delay:.08s">Панічні атаки</li>
+      <li class="fade-up" style="transition-delay:.12s">Страхи, фобії, соціальна тривога</li>
+      <li class="fade-up" style="transition-delay:.16s">Наслідки травматичних подій, ПТСР</li>
+      <li class="fade-up" style="transition-delay:.20s">Стрес, пов'язаний із війною і невизначеністю</li>
+      <li class="fade-up" style="transition-delay:.24s">Емоційне вигорання, брак сил</li>
+      <li class="fade-up" style="transition-delay:.28s">Пригнічений настрій, апатія</li>
+      <li class="fade-up" style="transition-delay:.32s">Надмірна самокритика, низька самооцінка</li>
+      <li class="fade-up" style="transition-delay:.36s">Труднощі в стосунках</li>
+      <li class="fade-up" style="transition-delay:.40s">Втрата і переживання горя</li>
+    </ul>
+
+    <p class="cases-note fade-up" style="transition-delay:.2s">
+      <strong>Це планова терапія, а не екстрена допомога.</strong>
+      Якщо стан гострий або є думки про самоушкодження — зателефонуйте на цілодобову
+      безкоштовну лінію психологічної підтримки <a href="tel:7333">Lifeline Ukraine 7333</a>.
+    </p>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

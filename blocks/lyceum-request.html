@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Ліцеї · Ваш запит</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:      #F5F9FF;
+    --surface: #FFFFFF;
+    --text:    #14132B;
+    --text-mute: #565B7E;
+    --primary: #5055BE;
+    --primary-2: #4A6CF5;
+    --border:  #E1E6F2;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .section { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 24px; background: var(--surface); }
+
+  .eyebrow { font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 1088px; width: 100%; margin: 0 auto; }
+  .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; white-space: nowrap; }
+  .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); max-width: 560px; }
+
+  /* Interactive multi-select — ідентично consultation-landing/index.html "Кому підійде" */
+  .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 1088px; width: 100%; margin: 0 auto; }
+  .fitcard {
+    appearance: none; -webkit-appearance: none;
+    background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 12px; min-height: 56px;
+    min-width: 0; width: 100%; cursor: pointer; text-align: left;
+    font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--text); position: relative;
+    transition: border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .fitcard:hover { border-color: #B9BEE6; }
+  .fitcard:focus { outline: none; box-shadow: none; }
+  .fitcard:focus-visible { outline: 3px solid #9EA3F0; outline-offset: 2px; }
+  .fitcard:active { transform: scale(.99); }
+  .fitcard.is-selected { border-color: var(--primary); background: #EEF0FB; }
+  .fitcard--other { background: transparent; border-style: dashed; border-color: #C9CDEB; color: #3F4466; }
+  .fitcard--other:hover { border-style: dashed; }
+  .fitcard--other.is-selected { border-style: solid; background: #EEF0FB; color: var(--text); }
+  .fitcard-box {
+    flex: 0 0 auto; width: 22px; height: 22px; box-sizing: border-box; border-radius: 7px;
+    border: 2px solid #C9CDEB; display: grid; place-items: center; color: transparent; background: var(--surface);
+    transition: all .15s ease;
+  }
+  .fitcard-box svg { width: 13px; height: 13px; }
+  .fitcard.is-selected .fitcard-box { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  .fit-other-input {
+    max-width: 1088px; width: 100%; margin-left: auto; margin-right: auto;
+    overflow: hidden; box-sizing: border-box; max-height: 0; opacity: 0;
+    transition: max-height .25s ease, opacity .2s ease, margin .25s ease;
+  }
+  .fit-other-input.is-open { max-height: 220px; opacity: 1; margin-top: 4px; }
+  .fit-other-input label { display: block; margin-bottom: 8px; font-size: .875rem; font-weight: 700; color: var(--text-mute); }
+  .fit-other-input textarea {
+    width: 100%; box-sizing: border-box; border: 2px solid var(--primary); border-radius: 16px;
+    padding: 14px 16px; font-family: var(--font-body); font-size: .9375rem; line-height: 1.5; color: var(--text);
+    resize: vertical; min-height: 100px; background: var(--surface);
+  }
+  .fit-other-input textarea:focus { outline: none; }
+
+  .fit-cta {
+    max-width: 1088px; width: 100%; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center;
+  }
+  .fit-cta-count { font-family: var(--font-head); font-weight: 600; font-size: 1.125rem; color: var(--text); }
+  .fit-cta-hint { font-size: .8125rem; color: var(--text-mute); }
+  .fit-cta-btn {
+    display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 56px;
+    padding: 0 30px; border-radius: 999px; font-weight: 800; font-size: 1rem;
+    background: linear-gradient(135deg, var(--primary-2), var(--primary)); color: #fff; text-decoration: none;
+    box-shadow: 0 12px 30px rgba(80,85,190,.28); transition: filter .15s ease, box-shadow .15s ease;
+  }
+  .fit-cta-btn:hover { filter: brightness(1.05); }
+  .fit-cta-btn[aria-disabled="true"] { background: #D5D9F2; box-shadow: none; pointer-events: none; }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } .fitcard:active { transform: none; } }
+
+  @media (min-width: 860px) {
+    .fit-cta { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 18px 18px 28px; text-align: left; }
+    .fit-cta-info { display: flex; flex-direction: column; gap: 2px; }
+    .fit-cta-hint { white-space: nowrap; }
+    .fit-cta-btn { width: auto; white-space: nowrap; font-size: 1.0625rem; padding: 0 40px; }
+  }
+
+  @media (min-width: 900px) {
+    .fitgrid { display: flex; flex-flow: row wrap; }
+    .fitcard { width: 400px; flex: 0 0 400px; padding: 10px 20px 10px 16px; min-height: 52px; gap: 12px; font-size: 1.0625rem; border-radius: 14px; white-space: nowrap; }
+    .fitcard-box { width: 24px; height: 24px; }
+    .fitcard-box svg { width: 14px; height: 14px; }
+  }
+
+  @media (max-width: 1024px) {
+    .section { padding: 80px 32px; }
+    .head h2 { white-space: normal; }
+  }
+
+  @media (max-width: 620px) {
+    .section { padding: 68px 20px; gap: 20px; }
+    .head h2 { font-size: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="head fade-up">
+    <div class="eyebrow">Запит вашого ліцею</div>
+    <h2 id="reqH2">Оберіть, які виклики існують у вашому ліцеї</h2>
+    <p>Можна обрати кілька — це допоможе зрозуміти, як саме вам допомогти</p>
+  </div>
+
+  <div class="fitgrid fade-up" id="reqGrid" style="transition-delay:.06s" role="group" aria-labelledby="reqH2">
+    <button type="button" class="fitcard" aria-pressed="false" data-id="climate" data-label="Напружена атмосфера під час уроків">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Напружена атмосфера під час уроків</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="burnout" data-label="Вигорання та виснаження педагогів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Вигорання та виснаження педагогів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="students" data-label="Напружені стосунки між учнями">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Напружені стосунки між учнями</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="motivation" data-label="Низька мотивація учнів/педагогів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Низька мотивація учнів/педагогів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="adaptation" data-label="Труднощі адаптації нових учнів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Труднощі адаптації нових учнів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="team" data-label="Труднощі в роботі колективу">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Труднощі в роботі колективу</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="changes" data-label="Важко впроваджувати зміни в ліцеї">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Важко впроваджувати зміни в ліцеї</span>
+    </button>
+    <button type="button" class="fitcard fitcard--other" id="reqOtherCard" aria-pressed="false" data-id="other" data-label="Інше">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Інше — опишу своїми словами</span>
+    </button>
+  </div>
+
+  <div class="fit-other-input" id="reqOtherInput">
+    <label for="reqOtherText">Опишіть, що вас турбує</label>
+    <textarea id="reqOtherText" rows="3" placeholder="Наприклад: учні часто конфліктують одне з одним" maxlength="200"></textarea>
+  </div>
+
+  <div class="fit-cta fade-up" style="transition-delay:.14s">
+    <div class="fit-cta-info">
+      <div class="fit-cta-count" id="reqCount" aria-live="polite">Нічого не обрано</div>
+      <div class="fit-cta-hint" id="reqHint">Оберіть хоча б одну тему або «Інше»</div>
+    </div>
+    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
+    <a href="CONSULT_URL" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Interactive multi-select checklist feeding the CTA button
+  (() => {
+    const grid = document.getElementById('reqGrid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.fitcard'));
+    const otherCard = document.getElementById('reqOtherCard');
+    const otherInput = document.getElementById('reqOtherInput');
+    const otherText = document.getElementById('reqOtherText');
+    const countEl = document.getElementById('reqCount');
+    const hintEl = document.getElementById('reqHint');
+    const ctaBtn = document.getElementById('reqCtaBtn');
+
+    const pluralTopics = (n) => {
+      const mod10 = n % 10, mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'тему';
+      if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return 'теми';
+      return 'тем';
+    };
+
+    const selectedCount = () => {
+      let n = cards.filter(c => c !== otherCard && c.classList.contains('is-selected')).length;
+      if (otherCard.classList.contains('is-selected') && otherText.value.trim()) n += 1;
+      return n;
+    };
+
+    const updateCta = () => {
+      const n = selectedCount();
+      countEl.textContent = n === 0 ? 'Нічого не обрано' : `Обрано ${n} ${pluralTopics(n)}`;
+      hintEl.textContent = n === 0 ? 'Оберіть хоча б одну тему або «Інше»' : 'Дякуємо, це допоможе підготуватись до розмови';
+      ctaBtn.setAttribute('aria-disabled', n === 0 ? 'true' : 'false');
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const selected = card.classList.toggle('is-selected');
+        card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (card === otherCard) {
+          otherInput.classList.toggle('is-open', selected);
+          if (selected) setTimeout(() => otherText.focus(), 200);
+        }
+        updateCta();
+      });
+    });
+    otherText.addEventListener('input', updateCta);
+    ctaBtn.addEventListener('click', (e) => {
+      if (ctaBtn.getAttribute('aria-disabled') === 'true') e.preventDefault();
+    });
+    updateCta();
+  })();
+</script>
+</body>
+</html>

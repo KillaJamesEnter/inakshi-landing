@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Ліцеї · Що змінюється</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:      #F5F9FF;
+    --alt:     #EBEEF8;
+    --surface: #FFFFFF;
+    --text:    #14132B;
+    --text-mute: #565B7E;
+    --primary: #5055BE;
+    --border:  #E1E6F2;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .section { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 32px; background: var(--alt); }
+
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 820px; }
+  .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; white-space: nowrap; }
+  .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); }
+
+  .ring { position: relative; width: 100%; max-width: 1248px; aspect-ratio: 1248 / 440; margin: 20px auto 0; }
+  .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .node {
+    position: absolute; box-sizing: border-box; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+    box-shadow: 0 12px 28px rgba(80,85,190,.1); color: var(--text); padding: 24px 40px;
+    display: flex; align-items: center; font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.3;
+  }
+  .node--top    { left: 34.2%; top: 0;      width: 31.65%; height: 34.1%; }
+  .node--right  { left: 68.35%; top: 32.95%; width: 31.65%; height: 34.1%; }
+  .node--bottom { left: 34.2%; top: 65.9%;  width: 31.65%; height: 34.1%; }
+  .node--left   { left: 0;     top: 32.95%; width: 31.65%; height: 34.1%; }
+
+  .center {
+    position: absolute; left: 40.95%; top: 42.5%; width: 18.2%; height: 15%;
+    border-radius: 60px; background: var(--primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.0625rem; line-height: 1.2; padding: 4px 20px;
+  }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } }
+
+  @media (max-width: 1024px) {
+    .section { padding: 80px 32px; }
+    .ring { aspect-ratio: auto; height: auto; display: flex; flex-direction: column; gap: 16px; }
+    .ring svg { display: none; }
+    .node, .center { position: static; width: 100%; height: auto; padding: 20px 28px; text-align: left; justify-content: flex-start; }
+    .center { order: 5; margin-top: 4px; justify-content: center; text-align: center; }
+  }
+
+  @media (max-width: 620px) {
+    .section { padding: 68px 20px; }
+    .head h2 { font-size: 1.75rem; white-space: normal; }
+    .node { font-size: 1.1rem; padding: 18px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="head fade-up">
+    <h2>Цикл зростання і розвитку вашого ліцею</h2>
+    <p>Як психологічна підтримка змінює ліцей</p>
+  </div>
+
+  <div class="ring fade-up" style="transition-delay:.1s">
+    <svg viewBox="0 0 1248 440" aria-hidden="true">
+      <defs>
+        <marker id="arrK" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
+          <path d="M0,0 L18,9 L0,18 z" fill="#5055BE"></path>
+        </marker>
+      </defs>
+      <path d="M822,75 Q1100,75 1100,141" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M1100,299 Q1100,365 826,365" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M423,365 Q197,365 197,299" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M197,141 Q197,75 423,75" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+    </svg>
+
+    <div class="node node--top">Педагоги мають мотивацію, а не вигорання</div>
+    <div class="node node--right">На уроках панує безпека та натхнення</div>
+    <div class="node node--bottom">Учні довіряють вашим педагогам</div>
+    <div class="node node--left">Ви отримуєте стабільність у житті ліцею</div>
+    <div class="center">Психологічна підтримка</div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

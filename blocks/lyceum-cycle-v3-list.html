@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Ліцеї · Цикл (варіант 3: вертикальний список)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:      #F5F9FF;
+    --alt:     #EBEEF8;
+    --surface: #FFFFFF;
+    --text:    #14132B;
+    --text-mute: #565B7E;
+    --primary: #5055BE;
+    --primary-2: #4A6CF5;
+    --border:  #E1E6F2;
+    --dark-1:  #1B1550;
+    --dark-2:  #332B7A;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .section { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 32px; background: var(--alt); }
+  .head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
+  .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
+  .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); }
+
+  .cl-list {
+    max-width: 720px; margin: 8px auto 0; width: 100%; position: relative;
+    display: flex; flex-direction: column; gap: 16px; padding-left: 44px;
+  }
+  .cl-list::before { content: ""; position: absolute; left: 15px; top: 24px; bottom: 24px; width: 2px; background: var(--border); }
+
+  .cl-item {
+    position: relative; display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border);
+  }
+  .cl-item::before {
+    content: ""; position: absolute; left: -44px; top: 50%; margin-top: -15px;
+    width: 30px; height: 30px; border-radius: 999px; background: var(--primary); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cl-num {
+    position: absolute; left: -44px; top: 50%; margin-top: -15px; width: 30px; height: 30px; border-radius: 999px;
+    background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head); font-weight: 700; font-size: .875rem; z-index: 1;
+  }
+  .cl-item p { font-family: var(--font-head); font-weight: 600; font-size: 1.0625rem; line-height: 1.35; }
+
+  .cl-item--final {
+    background: linear-gradient(135deg, var(--dark-1), var(--dark-2)); border: none; color: #fff;
+    padding: 24px 26px;
+  }
+  .cl-item--final .cl-num { background: var(--primary-2); }
+  .cl-item--final p { font-size: 1.125rem; }
+
+  .cl-tag {
+    margin-left: auto; flex-shrink: 0; font-family: var(--font-head); font-weight: 700; font-size: .75rem;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--primary); background: #EEF0FB; border-radius: 999px; padding: 6px 12px;
+  }
+  .cl-item--final .cl-tag { color: #fff; background: rgba(255,255,255,.18); }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } }
+
+  @media (max-width: 620px) {
+    .section { padding: 68px 20px; }
+    .head h2 { font-size: 1.75rem; }
+    .cl-list { padding-left: 36px; }
+    .cl-item::before, .cl-num { left: -36px; }
+    .cl-item { flex-wrap: wrap; gap: 8px; }
+    .cl-tag { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="head fade-up">
+    <h2>Цикл зростання і розвитку вашого ліцею</h2>
+    <p>Як психологічна підтримка змінює ліцей — крок за кроком</p>
+  </div>
+
+  <div class="cl-list fade-up" style="transition-delay:.1s">
+    <div class="cl-item">
+      <span class="cl-num">1</span>
+      <p>Педагоги мають мотивацію, а не вигорання</p>
+      <span class="cl-tag">Педагоги</span>
+    </div>
+    <div class="cl-item">
+      <span class="cl-num">2</span>
+      <p>На уроках панує безпека та натхнення</p>
+      <span class="cl-tag">Клімат</span>
+    </div>
+    <div class="cl-item">
+      <span class="cl-num">3</span>
+      <p>Учні довіряють вашим педагогам</p>
+      <span class="cl-tag">Учні</span>
+    </div>
+    <div class="cl-item cl-item--final">
+      <span class="cl-num">4</span>
+      <p>Ви отримуєте стабільність у житті ліцею</p>
+      <span class="cl-tag">Результат</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

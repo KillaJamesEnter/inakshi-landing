@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — Ліцеї · Послуги</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:        #F5F9FF;
+    --surface:   #FFFFFF;
+    --text:      #14132B;
+    --text-mute: #565B7E;
+    --primary:   #5055BE;
+    --primary-2: #4A6CF5;
+    --border:    #E1E6F2;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .section { padding: 112px var(--gutter); }
+
+  .head { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; max-width: 680px; margin: 0 auto 48px; }
+  .eyebrow { font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+  .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; color: var(--text); }
+  .head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
+
+  .row { display: flex; max-width: 1040px; margin: 0 auto; }
+  .item { flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 4px 36px; }
+  .item + .item { border-left: 1px solid var(--border); }
+  .item-icon {
+    width: 48px; height: 48px; border-radius: 999px; background: rgba(80, 85, 190, .1); color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .item h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; color: var(--text); }
+  .item p { font-size: .97rem; line-height: 1.55; color: var(--text-mute); }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } }
+
+  @media (max-width: 1024px) {
+    .section { padding: 80px 32px; }
+    .row { flex-direction: column; gap: 36px; }
+    .item { padding: 0; }
+    .item + .item { border-left: none; border-top: 1px solid var(--border); padding-top: 32px; }
+  }
+
+  @media (max-width: 620px) {
+    .section { padding: 68px 20px; }
+    .head h2 { font-size: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="head fade-up">
+    <div class="eyebrow">Послуги</div>
+    <h2>Підтримка для кожного в ліцеї</h2>
+    <p>Три напрямки роботи — для адміністрації, педагогів і учнів</p>
+  </div>
+
+  <div class="row">
+    <div class="item fade-up" style="transition-delay:.05s">
+      <div class="item-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M3 13h18"></path></svg>
+      </div>
+      <h3>Для адміністрації</h3>
+      <p>Стратегічні рекомендації щодо психологічного клімату та стабільності колективу</p>
+    </div>
+
+    <div class="item fade-up" style="transition-delay:.12s">
+      <div class="item-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M9 20h6M12 16v4"></path><path d="M9 9l3 1.5L9 12"></path></svg>
+      </div>
+      <h3>Для педагогів</h3>
+      <p>Профілактика вигорання, групова підтримка та практичні інструменти</p>
+    </div>
+
+    <div class="item fade-up" style="transition-delay:.19s">
+      <div class="item-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L2 8l10 5 10-5-10-5z"></path><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"></path></svg>
+      </div>
+      <h3>Для учнів</h3>
+      <p>Безпечний простір для адаптації, довіри та емоційної стійкості</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

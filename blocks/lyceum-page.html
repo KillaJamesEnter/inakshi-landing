@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Інакші — психологічна підтримка для онлайн-ліцеїв</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400..900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-head: 'Geologica', system-ui, sans-serif;
+    --gutter: max(24px, calc((100% - 1248px) / 2));
+    --font-body: 'Nunito', system-ui, sans-serif;
+
+    --bg:        #F5F9FF;
+    --surface:   #FFFFFF;
+    --alt:       #EBEEF8;
+    --footer:    #EEF0FB;
+    --text:      #14132B;
+    --text-mute: #565B7E;
+    --primary:   #5055BE;
+    --primary-2: #4A6CF5;
+    --border:    #E1E6F2;
+    --dark-1:    #1B1550;
+    --dark-2:    #332B7A;
+    --r-pill:    999px;
+  }
+
+  body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .fade-up { transition: opacity .3s ease; transform: none; } }
+
+  /* ════════════════ 1. HERO ════════════════ */
+  #hero nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px; background: rgba(245, 249, 255, .82); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  #hero .logo { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; }
+  #hero .logo .mark { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--primary); letter-spacing: -.01em; }
+  #hero .logo .sub { font-family: var(--font-body); font-weight: 700; font-style: italic; font-size: .82rem; color: var(--text-mute); }
+  #hero .logo:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+  #hero .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+    color: #fff; text-decoration: none; border: none; cursor: pointer;
+    padding: 16px 32px; border-radius: var(--r-pill); white-space: nowrap;
+    background: linear-gradient(135deg, var(--primary-2), var(--primary));
+    box-shadow: 0 12px 30px rgba(80, 85, 190, .28);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  #hero .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(80, 85, 190, .38); }
+  #hero .btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+  #hero .btn--sm { padding: 11px 24px; font-size: .9rem; box-shadow: 0 8px 22px rgba(80, 85, 190, .24); }
+
+  #hero .hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: space-between; gap: 64px; padding: 148px var(--gutter) 104px; }
+  #hero .hero::before, #hero .hero::after {
+    content: ""; position: absolute; border-radius: 50%;
+    filter: blur(100px); pointer-events: none; z-index: 0;
+  }
+  #hero .hero::before { width: 560px; height: 560px; background: rgba(80, 85, 190, .16); top: -160px; left: -130px; }
+  #hero .hero::after  { width: 440px; height: 440px; background: rgba(130, 86, 224, .12); right: -130px; bottom: -110px; }
+  #hero .hero-copy, #hero .hero-visual { position: relative; z-index: 1; }
+  #hero .hero-copy { max-width: 580px; display: flex; flex-direction: column; gap: 24px; }
+  #hero .eyebrow { font-family: var(--font-head); font-weight: 800; font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); white-space: nowrap; }
+  #hero h1 { font-family: var(--font-head); font-weight: 700; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.1; letter-spacing: -.01em; color: var(--text); }
+  #hero h1 .hl { color: var(--primary); }
+
+  #hero .hero-features { display: flex; flex-wrap: wrap; gap: 10px; }
+  #hero .hf-tag {
+    display: inline-flex; align-items: center; white-space: nowrap;
+    padding: 9px 18px; border-radius: var(--r-pill);
+    background: rgba(80, 85, 190, .1); color: var(--primary);
+    font-family: var(--font-head); font-weight: 700; font-size: .875rem;
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+  #hero .hf-tag:hover { transform: translateY(-3px); background: rgba(80, 85, 190, .18); box-shadow: 0 8px 18px rgba(80, 85, 190, .18); }
+  @media (prefers-reduced-motion: reduce) { #hero .hf-tag:hover { transform: none; } }
+
+  #hero .hero-visual {
+    flex-shrink: 0; width: 640px; max-width: 46vw; aspect-ratio: 640 / 520; border-radius: 24px;
+    background: linear-gradient(160deg, #C9D6F2, #8E9BD6); box-shadow: 0 24px 48px rgba(80, 85, 190, .16);
+    overflow: hidden;
+  }
+  #hero .hero-visual video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (prefers-reduced-motion: reduce) { #hero .btn:hover { transform: none; } }
+
+  @media (max-width: 1024px) {
+    #hero header { padding: 20px 32px; }
+    #hero .hero { flex-direction: column-reverse; padding: 136px 32px 64px; gap: 48px; text-align: center; }
+    #hero .hero-copy { align-items: center; max-width: 100%; }
+    #hero .hero-visual { width: 100%; max-width: 480px; aspect-ratio: 640 / 400; }
+  }
+  @media (max-width: 620px) {
+    #hero nav { padding: 12px 18px; }
+    #hero .logo .sub { display: none; }
+    #hero .btn--sm { padding: 9px 18px; font-size: .82rem; }
+    #hero .hero { padding: 116px 20px 48px; }
+    #hero .eyebrow { font-size: .7rem; letter-spacing: .1em; }
+  }
+
+  /* ════════════════ 2. TIMELINE ════════════════ */
+  #timeline { padding: 112px var(--gutter); display: flex; gap: 64px; align-items: flex-start; background: var(--alt); }
+
+  #timeline .tl-head { flex: 0 0 640px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 120px; }
+  #timeline .tl-head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; color: var(--text); }
+  #timeline .tl-head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
+
+  #timeline .tl-list { flex: 1; position: relative; display: flex; flex-direction: column; gap: 20px; padding-left: 40px; max-width: 760px; }
+  #timeline .tl-list::before { content: ""; position: absolute; left: 7px; top: 24px; bottom: 24px; width: 2px; background: var(--border); }
+
+  #timeline .tl-item { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); }
+  #timeline .tl-item::before { content: ""; position: absolute; left: -40px; top: 50%; margin-top: -8px; width: 16px; height: 16px; border-radius: 999px; background: var(--primary); }
+  #timeline .tl-item--final { background: linear-gradient(135deg, var(--dark-1), var(--dark-2)); border: none; color: #fff; }
+  #timeline .tl-item--final::before { background: var(--primary-2); }
+
+  #timeline .tl-item h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.25rem; }
+  #timeline .tl-item p { font-size: .94rem; line-height: 1.5; color: var(--text-mute); }
+  #timeline .tl-item--final p { color: #F0F1FC; font-weight: 600; }
+
+  #timeline .tl-bar { height: 6px; width: 30%; border-radius: 999px; background: var(--primary); margin-top: 6px; }
+  #timeline .tl-item:nth-child(2) .tl-bar { width: 50%; }
+  #timeline .tl-item:nth-child(3) .tl-bar { width: 75%; }
+  #timeline .tl-item--final .tl-bar { width: 100%; background: linear-gradient(90deg, var(--primary-2), #A9B4FF); }
+
+  @media (max-width: 1024px) {
+    #timeline { flex-direction: column; padding: 80px 32px; gap: 32px; }
+    #timeline .tl-head { flex: none; position: static; max-width: 640px; }
+    #timeline .tl-list { max-width: 100%; }
+  }
+  @media (max-width: 620px) {
+    #timeline { padding: 68px 20px; }
+    #timeline .tl-list { padding-left: 32px; }
+    #timeline .tl-item { padding: 18px 20px; }
+    #timeline .tl-item::before { left: -32px; }
+  }
+
+  /* ════════════════ 3. ABOUT ════════════════ */
+  #about { padding: 112px var(--gutter) 120px; background: linear-gradient(180deg, #DDE8FB 0%, var(--bg) 420px, var(--bg) 100%); }
+  #about .eyebrow { font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+
+  #about .about-top { display: flex; gap: 64px; align-items: center; margin-bottom: 96px; }
+  #about .about-visual { flex: 0 0 400px; width: 400px; height: 520px; border-radius: 24px; background: linear-gradient(160deg, #C9D6F2, #8E9BD6); box-shadow: 0 24px 48px rgba(80,85,190,.16); overflow: hidden; }
+  #about .about-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 18%; display: block; }
+  #about .about-copy { flex: 1; max-width: 610px; display: flex; flex-direction: column; gap: 18px; }
+  #about .about-copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: var(--text); margin-top: 6px; }
+  #about .about-copy .intro { font-family: var(--font-head); font-weight: 500; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
+  #about .about-copy .intro .accent { color: var(--primary); font-weight: 700; }
+  #about .about-copy .lead { font-family: var(--font-head); font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text); }
+
+  #about .principles { display: flex; flex-direction: column; }
+  #about .principle { display: flex; gap: 20px; padding: 24px 0; border-top: 1px solid var(--border); }
+  #about .principle:last-child { border-bottom: 1px solid var(--border); }
+  #about .num { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; background: #EEF2FF; color: var(--primary); font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; }
+  #about .principle h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.1875rem; line-height: 1.4; margin-bottom: 4px; }
+  #about .principle p { font-size: .9375rem; line-height: 1.45; color: var(--text-mute); }
+  @media (min-width: 621px) { #about .principle p.nowrap-lg { white-space: nowrap; } }
+
+  /* Education (copied verbatim from consultation-landing/index.html "Освіта і спеціалізація") */
+  #about .edu-head { max-width: 1088px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  #about .edu-title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
+  #about .edu-title .hl { color: var(--primary); }
+  #about .edu-sub { margin: 0; max-width: 560px; font-family: var(--font-body); font-size: .9375rem; line-height: 1.5; color: #6B6F8A; }
+
+  #about .edu-panel {
+    max-width: 1088px; margin: 40px auto 0; background: var(--surface); border: 1px solid #E1E6F5; border-radius: 24px; padding: 12px;
+    box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;
+  }
+
+  #about .mgrid { display: flex; flex-direction: column; gap: 10px; }
+  #about .mcard {
+    background: #F6F7FC; border: 1px solid #E3E7F3; border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(27,21,80,.05);
+    padding: 14px 12px; display: flex; flex-direction: column; gap: 12px;
+  }
+  #about .mcard-head { display: flex; align-items: center; gap: 10px; }
+  #about .mcard-copy { display: flex; flex-direction: column; gap: 3px; text-align: left; }
+  #about .mcard .badge-logo {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+    background: var(--c-bg); display: grid; place-items: center; overflow: hidden;
+  }
+  #about .mcard .badge-logo svg { width: 22px; height: 22px; color: var(--c-accent); }
+  #about .mcard .badge-logo--plain { background: none; }
+  #about .mcard .badge-logo--plain img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+  #about .mcard h3 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 1.125rem; color: var(--text); }
+  #about .mcard p { margin: 0; font-family: var(--font-body); font-size: .8125rem; line-height: 1.4; color: #4A4E6A; white-space: nowrap; }
+  #about .mcard .pill {
+    box-sizing: border-box; width: 100%; padding: 7px 6px; border-radius: 12px;
+    background: transparent; border: 1px solid #D9DCF5; display: flex; flex-direction: column; align-items: center; gap: 1px;
+  }
+  #about .mcard .pill b { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: #1B1550; }
+  #about .mcard .pill span { font-family: var(--font-body); font-weight: 800; font-size: .625rem; text-transform: uppercase; letter-spacing: .08em; color: #6B6F94; }
+  #about .mcard.c-ostroh { --c-bg: #F6E1E6; --c-accent: #9B1B30; }
+  #about .mcard.c-uicbt  { --c-bg: #DCEAF7; --c-accent: #0B6FB6; }
+  #about .mcard.c-uakpt  { --c-bg: #D7EFEA; --c-accent: #0B7A73; }
+  @media (max-width: 374px) { #about .mcard p { font-size: .75rem; } }
+
+  #about .proof-controls { display: contents; }
+  #about .proof-tabs { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  #about .proof-tab {
+    width: 100%; box-sizing: border-box; min-height: 44px; padding: 0 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-body); font-weight: 700; font-size: .875rem; white-space: nowrap;
+    background: #fff; color: #3F4466; border: 1px solid #E1E6F5; border-radius: 999px; cursor: pointer;
+    transition: color .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+  #about .proof-tab:hover { border-color: var(--primary); color: var(--text); }
+  #about .proof-tab.is-active { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 6px 18px rgba(80,85,190,.28); }
+  #about .proof-tap-hint {
+    position: absolute; right: -6px; top: -22px; width: 22px; height: 22px;
+    color: var(--primary); opacity: 0; pointer-events: none;
+    animation: proofTapHint 2.6s ease-in-out .6s 2;
+  }
+  @keyframes proofTapHint {
+    0% { opacity: 0; transform: translate(6px, 6px) scale(.85); }
+    18% { opacity: 1; transform: translate(0, 0) scale(1); }
+    38% { opacity: 1; transform: translate(0, 2px) scale(.94); }
+    55% { opacity: 1; transform: translate(0, 0) scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translate(6px, 6px) scale(.85); }
+  }
+  @media (prefers-reduced-motion: reduce) { #about .proof-tap-hint { display: none; } }
+
+  #about .proof-carousel { position: relative; }
+  #about .proof-track {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+    padding: 4px 4px 4px 0; margin: 0 -12px 0 0;
+    scrollbar-width: none;
+  }
+  #about .proof-track::-webkit-scrollbar { display: none; }
+  #about .proof-track.is-centered { justify-content: center; }
+  #about .proof-slot {
+    scroll-snap-align: start; flex: 0 0 auto; width: 272px;
+    border: none; padding: 0; background: none; cursor: zoom-in;
+    display: flex; flex-direction: column; gap: 10px; text-align: left;
+    font-family: var(--font-body); color: var(--text);
+    transition: transform .18s ease;
+  }
+  #about .proof-slot:hover { transform: translateY(-3px); }
+  #about .proof-thumb {
+    position: relative; display: block; height: 180px; border-radius: 16px;
+    background: var(--bg); overflow: hidden;
+  }
+  #about .proof-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #about .proof-open {
+    position: absolute; right: 10px; bottom: 10px; z-index: 1;
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px;
+    background: rgba(27,21,80,.72); color: #fff; border-radius: 999px;
+    font-size: .75rem; font-weight: 700;
+  }
+  #about .proof-open svg { width: 12px; height: 12px; }
+  #about .proof-info { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; }
+  #about .proof-name { font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--text); }
+  #about .proof-year { font-size: .875rem; color: var(--text-mute); }
+
+  #about .proof-nav { display: none; }
+  #about .proof-arrow {
+    width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid var(--border);
+    color: var(--text); cursor: pointer; display: grid; place-items: center;
+    transition: opacity .18s ease, border-color .18s ease;
+  }
+  #about .proof-arrow svg { width: 20px; height: 20px; }
+  #about .proof-arrow:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+  #about .proof-arrow:disabled { opacity: .45; cursor: default; }
+
+  #about .proof-dots { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 16px; }
+  #about .proof-dot { width: 6px; height: 6px; border-radius: 999px; background: #C9CDEB; transition: width .18s ease, background .18s ease; }
+  #about .proof-dot.is-active { width: 18px; background: var(--primary); }
+
+  #about .proof-toggle-row { display: flex; justify-content: center; }
+  #about .proof-toggle {
+    box-sizing: border-box; min-height: 44px; padding: 0 24px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 700; font-size: .875rem; white-space: nowrap;
+    background: #fff; color: #1B1550; border: 1.5px solid #D9DCF5; border-radius: 999px; cursor: pointer;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  #about .proof-toggle:hover { border-color: var(--primary); color: var(--text); }
+  #about .proof-toggle:focus { outline: none; }
+  #about .proof-toggle:focus-visible { outline: 3px solid #5055BE; outline-offset: 2px; }
+  #about .proof-toggle svg { width: 18px; height: 18px; flex-shrink: 0; }
+  #about .proof-collapse { display: flex; flex-direction: column; gap: 28px; max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+  #about .proof-collapse.is-open { max-height: 2000px; }
+  @media (prefers-reduced-motion: reduce) { #about .proof-collapse { transition: none; } }
+
+  @media (min-width: 900px) {
+    #about .edu-head { gap: 8px; }
+    #about .edu-title { white-space: nowrap; }
+
+    #about .edu-panel { padding: 24px; border-radius: 28px; gap: 24px; }
+
+    #about .mgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    #about .mcard { align-items: center; text-align: center; padding: 18px 14px 14px; border-radius: 20px; gap: 10px; min-width: 0; }
+    #about .mcard-head { flex-direction: column; gap: 12px; min-width: 0; }
+    #about .mcard-copy { align-items: center; text-align: center; min-width: 0; }
+    #about .mcard .badge-logo { width: 60px; height: 60px; border-radius: 16px; }
+    #about .mcard .badge-logo svg { width: 32px; height: 32px; }
+    #about .mcard h3 { font-size: 1.1875rem; white-space: nowrap; }
+    #about .mcard p { font-size: .875rem; line-height: 1.45; }
+    #about .mcard .pill { margin-top: auto; padding: 6px; }
+
+    #about .proof-controls { display: flex; align-items: center; gap: 16px; }
+    #about .proof-tabs { flex: 1; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    #about .proof-tab { width: auto; min-height: 44px; padding: 0 24px; font-size: 1rem; }
+
+    #about .proof-track { gap: 16px; margin: 0; }
+    #about .proof-slot { width: 220px; }
+    #about .proof-thumb { height: 140px; }
+    #about .proof-name { font-size: .9375rem; }
+    #about .proof-year { font-size: .8125rem; }
+    #about .proof-nav { display: flex; flex-shrink: 0; gap: 10px; margin-top: 0; }
+    #about .proof-arrow { width: 40px; height: 40px; }
+    #about .proof-arrow svg { width: 18px; height: 18px; }
+    #about .proof-dots { display: none; }
+  }
+  #about .lightbox {
+    position: fixed; inset: 0; background: rgba(15,12,40,.86); z-index: 200;
+    display: grid; place-items: center; padding: 5vh 5vw;
+  }
+  #about .lightbox[hidden] { display: none; }
+  #about .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
+  #about .lightbox-close {
+    position: absolute; top: 22px; right: 26px; width: 40px; height: 40px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,.14); color: #fff; font-size: 1.4rem; line-height: 1;
+    cursor: pointer; display: grid; place-items: center;
+  }
+  #about .lightbox-close:hover { background: rgba(255,255,255,.24); }
+
+  #about .dopusk-row { max-width: 1088px; margin: 24px auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  #about .dopusk-plate {
+    width: 100%; height: 112px; box-sizing: border-box;
+    background: #FFFFFF; border: 1px solid #E3E8F7; border-radius: 20px; padding: 0 28px;
+    display: flex; align-items: center; gap: 20px; text-align: left;
+  }
+  #about .dopusk-plate-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  #about .dopusk-plate-title { font-family: var(--font-body); font-weight: 800; font-size: 1.0625rem; line-height: 1.3; color: #1B1550; white-space: nowrap; }
+  #about .dopusk-plate-desc { font-family: var(--font-body); font-weight: 400; font-size: .9375rem; line-height: 1.4; color: #4A4F7A; white-space: nowrap; }
+  #about .dopusk-plate-link {
+    background: none; border: none; padding: 0; color: #3F43A0;
+    font-family: var(--font-body); font-weight: 700; font-size: .9375rem; cursor: pointer; text-decoration: none;
+  }
+  #about .dopusk-plate-link:hover { text-decoration: underline; }
+  #about .dopusk-stamp {
+    flex-shrink: 0; width: 92px; height: 92px; box-sizing: border-box; border-radius: 50%;
+    border: 2px solid var(--dopusk-accent, #5055BE);
+    box-shadow: inset 0 0 0 5px #FFFFFF, inset 0 0 0 6px var(--dopusk-ring, #C9CDF0);
+    background: var(--dopusk-bg, #F5F7FF); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  }
+  #about .dopusk-stamp-val { font-family: var(--font-head); font-weight: 700; font-size: 1.625rem; line-height: 1; color: var(--dopusk-accent, #3F43A0); }
+  #about .dopusk-stamp-cap { font-family: var(--font-body); font-weight: 800; font-size: .625rem; letter-spacing: .06em; text-transform: uppercase; color: #6B6F94; }
+  #about .dopusk-stamp--license { --dopusk-accent: #2F6FED; --dopusk-ring: #C9D9FB; --dopusk-bg: #F2F6FF; }
+  #about .dopusk-stamp--supervision { --dopusk-accent: #0E9F6E; --dopusk-ring: #BFE8D8; --dopusk-bg: #F0FAF6; }
+  @media (max-width: 768px) {
+    #about .dopusk-row { grid-template-columns: 1fr; gap: 12px; }
+    #about .dopusk-plate { width: 100%; height: auto; padding: 16px 18px; }
+    #about .dopusk-plate-title, #about .dopusk-plate-desc { white-space: normal; }
+    #about .dopusk-stamp { width: 76px; height: 76px; }
+    #about .dopusk-stamp-val { font-size: 1.375rem; }
+  }
+
+  @media (max-width: 1024px) {
+    #about { padding: 80px 32px; }
+    #about .about-top { flex-direction: column; align-items: center; text-align: center; gap: 36px; margin-bottom: 64px; }
+    #about .about-visual { width: 280px; height: 364px; }
+    #about .about-copy { max-width: 100%; }
+    #about .principle { text-align: left; }
+  }
+  @media (max-width: 620px) {
+    #about { padding: 68px 20px; }
+    #about .about-copy h2, #about .edu-head h2 { font-size: 1.75rem; }
+  }
+
+  /* ════════════════ 4. FLEXIBLE ════════════════ */
+  #flexible { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 48px; background: var(--surface); --border: #D6DEF2; }
+  #flexible .head { display: flex; flex-direction: column; gap: 16px; }
+  #flexible .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
+  #flexible .head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
+
+  #flexible .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  #flexible .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 12px 32px rgba(27,21,80,.1); display: flex; flex-direction: column; gap: 20px; }
+  #flexible .card-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; }
+  #flexible .card h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.375rem; line-height: 1.3; color: var(--text); }
+  #flexible .card p { font-size: 1rem; line-height: 1.6; color: var(--text-mute); }
+
+  @media (max-width: 1024px) {
+    #flexible { padding: 80px 32px; gap: 32px; }
+    #flexible .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 620px) {
+    #flexible { padding: 68px 20px; }
+    #flexible .head h2 { font-size: 1.75rem; }
+    #flexible .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ════════════════ 5. START ════════════════ */
+  #start { padding: 112px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 80px; background: var(--surface); }
+
+  #start .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
+  #start .copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
+  #start .copy p { font-size: 1.0625rem; line-height: 1.6; color: var(--text-mute); }
+
+  #start .steps { flex: 1; display: flex; flex-direction: column; }
+  #start .step { display: flex; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--border); }
+  #start .step .no { font-family: var(--font-head); font-weight: 700; font-size: 1.75rem; color: var(--primary); width: 48px; flex-shrink: 0; }
+  #start .step h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; }
+  #start .step p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
+
+  #start .result { margin-top: 28px; margin-left: 72px; width: calc(100% - 72px); box-sizing: border-box; background: var(--alt); border-radius: 24px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; }
+  #start .result-icon { flex-shrink: 0; width: 56px; height: 56px; border-radius: 16px; background: rgba(80,85,190,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+  #start .result h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; color: var(--text); margin-bottom: 6px; }
+  #start .result p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
+
+  @media (max-width: 1024px) {
+    #start { flex-direction: column; padding: 80px 32px; gap: 40px; }
+    #start .copy { flex: none; max-width: 100%; text-align: center; align-items: center; }
+    #start .result { margin-left: 0; width: 100%; }
+  }
+  @media (max-width: 620px) {
+    #start { padding: 68px 20px; }
+    #start .copy h2 { font-size: 1.75rem; }
+    #start .result { flex-direction: column; text-align: center; padding: 24px; }
+  }
+
+  /* ════════════════ 6. CYCLE ════════════════ */
+  #cycle { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 32px; background: var(--alt); }
+  #cycle .head { display: flex; flex-direction: column; gap: 12px; max-width: 820px; }
+  #cycle .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; white-space: nowrap; }
+  #cycle .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); }
+
+  #cycle .ring { position: relative; width: 100%; max-width: 1248px; aspect-ratio: 1248 / 440; margin: 20px auto 0; }
+  #cycle .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  #cycle .node {
+    position: absolute; box-sizing: border-box; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+    box-shadow: 0 12px 28px rgba(80,85,190,.1); color: var(--text); padding: 24px 40px;
+    display: flex; align-items: center; font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.3;
+  }
+  #cycle .node--top    { left: 34.2%; top: 0;      width: 31.65%; height: 34.1%; }
+  #cycle .node--right  { left: 68.35%; top: 32.95%; width: 31.65%; height: 34.1%; }
+  #cycle .node--bottom { left: 34.2%; top: 65.9%;  width: 31.65%; height: 34.1%; }
+  #cycle .node--left   { left: 0;     top: 32.95%; width: 31.65%; height: 34.1%; }
+
+  #cycle .center {
+    position: absolute; left: 40.95%; top: 42.5%; width: 18.2%; height: 15%;
+    border-radius: 60px; background: var(--primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.0625rem; line-height: 1.2; padding: 4px 20px;
+  }
+
+  @media (max-width: 1024px) {
+    #cycle { padding: 80px 32px; }
+    #cycle .ring { aspect-ratio: auto; height: auto; display: flex; flex-direction: column; gap: 16px; }
+    #cycle .ring svg { display: none; }
+    #cycle .node, #cycle .center { position: static; width: 100%; height: auto; padding: 20px 28px; text-align: left; justify-content: flex-start; }
+    #cycle .center { order: 5; margin-top: 4px; justify-content: center; text-align: center; }
+  }
+  @media (max-width: 620px) {
+    #cycle { padding: 68px 20px; }
+    #cycle .head h2 { font-size: 1.75rem; white-space: normal; }
+    #cycle .node { font-size: 1.1rem; padding: 18px 22px; }
+  }
+
+  /* ════════════════ 7. REQUEST ════════════════ */
+  #request { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 24px; background: var(--surface); }
+
+  #request .eyebrow { font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+  #request .head { display: flex; flex-direction: column; gap: 12px; max-width: 1088px; width: 100%; margin: 0 auto; }
+  #request .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; white-space: nowrap; }
+  #request .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); max-width: 560px; }
+
+  /* Interactive multi-select — ідентично consultation-landing/index.html "Кому підійде" */
+  #request .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 1088px; width: 100%; margin: 0 auto; }
+  #request .fitcard {
+    appearance: none; -webkit-appearance: none;
+    background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 12px; min-height: 56px;
+    min-width: 0; width: 100%; cursor: pointer; text-align: left;
+    font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--text); position: relative;
+    transition: border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  #request .fitcard:hover { border-color: #B9BEE6; }
+  #request .fitcard:focus { outline: none; box-shadow: none; }
+  #request .fitcard:focus-visible { outline: 3px solid #9EA3F0; outline-offset: 2px; }
+  #request .fitcard:active { transform: scale(.99); }
+  #request .fitcard.is-selected { border-color: var(--primary); background: #EEF0FB; }
+  #request .fitcard--other { background: transparent; border-style: dashed; border-color: #C9CDEB; color: #3F4466; }
+  #request .fitcard--other:hover { border-style: dashed; }
+  #request .fitcard--other.is-selected { border-style: solid; background: #EEF0FB; color: var(--text); }
+  #request .fitcard-box {
+    flex: 0 0 auto; width: 22px; height: 22px; box-sizing: border-box; border-radius: 7px;
+    border: 2px solid #C9CDEB; display: grid; place-items: center; color: transparent; background: var(--surface);
+    transition: all .15s ease;
+  }
+  #request .fitcard-box svg { width: 13px; height: 13px; }
+  #request .fitcard.is-selected .fitcard-box { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  #request .fit-other-input {
+    max-width: 1088px; width: 100%; margin-left: auto; margin-right: auto;
+    overflow: hidden; box-sizing: border-box; max-height: 0; opacity: 0;
+    transition: max-height .25s ease, opacity .2s ease, margin .25s ease;
+  }
+  #request .fit-other-input.is-open { max-height: 220px; opacity: 1; margin-top: 4px; }
+  #request .fit-other-input label { display: block; margin-bottom: 8px; font-size: .875rem; font-weight: 700; color: var(--text-mute); }
+  #request .fit-other-input textarea {
+    width: 100%; box-sizing: border-box; border: 2px solid var(--primary); border-radius: 16px;
+    padding: 14px 16px; font-family: var(--font-body); font-size: .9375rem; line-height: 1.5; color: var(--text);
+    resize: vertical; min-height: 100px; background: var(--surface);
+  }
+  #request .fit-other-input textarea:focus { outline: none; }
+
+  #request .fit-cta {
+    max-width: 1088px; width: 100%; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center;
+  }
+  #request .fit-cta-count { font-family: var(--font-head); font-weight: 600; font-size: 1.125rem; color: var(--text); }
+  #request .fit-cta-hint { font-size: .8125rem; color: var(--text-mute); }
+  #request .fit-cta-btn {
+    display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 56px;
+    padding: 0 30px; border-radius: 999px; font-weight: 800; font-size: 1rem;
+    background: linear-gradient(135deg, var(--primary-2), var(--primary)); color: #fff; text-decoration: none;
+    box-shadow: 0 12px 30px rgba(80,85,190,.28); transition: filter .15s ease, box-shadow .15s ease;
+  }
+  #request .fit-cta-btn:hover { filter: brightness(1.05); }
+  #request .fit-cta-btn[aria-disabled="true"] { background: #D5D9F2; box-shadow: none; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { #request .fitcard:active { transform: none; } }
+
+  @media (min-width: 860px) {
+    #request .fit-cta { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 18px 18px 28px; text-align: left; }
+    #request .fit-cta-info { display: flex; flex-direction: column; gap: 2px; }
+    #request .fit-cta-hint { white-space: nowrap; }
+    #request .fit-cta-btn { width: auto; white-space: nowrap; font-size: 1.0625rem; padding: 0 40px; }
+  }
+
+  @media (min-width: 900px) {
+    #request .fitgrid { display: flex; flex-flow: row wrap; }
+    #request .fitcard { width: 400px; flex: 0 0 400px; padding: 10px 20px 10px 16px; min-height: 52px; gap: 12px; font-size: 1.0625rem; border-radius: 14px; white-space: nowrap; }
+    #request .fitcard-box { width: 24px; height: 24px; }
+    #request .fitcard-box svg { width: 14px; height: 14px; }
+  }
+
+  @media (max-width: 1024px) {
+    #request { padding: 80px 32px; }
+    #request .head h2 { white-space: normal; }
+  }
+  @media (max-width: 620px) {
+    #request { padding: 68px 20px; gap: 20px; }
+    #request .head h2 { font-size: 1.75rem; }
+  }
+
+  /* ════════════════ 8. CTA ════════════════ */
+  #cta { padding: 64px var(--gutter); display: flex; align-items: center; background: var(--alt); }
+
+  #cta .panel { width: 100%; box-sizing: border-box; background: linear-gradient(135deg, var(--dark-1), var(--dark-2)); border-radius: 32px; padding: 56px 64px; display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+  #cta .panel h2 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: #fff; }
+  #cta .panel h2 .hl { color: var(--primary-2); }
+  #cta .panel p { margin: 10px 0 0; font-size: 1.1875rem; line-height: 1.6; color: #C9CEF0; }
+
+  #cta .btn {
+    flex-shrink: 0; background: #fff; color: var(--dark-1); text-decoration: none; border-radius: 999px;
+    padding: 20px 40px; font-family: var(--font-body); font-weight: 700; font-size: 1.125rem; line-height: 1; white-space: nowrap;
+    transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  }
+  #cta .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(0,0,0,.24); }
+  #cta .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { #cta .btn:hover { transform: none; } }
+
+  @media (max-width: 1024px) {
+    #cta { padding: 32px 32px; }
+    #cta .panel { padding: 48px 40px; flex-direction: column; text-align: center; gap: 28px; }
+  }
+  @media (max-width: 620px) {
+    #cta { padding: 24px 20px; }
+    #cta .panel { padding: 40px 28px; border-radius: 24px; }
+    #cta .panel h2 { font-size: 1.75rem; }
+    #cta .btn { width: 100%; text-align: center; }
+  }
+
+  /* ════════════════ 9. HELP ════════════════ */
+  #help { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 40px; background: var(--surface); }
+  #help h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
+
+  #help .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: stretch; }
+
+  #help .main-card { background: var(--footer); border-radius: 24px; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  #help .main-card h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.625rem; line-height: 1.3; }
+  #help .main-card .phone { font-family: var(--font-head); font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; color: var(--text); text-decoration: none; display: block; }
+  #help .main-card .badge { align-self: flex-start; background: rgba(80,85,190,.12); color: var(--primary); border-radius: 999px; padding: 6px 14px; font-size: .875rem; font-weight: 700; }
+
+  #help .cards { display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 24px; }
+  #help .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
+  #help .card h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.1875rem; line-height: 1.3; white-space: nowrap; }
+  #help .card h4.h4-long { font-size: .9375rem; }
+  #help .card .phone { font-family: var(--font-head); font-weight: 700; font-size: 1.375rem; line-height: 1.3; color: var(--primary); text-decoration: none; }
+  #help .card p { font-size: .9375rem; line-height: 1.45; color: var(--text-mute); }
+
+  @media (max-width: 860px) {
+    #help { padding: 80px 32px; }
+    #help .grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 620px) {
+    #help { padding: 68px 20px; gap: 28px; }
+    #help h2 { font-size: 1.75rem; }
+    #help .main-card { padding: 28px; }
+  }
+
+  /* ════════════════ 10. Telegram / Footer (ідентично основному ленду) ════════════════ */
+  footer { background: #F5F9FF; padding-block: 80px; padding-inline: 16px; }
+  .tg-card {
+    background: #FFFFFF; border: 1px solid #E3E8F7; border-radius: 24px;
+    box-shadow: 0 14px 34px rgba(27, 21, 80, .07);
+    padding: 28px 20px; max-width: 880px; margin: 0 auto;
+    display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 20px 14px;
+  }
+  .tg-logo { grid-column: 1; grid-row: 1; display: block; width: 56px; height: 56px; }
+  .tg-h2 {
+    grid-column: 2; grid-row: 1; margin: 0;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.375rem; line-height: 1.2;
+    color: #1B1550; white-space: nowrap;
+  }
+  .tg-topics {
+    grid-column: 1 / -1; grid-row: 2;
+    display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; row-gap: 6px;
+    font-size: .875rem; font-weight: 700; color: #1B1550;
+  }
+  .tg-topic { display: flex; align-items: center; gap: 6px; }
+  .tg-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: #5055BE; }
+  .tg-btn {
+    grid-column: 1 / -1; grid-row: 3;
+    width: 100%; min-height: 52px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+    color: #FFFFFF; text-decoration: none; border: none; cursor: pointer; border-radius: var(--r-pill);
+    background: linear-gradient(135deg, #4A6CF5, #5055BE); box-shadow: 0 10px 24px rgba(80, 85, 190, .28);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .tg-btn:hover { color: #FFFFFF; transform: translateY(-2px); opacity: .92; }
+  @media (min-width: 900px) {
+    .tg-card {
+      border-radius: 28px; box-shadow: 0 18px 44px rgba(27, 21, 80, .07);
+      padding: 36px 44px;
+      grid-template-columns: 72px 1fr auto; grid-template-rows: auto auto;
+      column-gap: 28px; row-gap: 8px;
+    }
+    .tg-logo { grid-row: 1 / 3; width: 72px; height: 72px; }
+    .tg-h2 { font-size: 1.75rem; }
+    .tg-topics { grid-column: 2; grid-row: 2; flex-wrap: nowrap; column-gap: 10px; row-gap: 0; margin-top: 2px; }
+    .tg-btn { grid-column: 3; grid-row: 1 / 3; width: 207px; white-space: nowrap; }
+  }
+
+  .ft { background: #EEF0FB; color: #1B1550; font-family: 'Nunito', sans-serif; padding: 48px 16px 24px; }
+  .ft__in { max-width: 1088px; margin: 0 auto; }
+  .ft__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+  .ft__brand { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; }
+  .ft__name { font: 700 20px/1.2 'Geologica', sans-serif; }
+  .ft__tag { font-size: 15px; color: #6B6F94; }
+  .ft__col { display: flex; flex-direction: column; gap: 8px; }
+  .ft__col h4 { margin: 0 0 4px; font: 800 .8125rem/1.3 'Nunito', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #6B6F94; }
+  .ft__col a { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; min-height: 44px; color: #6B6F94; text-decoration: none; word-break: break-all; }
+  .ft__col a:hover { color: #5055BE; }
+  .ft__col svg { flex: none; width: 18px; height: 18px; }
+  .ft__bot { margin-top: 32px; padding-top: 18px; border-top: 1px solid #D9DEF2; display: flex; flex-direction: column; gap: 12px; }
+  .ft__crisis { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; color: #3F43A0; }
+  .ft__tel { display: flex; gap: 8px; }
+  .ft__tel a { display: grid; place-items: center; width: 56px; height: 44px; border-radius: 999px; background: #5055BE; color: #fff; font-weight: 800; text-decoration: none; }
+  .ft__legal { margin: 0; display: flex; flex-direction: column; gap: 12px; font-size: 13px; line-height: 1.4; color: #6B6F94; }
+  .ft__copy { order: 2; font-size: 14px; }
+  .ft__sep { display: none; }
+  @media (min-width: 769px) {
+    .ft { padding: 56px 96px 28px; }
+    .ft__grid { grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+    .ft__brand { grid-column: auto; }
+    .ft__name { font-size: 22px; }
+    .ft__col { gap: 12px; }
+    .ft__col a { padding: 0; min-height: 0; }
+    .ft__bot { flex-direction: row; justify-content: space-between; align-items: center; }
+    .ft__crisis { order: 2; justify-content: flex-start; font-size: 14px; }
+    .ft__tel { gap: 4px; }
+    .ft__tel a { display: inline-block; width: auto; height: auto; background: none; color: #5055BE; text-decoration: underline; }
+    .ft__tel a + a::before { content: "/ "; color: #3F43A0; text-decoration: none; display: inline-block; margin-right: 4px; }
+    .ft__legal { display: block; font-size: 14px; }
+    .ft__sep { display: inline; }
+  }
+</style>
+</head>
+<body>
+
+<div id="hero">
+  <nav>
+    <a href="https://inakshi.in.ua" class="logo">
+      <span class="mark">Інакші</span>
+      <span class="sub">— освітній проєкт психолога Віталія Медведєва</span>
+    </a>
+    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
+    <a href="CONSULT_URL" class="btn btn--sm">Безкоштовна консультація</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow fade-up">Психологічна турбота для ліцеїв онлайн</div>
+      <h1 class="fade-up" style="transition-delay:.05s">Опора там, де зростає <span class="hl">покоління</span></h1>
+      <div class="hero-features fade-up" style="transition-delay:.15s">
+        <span class="hf-tag">Учні</span>
+        <span class="hf-tag">Педагоги</span>
+        <span class="hf-tag">Адміністрація</span>
+        <span class="hf-tag">Керівництво</span>
+      </div>
+      <div class="fade-up" style="transition-delay:.25s">
+        <a href="CONSULT_URL" class="btn">Безкоштовна консультація</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up" style="transition-delay:.2s">
+      <video src="assets/hero-video.mp4" autoplay muted loop playsinline aria-label="Ленд ліцей"></video>
+    </div>
+  </section>
+</div>
+
+<section id="request">
+  <div class="head fade-up">
+    <div class="eyebrow">Запит вашого ліцею</div>
+    <h2 id="reqH2">Оберіть, які виклики існують у вашому ліцеї</h2>
+    <p>Можна обрати кілька — це допоможе зрозуміти, як саме вам допомогти</p>
+  </div>
+  <div class="fitgrid fade-up" id="reqGrid" style="transition-delay:.06s" role="group" aria-labelledby="reqH2">
+    <button type="button" class="fitcard" aria-pressed="false" data-id="climate" data-label="Напружена атмосфера під час уроків">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Напружена атмосфера під час уроків</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="burnout" data-label="Вигорання та виснаження педагогів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Вигорання та виснаження педагогів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="students" data-label="Напружені стосунки між учнями">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Напружені стосунки між учнями</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="motivation" data-label="Низька мотивація учнів/педагогів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Низька мотивація учнів/педагогів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="adaptation" data-label="Труднощі адаптації нових учнів">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Труднощі адаптації нових учнів</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="team" data-label="Труднощі в роботі колективу">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Труднощі в роботі колективу</span>
+    </button>
+    <button type="button" class="fitcard" aria-pressed="false" data-id="changes" data-label="Важко впроваджувати зміни в ліцеї">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Важко впроваджувати зміни в ліцеї</span>
+    </button>
+    <button type="button" class="fitcard fitcard--other" id="reqOtherCard" aria-pressed="false" data-id="other" data-label="Інше">
+      <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Інше — опишу своїми словами</span>
+    </button>
+  </div>
+
+  <div class="fit-other-input" id="reqOtherInput">
+    <label for="reqOtherText">Опишіть, що вас турбує</label>
+    <textarea id="reqOtherText" rows="3" placeholder="Наприклад: учні часто конфліктують одне з одним" maxlength="200"></textarea>
+  </div>
+
+  <div class="fit-cta fade-up" style="transition-delay:.14s">
+    <div class="fit-cta-info">
+      <div class="fit-cta-count" id="reqCount" aria-live="polite">Нічого не обрано</div>
+      <div class="fit-cta-hint" id="reqHint">Оберіть хоча б одну тему або «Інше»</div>
+    </div>
+    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
+    <a href="CONSULT_URL" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+  </div>
+</section>
+<section id="timeline">
+  <div class="tl-head">
+    <h2>Від безкоштовної консультації<br>до стабільного колективу</h2>
+    <p>Чотири етапи змін у вашому ліцеї</p>
+  </div>
+  <div class="tl-list">
+    <div class="tl-item">
+      <h3>Інтеграція в середовище</h3>
+      <p>Групові зустрічі на психологічні теми для усіх учасників освітнього процесу</p>
+      <div class="tl-bar"></div>
+    </div>
+    <div class="tl-item">
+      <h3>Покращення клімату</h3>
+      <p>Створення збалансованої безпечної атмосфери в класах і освітньому просторі</p>
+      <div class="tl-bar"></div>
+    </div>
+    <div class="tl-item">
+      <h3>Підвищення мотивації</h3>
+      <p>Учням краще засвоювати знання та розвиватися, а педагогам — готувати заняття</p>
+      <div class="tl-bar"></div>
+    </div>
+    <div class="tl-item tl-item--final">
+      <h3>Стабільний колектив</h3>
+      <p>Психологічне зростання команди педагогів і учнів знижує операційні витрати ліцею</p>
+      <div class="tl-bar"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="flexible">
+  <div class="head fade-up">
+    <h2>Гнучкі рішення – суттєві зміни</h2>
+    <p>Впровадження доказових методів підтримки для досягнення цілей</p>
+  </div>
+  <div class="grid">
+    <div class="card fade-up" style="transition-delay:.05s">
+      <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M15 14.2c2.6 0 5 2 5 5"></path></svg></div>
+      <h3>Практичні групи</h3>
+      <p>Щоб мати навички, які можна застосувати в житті</p>
+    </div>
+    <div class="card fade-up" style="transition-delay:.1s">
+      <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M9 20h6M12 16v4"></path><path d="M10 8l4 2-4 2z"></path></svg></div>
+      <h3>Освітні вебінари</h3>
+      <p>Щоб бути обізнаним у дитячій психології та розуміти себе</p>
+    </div>
+    <div class="card fade-up" style="transition-delay:.15s">
+      <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"></path><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"></path></svg></div>
+      <h3>Вступні співбесіди</h3>
+      <p>Щоб зрозуміти психологічну готовність дітей та педагогів</p>
+    </div>
+    <div class="card fade-up" style="transition-delay:.2s">
+      <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></div>
+      <h3>Групи підтримки</h3>
+      <p>Щоб мати місце для розмов про складне і знаходити опору</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="cycle">
+  <div class="head fade-up">
+    <h2>Цикл зростання і розвитку вашого ліцею</h2>
+    <p>Як психологічна підтримка змінює ліцей</p>
+  </div>
+  <div class="ring fade-up" style="transition-delay:.1s">
+    <svg viewBox="0 0 1248 440" aria-hidden="true">
+      <defs>
+        <marker id="arrK" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
+          <path d="M0,0 L18,9 L0,18 z" fill="#5055BE"></path>
+        </marker>
+      </defs>
+      <path d="M822,75 Q1100,75 1100,141" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M1100,299 Q1100,365 826,365" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M423,365 Q197,365 197,299" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <path d="M197,141 Q197,75 423,75" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+    </svg>
+    <div class="node node--top">Педагоги мають мотивацію, а не вигорання</div>
+    <div class="node node--right">На уроках панує безпека та натхнення</div>
+    <div class="node node--bottom">Учні довіряють вашим педагогам</div>
+    <div class="node node--left">Ви отримуєте стабільність у житті ліцею</div>
+    <div class="center">Психологічна підтримка</div>
+  </div>
+</section>
+
+
+<section id="about">
+  <div class="about-top">
+    <div class="about-copy fade-up" style="transition-delay:.08s">
+      <div class="eyebrow">Про мене</div>
+      <h2>Привіт, я Віталій</h2>
+      <p class="intro">За 8 років практики, я бачу, що <span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де всім безпечно і куди хочеться повернутися.</p>
+      <p class="lead">Тому, під час співпраці, я дотримуюся трьох головних принципів:</p>
+      <div class="principles">
+        <div class="principle"><span class="num">1</span><div><h3>Фокус на цілях ліцею</h3><p class="nowrap-lg">Разом визначаємо, що саме ліцей хоче змінити, і рухаємося до цього</p></div></div>
+        <div class="principle"><span class="num">2</span><div><h3>Доказовий метод</h3><p class="nowrap-lg">КПТ — золотий стандарт терапії з +60 років клінічних досліджень</p></div></div>
+        <div class="principle"><span class="num">3</span><div><h3>Навички на щодень</h3><p class="nowrap-lg">Навички, які учасники опановують, одразу застосовують у роботі та житті</p></div></div>
+      </div>
+    </div>
+    <div class="about-visual fade-up">
+      <img src="assets/about-photo.jpg" alt="Портрет психолога Віталія Медведєва">
+    </div>
+  </div>
+
+  <div class="edu-head fade-up" style="transition-delay:.06s">
+    <span class="eyebrow">Освіта і спеціалізація</span>
+    <h2 class="edu-title">Терапія за європейським стандартом <span class="hl">EABCT</span></h2>
+    <p class="edu-sub">EABCT — Європейська асоціація поведінкових та когнітивних терапій</p>
+  </div>
+
+  <div class="edu-panel fade-up" style="transition-delay:.16s">
+    <div class="mgrid">
+      <article class="mcard c-ostroh fade-up" style="transition-delay:.04s">
+        <div class="mcard-head">
+          <span class="badge-logo badge-logo--plain" aria-hidden="true"><img src="assets/edu/ostroh-logo.png" alt=""></span>
+          <div class="mcard-copy">
+            <h3>Вища освіта</h3>
+            <p>Національний університет<br>«Острозька академія»</p>
+          </div>
+        </div>
+        <div class="pill"><b>2019 · 2020</b><span>Бакалавр · Магістр</span></div>
+      </article>
+      <article class="mcard c-uicbt fade-up" style="transition-delay:.12s">
+        <div class="mcard-head">
+          <span class="badge-logo badge-logo--plain" aria-hidden="true"><img src="assets/edu/uicbt-logo-new.png" alt=""></span>
+          <div class="mcard-copy">
+            <h3>Професійне навчання</h3>
+            <p>Український інститут<br>когнітивно-поведінкової терапії</p>
+          </div>
+        </div>
+        <div class="pill"><b>2023</b><span>Початок навчання</span></div>
+      </article>
+      <article class="mcard c-uakpt fade-up" style="transition-delay:.20s">
+        <div class="mcard-head">
+          <span class="badge-logo badge-logo--plain" aria-hidden="true"><img src="assets/edu/logo.png" alt=""></span>
+          <div class="mcard-copy">
+            <h3>Дійсне членство</h3>
+            <p>Українська асоціація<br>когнітивно-поведінкових терапевтів</p>
+          </div>
+        </div>
+        <div class="pill"><b>2025</b><span>Початок членства</span></div>
+      </article>
+    </div>
+
+    <div class="proof-toggle-row">
+      <button type="button" class="proof-toggle" id="proofToggleBtn" aria-expanded="false" aria-controls="proofCollapse">
+        <span id="proofToggleLabel">Переглянути документи</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
+
+    <div class="proof-collapse" id="proofCollapse">
+    <div class="proof-controls">
+      <div class="proof-tabs fade-up" style="transition-delay:.26s" role="tablist">
+        <svg class="proof-tap-hint" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 7.5V4.8a1.8 1.8 0 0 1 3.6 0V12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.6 9.2V7.3a1.8 1.8 0 0 1 3.6 0v5.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.2 9.6a1.8 1.8 0 0 1 3.6 0V15c0 3.6-2.3 6.2-5.9 6.2h-1.6c-2.1 0-3.2-.6-4.4-2.1l-3-3.8c-.6-.8-.4-1.8.4-2.3.9-.6 2-.4 2.7.4l1.6 1.8V6.6a1.8 1.8 0 0 1 3.6 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="proof-tab" data-cat="osvita" type="button" role="tab" aria-selected="false">Освіта</button>
+        <button class="proof-tab is-active" data-cat="navchannya" type="button" role="tab" aria-selected="true">Професійне навчання</button>
+        <button class="proof-tab" data-cat="konferentsii" type="button" role="tab" aria-selected="false">Конференції</button>
+        <button class="proof-tab" data-cat="chlenstvo" type="button" role="tab" aria-selected="false">Членство</button>
+      </div>
+      <div class="proof-nav">
+        <button class="proof-arrow" id="proofPrev" type="button" aria-label="Попередні документи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+        <button class="proof-arrow" id="proofNext" type="button" aria-label="Наступні документи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </div>
+    </div>
+
+    <div class="proof-carousel fade-up" style="transition-delay:.32s">
+      <div class="proof-track" id="proofTrack">
+        <!-- Освіта -->
+        <button class="proof-slot" data-cat="osvita" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/osvita/thumbs/bakalavr.jpg" data-full="assets/edu/diplomas/osvita/bakalavr.jpg" alt="Диплом бакалавра, Острозька академія, 2019">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Диплом бакалавра</span>
+            <span class="proof-year">2019</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="osvita" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/osvita/thumbs/magistr.jpg" data-full="assets/edu/diplomas/osvita/magistr.jpg" alt="Диплом магістра, Острозька академія, 2020">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Диплом магістра</span>
+            <span class="proof-year">2020</span>
+          </span>
+        </button>
+
+        <!-- Професійне навчання: спершу УІКПТ, далі решта -->
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/obstezhennya.jpg" data-full="assets/edu/diplomas/navchannya/obstezhennya.jpg" alt="Вступ у КПТ: обстеження і формулювання, УІКПТ, 2024">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Обстеження і формулювання в&nbsp;КПТ</span>
+            <span class="proof-year">2024</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/povedinkovi-tehniky.jpg" data-full="assets/edu/diplomas/navchannya/povedinkovi-tehniky.jpg" alt="Базові навички та поведінкові техніки КПТ, УІКПТ, 2024">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Поведінкові техніки КПТ</span>
+            <span class="proof-year">2024</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/psyhiatriya.jpg" data-full="assets/edu/diplomas/navchannya/psyhiatriya.jpg" alt="Основи психіатрії в інтегративній КПТ-моделі, УІКПТ, 2024">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Основи психіатрії в КПТ-моделі</span>
+            <span class="proof-year">2024</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/kognityvni-tehniky.jpg" data-full="assets/edu/diplomas/navchannya/kognityvni-tehniky.jpg" alt="Когнітивні техніки КПТ, УІКПТ, 2025">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Когнітивні техніки КПТ</span>
+            <span class="proof-year">2025</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/gp-i-pj.jpg" data-full="assets/edu/diplomas/navchannya/gp-i-pj.jpg" alt="КПТ дисфункційних схем і правил життя, УІКПТ, 2025">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Дисфункційні схеми і правила життя</span>
+            <span class="proof-year">2025</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/suicydalnist.jpg" data-full="assets/edu/diplomas/navchannya/suicydalnist.jpg" alt="Менеджмент суїцидальності в КПТ, УІКПТ, 2025">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Менеджмент суїцидальності</span>
+            <span class="proof-year">2025</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/fobiyi.jpg" data-full="assets/edu/diplomas/navchannya/fobiyi.jpg" alt="КПТ простої та соціальної фобій, УІКПТ, 2025">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">КПТ простої та соціальної фобій</span>
+            <span class="proof-year">2025</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/ptsr.jpg" data-full="assets/edu/diplomas/navchannya/ptsr.jpg" alt="КПТ ПТСР, УІКПТ, 2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">КПТ ПТСР</span>
+            <span class="proof-year">2026</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/gtr.jpg" data-full="assets/edu/diplomas/navchannya/gtr.jpg" alt="КПТ генералізованого тривожного розладу, УІКПТ, 2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">КПТ генералізованого тривож. розладу</span>
+            <span class="proof-year">2026</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/kptsr.jpg" data-full="assets/edu/diplomas/navchannya/kptsr.jpg" alt="Поглиблений тренінг з когнітивної терапії ПТСР, протокол Елерс і Кларка, 2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">КТ ПТСР (Елерс і Кларк)</span>
+            <span class="proof-year">2026</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/self.jpg" data-full="assets/edu/diplomas/navchannya/self.jpg" alt="Консультування в роботі практичного психолога, SELF, 2018">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Консультування в роботі психолога</span>
+            <span class="proof-year">2018</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/self2.jpg" data-full="assets/edu/diplomas/navchannya/self2.jpg" alt="Перезавантаження+, SELF, 2020">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">«Перезавантаження+»</span>
+            <span class="proof-year">2020</span>
+          </span>
+        </button>
+
+        <!-- Конференції: спершу УАКПТ, далі решта -->
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/kpt-2024.jpg" data-full="assets/edu/diplomas/konferentsii/kpt-2024.jpg" alt="X конференція УАКПТ «КПТ і виклики тривалої війни», 2024">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">X конференція УАКПТ</span>
+            <span class="proof-year">2024</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/kpt-2025.png" data-full="assets/edu/diplomas/konferentsii/kpt-2025.png" alt="XI конференція УАКПТ «Спільноти підтримки», 2025">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">XI конференція УАКПТ</span>
+            <span class="proof-year">2025</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/kpt-2026.png" data-full="assets/edu/diplomas/konferentsii/kpt-2026.png" alt="Конференція УАКПТ «Сила бути КПТ в часи тривалого виснаження», 2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Конференція УАКПТ</span>
+            <span class="proof-year">2026</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/mystetstvo-likuvannya.jpg" data-full="assets/edu/diplomas/konferentsii/mystetstvo-likuvannya.jpg" alt="«Мистецтво лікування»: тренінг-програма для лікарів, 2017">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">«Мистецтво лікування»</span>
+            <span class="proof-year">2017</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/kognityvna-psyhologiya.jpg" data-full="assets/edu/diplomas/konferentsii/kognityvna-psyhologiya.jpg" alt="Міжнародна конференція «Сучасні дослідження когнітивної психології», 2020">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Дослідження когнітивної психології</span>
+            <span class="proof-year">2020</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/osvityan.jpg" data-full="assets/edu/diplomas/konferentsii/osvityan.jpg" alt="Форум «Психологічне здоров’я освітян», 2023">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">«Психологічне здоров’я освітян»</span>
+            <span class="proof-year">2023</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="konferentsii" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/konferentsii/thumbs/antyeydzhing.jpg" data-full="assets/edu/diplomas/konferentsii/antyeydzhing.jpg" alt="Асоціація превентивної та антиейджинг медицини">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Превентивна та антиейджинг медицина</span>
+          </span>
+        </button>
+
+        <!-- Членство -->
+        <button class="proof-slot" data-cat="chlenstvo" type="button">
+          <span class="proof-thumb">
+            <img src="assets/edu/diplomas/chlenstvo/thumbs/dovidka-chlenstvo.jpg" data-full="assets/edu/diplomas/chlenstvo/dovidka-chlenstvo-full.jpg" alt="Довідка про членство в УАКПТ, 05.09.2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">Довідка про членство в УАКПТ</span>
+            <span class="proof-year">05.09.2026</span>
+          </span>
+        </button>
+      </div>
+      <div class="proof-dots" id="proofDots" aria-hidden="true"></div>
+    </div>
+    </div>
+  </div>
+
+  <div class="dopusk-row fade-up">
+    <div class="dopusk-plate">
+      <div class="dopusk-stamp dopusk-stamp--license" aria-hidden="true">
+        <span class="dopusk-stamp-val">2030</span>
+        <span class="dopusk-stamp-cap">Діє до</span>
+      </div>
+      <div class="dopusk-plate-body">
+        <div class="dopusk-plate-title">Допуск практики КПТ в Україні</div>
+        <div class="dopusk-plate-desc">Сертифікат УІКПТ · <button type="button" class="dopusk-plate-link" id="dopuskDocBtn">Відкрити документ →</button></div>
+      </div>
+    </div>
+    <div class="dopusk-plate">
+      <div class="dopusk-stamp dopusk-stamp--supervision" aria-hidden="true">
+        <span class="dopusk-stamp-val">12+</span>
+        <span class="dopusk-stamp-cap">На рік</span>
+      </div>
+      <div class="dopusk-plate-body">
+        <div class="dopusk-plate-title">Супервізія для контролю якості</div>
+        <div class="dopusk-plate-desc">Сесії з акредитованими психотерапевтами КПТ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Закрити">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<section id="start">
+  <div class="copy fade-up">
+    <h2>Як почати</h2>
+    <p>Три прості кроки від першої заявки до сесії</p>
+  </div>
+  <div class="steps fade-up" style="transition-delay:.1s">
+    <div class="step"><div class="no">01</div><div><h3>Заявка</h3><p>Коротка форма з запитом</p></div></div>
+    <div class="step"><div class="no">02</div><div><h3>Бронювання</h3><p>Обираєте час для розмови</p></div></div>
+    <div class="step" style="border-bottom:none"><div class="no">03</div><div><h3>Безкоштовна консультація</h3><p>Відбувається онлайн через Google Meet</p></div></div>
+    <div class="result">
+      <div class="result-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div>
+      <div><h3>Покроковий план</h3><p>Це буде наш результат розмови: рекомендації під ваш запит</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="cta">
+  <div class="panel fade-up">
+    <div>
+      <h2>Почніть <span class="hl">сьогодні</span></h2>
+      <p>Отримайте рекомендації, з чого почати зміни у вашому ліцеї.</p>
+    </div>
+    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
+    <a href="CONSULT_URL" class="btn">Безкоштовна консультація</a>
+  </div>
+</section>
+
+
+<section id="help">
+  <h2 class="fade-up">Служби допомоги у кризових ситуаціях</h2>
+  <div class="grid fade-up" style="transition-delay:.08s">
+    <div class="main-card">
+      <h3>Всеукраїнський телефон довіри</h3>
+      <a href="tel:0800501701" class="phone">0 800 501 701</a>
+      <div class="badge">Цілодобово та безкоштовно</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h4>ГО «Ла Страда»</h4>
+        <a href="tel:0800500335" class="phone">0 800 500 335 · 116 123</a>
+        <p>Підтримка постраждалих від домашнього насильства та гендерної дискримінації</p>
+      </div>
+      <div class="card">
+        <h4>Національна гаряча лінія для дітей та молоді</h4>
+        <a href="tel:0800500225" class="phone">0 800 500 225 · 116 111</a>
+        <p>Психологічна підтримка та допомога у складних життєвих обставинах</p>
+      </div>
+      <div class="card">
+        <h4 class="h4-long">Психологічна підтримка та кризова допомога («Лінія Довіри»)</h4>
+        <a href="tel:0800507750" class="phone">0 800 50 77 50</a>
+        <p>Чат на сайті dovira.online/chat</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="tg-card">
+    <svg class="tg-logo" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="tgGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#tgGrad)"/><path fill="#FFFFFF" d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z"/></svg>
+    <h2 class="tg-h2">Приєднуйтесь</h2>
+    <div class="tg-topics">
+      <span class="tg-topic"><span class="tg-dot"></span>Психотерапія</span>
+      <span class="tg-topic"><span class="tg-dot"></span>Дослідження</span>
+      <span class="tg-topic"><span class="tg-dot"></span>Меми</span>
+    </div>
+    <a href="https://t.me/medvedmyself" class="tg-btn" target="_blank" rel="noopener">Приєднатися</a>
+  </div>
+</footer>
+
+<footer class="ft">
+  <div class="ft__in">
+    <div class="ft__grid">
+      <div class="ft__brand">
+        <span class="ft__name">Віталій Медведєв</span>
+        <span class="ft__tag">Психолог · КПТ-терапія · онлайн</span>
+      </div>
+      <div class="ft__col" role="navigation" aria-label="Документи">
+        <h4>Документи</h4>
+        <a href="terms.html">Договір оферти та політика конфіденційності</a>
+      </div>
+      <div class="ft__col">
+        <h4>Контакти</h4>
+        <a href="mailto:medvediev.vitalii.ua@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>medvediev.vitalii.ua@gmail.com</a>
+        <a href="https://t.me/medvedmyself" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+        <a href="https://www.youtube.com/@%D0%92%D1%96%D1%82%D0%B0%D0%BB%D1%96%D0%B9%D0%9C%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%94%D0%B2-%D0%BF4%D0%BF" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+      </div>
+    </div>
+    <div class="ft__bot">
+      <div class="ft__crisis">У кризі телефонуйте
+        <span class="ft__tel"><a href="tel:103">103</a><a href="tel:112">112</a></span>
+      </div>
+      <p class="ft__legal">
+        <span class="ft__copy">© 2026 Медведєв В. М.</span><span class="ft__sep"> · </span><span>Психологічні консультації не замінюють медичну допомогу.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Diploma proof carousel: category filter & lightbox
+  const proofTabs = document.querySelectorAll('.proof-tab');
+  const proofSlots = document.querySelectorAll('.proof-slot');
+  const proofTrack = document.getElementById('proofTrack');
+  const proofPrev = document.getElementById('proofPrev');
+  const proofNext = document.getElementById('proofNext');
+  const proofDots = document.getElementById('proofDots');
+  const CENTERED_CATS = ['osvita', 'chlenstvo'];
+
+  const visibleProofSlots = () => Array.from(proofSlots).filter(s => s.style.display !== 'none');
+
+  const buildProofDots = () => {
+    const slots = visibleProofSlots();
+    proofDots.innerHTML = '';
+    slots.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'proof-dot' + (i === 0 ? ' is-active' : '');
+      proofDots.appendChild(dot);
+    });
+  };
+
+  const updateProofNav = () => {
+    const slots = visibleProofSlots();
+    if (!slots.length) return;
+    const trackLeft = proofTrack.getBoundingClientRect().left;
+    let activeIndex = 0, minDist = Infinity;
+    slots.forEach((slot, i) => {
+      const dist = Math.abs(slot.getBoundingClientRect().left - trackLeft);
+      if (dist < minDist) { minDist = dist; activeIndex = i; }
+    });
+    Array.from(proofDots.children).forEach((d, i) => d.classList.toggle('is-active', i === activeIndex));
+    const max = proofTrack.scrollWidth - proofTrack.clientWidth;
+    if (proofPrev) proofPrev.disabled = proofTrack.scrollLeft <= 4;
+    if (proofNext) proofNext.disabled = proofTrack.scrollLeft >= max - 4;
+  };
+
+  const scrollProofBy = (dir) => {
+    const slots = visibleProofSlots();
+    if (!slots.length) return;
+    const gap = parseFloat(getComputedStyle(proofTrack).columnGap) || 0;
+    const step = (slots[0].getBoundingClientRect().width + gap) * dir;
+    proofTrack.scrollBy({ left: step, behavior: 'smooth' });
+  };
+
+  proofSlots.forEach(slot => { slot.style.display = (slot.dataset.cat === 'navchannya') ? '' : 'none'; });
+  buildProofDots();
+  updateProofNav();
+
+  proofTabs.forEach(tab => tab.addEventListener('click', () => {
+    proofTabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+    tab.classList.add('is-active');
+    tab.setAttribute('aria-selected', 'true');
+    const cat = tab.dataset.cat;
+    proofSlots.forEach(slot => { slot.style.display = (slot.dataset.cat === cat) ? '' : 'none'; });
+    proofTrack.classList.toggle('is-centered', CENTERED_CATS.includes(cat));
+    proofTrack.scrollLeft = 0;
+    buildProofDots();
+    updateProofNav();
+  }));
+
+  proofPrev?.addEventListener('click', () => scrollProofBy(-1));
+  proofNext?.addEventListener('click', () => scrollProofBy(1));
+  proofTrack.addEventListener('scroll', () => updateProofNav(), { passive: true });
+  window.addEventListener('resize', () => updateProofNav());
+
+  // Certificate carousel starts collapsed behind a toggle
+  const proofToggleBtn = document.getElementById('proofToggleBtn');
+  const proofToggleLabel = document.getElementById('proofToggleLabel');
+  const proofCollapse = document.getElementById('proofCollapse');
+  proofToggleBtn.addEventListener('click', () => {
+    const isOpen = proofCollapse.classList.toggle('is-open');
+    proofToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    proofToggleLabel.textContent = isOpen ? 'Згорнути' : 'Переглянути документи';
+    if (isOpen) updateProofNav();
+  });
+
+  // A horizontally-scrollable strip under the cursor captures the whole wheel
+  // gesture by default — including its vertical component — so scrolling past
+  // this section with anything but a perfectly straight vertical swipe freezes
+  // the page. Let a mostly-vertical gesture scroll the page instead.
+  proofTrack.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      window.scrollBy(0, e.deltaY);
+    }
+  }, { passive: false });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const openLightbox = (src, alt) => {
+    if (!src) return;
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.hidden = false;
+  };
+  const closeLightbox = () => { lightbox.hidden = true; lightboxImg.src = ''; };
+  proofSlots.forEach(slot => slot.addEventListener('click', () => {
+    const img = slot.querySelector('img');
+    if (img) openLightbox(img.dataset.full || img.src, img.alt);
+  }));
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  document.getElementById('dopuskDocBtn').addEventListener('click', () => {
+    openLightbox('assets/edu/docs/dopusk-klinichna-praktyka.jpg', 'Сертифікат допуску до клінічної практики КПТ, УІКПТ, 30.12.2025, діє до 31.12.2030');
+  });
+
+  // Request section: interactive multi-select checklist feeding the CTA button
+  (() => {
+    const grid = document.getElementById('reqGrid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.fitcard'));
+    const otherCard = document.getElementById('reqOtherCard');
+    const otherInput = document.getElementById('reqOtherInput');
+    const otherText = document.getElementById('reqOtherText');
+    const countEl = document.getElementById('reqCount');
+    const hintEl = document.getElementById('reqHint');
+    const ctaBtn = document.getElementById('reqCtaBtn');
+
+    const pluralTopics = (n) => {
+      const mod10 = n % 10, mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'тему';
+      if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return 'теми';
+      return 'тем';
+    };
+
+    const selectedCount = () => {
+      let n = cards.filter(c => c !== otherCard && c.classList.contains('is-selected')).length;
+      if (otherCard.classList.contains('is-selected') && otherText.value.trim()) n += 1;
+      return n;
+    };
+
+    const updateCta = () => {
+      const n = selectedCount();
+      countEl.textContent = n === 0 ? 'Нічого не обрано' : `Обрано ${n} ${pluralTopics(n)}`;
+      hintEl.textContent = n === 0 ? 'Оберіть хоча б одну тему або «Інше»' : 'Дякуємо, це допоможе підготуватись до розмови';
+      ctaBtn.setAttribute('aria-disabled', n === 0 ? 'true' : 'false');
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const selected = card.classList.toggle('is-selected');
+        card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (card === otherCard) {
+          otherInput.classList.toggle('is-open', selected);
+          if (selected) setTimeout(() => otherText.focus(), 200);
+        }
+        updateCta();
+      });
+    });
+    otherText.addEventListener('input', updateCta);
+    ctaBtn.addEventListener('click', (e) => {
+      if (ctaBtn.getAttribute('aria-disabled') === 'true') e.preventDefault();
+    });
+    updateCta();
+  })();
+</script>
+</body>
+</html>
