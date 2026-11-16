@@ -44,7 +44,6 @@
   }
   #hero .logo { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; }
   #hero .logo .mark { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--primary); letter-spacing: -.01em; }
-  #hero .logo .sub { font-family: var(--font-body); font-weight: 700; font-style: italic; font-size: .82rem; color: var(--text-mute); }
   #hero .logo:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
 
   #hero .btn {
@@ -59,6 +58,22 @@
   #hero .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(80, 85, 190, .38); }
   #hero .btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
   #hero .btn--sm { padding: 11px 24px; font-size: .9rem; box-shadow: 0 8px 22px rgba(80, 85, 190, .24); }
+  #hero .nav-actions { display: flex; align-items: center; gap: 20px; }
+  #hero .nav-tg { display: inline-flex; align-items: center; gap: 8px; padding: 8px 4px; font-family: var(--font-body); font-weight: 700; font-size: .9rem; color: var(--text); text-decoration: none; white-space: nowrap; transition: color .18s ease; }
+  #hero .nav-tg:hover { color: #229ED9; }
+  #hero .nav-tg:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
+  #hero .nav-tg svg { width: 24px; height: 24px; display: block; flex-shrink: 0; }
+  @media (max-width: 620px) { #hero .nav-tg span { display: none; } }
+  #hero .nav-left { display: flex; align-items: center; gap: 20px; min-width: 0; }
+  #hero .aud-switch { display: inline-flex; align-items: center; padding: 3px; border-radius: 999px; background: #EEF0FB; border: 1px solid #E1E6F5; }
+  #hero .aud-switch a { padding: 6px 14px; border-radius: 999px; font-family: var(--font-body); font-weight: 700; font-size: .8125rem; line-height: 1.2; color: var(--text-mute); text-decoration: none; white-space: nowrap; transition: color .18s ease, background .18s ease; }
+  #hero .aud-switch a:hover { color: var(--primary); }
+  #hero .aud-switch a.is-active { background: #fff; color: var(--primary); box-shadow: 0 2px 8px rgba(27,21,80,.08); }
+  #hero .aud-switch a:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+  #hero .aud-switch .s-short { display: none; }
+  #hero .btn--sm .b-short { display: none; }
+  @media (max-width: 480px) { #hero .nav-tg { display: none; } #hero .btn--sm .b-full { display: none; } #hero .btn--sm .b-short { display: inline; } }
+  @media (max-width: 400px) { #hero nav { padding: 10px 12px; } #hero nav .btn--sm { padding: 8px 12px; font-size: .76rem; } #hero .nav-left { gap: 8px; } #hero .aud-switch a { padding: 5px 7px; font-size: .7rem; } #hero .logo .mark { font-size: 1rem; } }
 
   #hero .hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: space-between; gap: 64px; padding: 148px var(--gutter) 104px; }
   #hero .hero::before, #hero .hero::after {
@@ -68,6 +83,15 @@
   #hero .hero::before { width: 560px; height: 560px; background: rgba(80, 85, 190, .16); top: -160px; left: -130px; }
   #hero .hero::after  { width: 440px; height: 440px; background: rgba(130, 86, 224, .12); right: -130px; bottom: -110px; }
   #hero .hero-copy, #hero .hero-visual { position: relative; z-index: 1; }
+
+  /* Subtle ambient gradient glow reused across sections (same as hero) */
+  .soft-glow { position: relative; z-index: 0; }
+  .soft-glow::before, .soft-glow::after {
+    content: ""; position: absolute; border-radius: 50%;
+    filter: blur(100px); pointer-events: none; z-index: -1;
+  }
+  .soft-glow::before { width: 560px; height: 560px; background: rgba(80, 85, 190, .08); top: -160px; left: -130px; }
+  .soft-glow::after  { width: 440px; height: 440px; background: rgba(130, 86, 224, .06); right: -130px; bottom: -110px; }
   #hero .hero-copy { max-width: 580px; display: flex; flex-direction: column; gap: 24px; }
   #hero .eyebrow { font-family: var(--font-head); font-weight: 800; font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); white-space: nowrap; }
   #hero h1 { font-family: var(--font-head); font-weight: 700; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.1; letter-spacing: -.01em; color: var(--text); }
@@ -100,8 +124,13 @@
   }
   @media (max-width: 620px) {
     #hero nav { padding: 12px 18px; }
-    #hero .logo .sub { display: none; }
     #hero .btn--sm { padding: 9px 18px; font-size: .82rem; }
+    #hero .nav-actions { gap: 8px; }
+    #hero .nav-left { gap: 10px; }
+    #hero .aud-switch a { padding: 5px 9px; font-size: .72rem; }
+    #hero .aud-switch .s-full { display: none; }
+    #hero .aud-switch .s-short { display: inline; }
+    #hero .btn--sm { white-space: nowrap; }
     #hero .hero { padding: 116px 20px 48px; }
     #hero .eyebrow { font-size: .7rem; letter-spacing: .1em; }
   }
@@ -109,6 +138,7 @@
   /* ════════════════ 2. TIMELINE ════════════════ */
   #timeline { padding: 112px var(--gutter); display: flex; gap: 64px; align-items: flex-start; background: var(--alt); }
 
+  #timeline .eyebrow { font-family: var(--font-body); font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin-bottom: -4px; }
   #timeline .tl-head { flex: 0 0 640px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 120px; }
   #timeline .tl-head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; color: var(--text); }
   #timeline .tl-head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
@@ -152,7 +182,7 @@
   #about .about-copy { flex: 1; max-width: 610px; display: flex; flex-direction: column; gap: 18px; }
   #about .about-copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: var(--text); margin-top: 6px; }
   #about .about-copy .intro { font-family: var(--font-head); font-weight: 500; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
-  #about .about-copy .intro .accent { color: var(--primary); font-weight: 700; }
+  #about .about-copy .intro .accent { color: var(--primary); font-weight: 500; }
   #about .about-copy .lead { font-family: var(--font-head); font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text); }
 
   #about .principles { display: flex; flex-direction: column; }
@@ -164,7 +194,7 @@
   @media (min-width: 621px) { #about .principle p.nowrap-lg { white-space: nowrap; } }
 
   /* Education (copied verbatim from consultation-landing/index.html "Освіта і спеціалізація") */
-  #about .edu-head { max-width: 1088px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  #about .edu-head { max-width: 1088px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
   #about .edu-title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
   #about .edu-title .hl { color: var(--primary); }
   #about .edu-sub { margin: 0; max-width: 560px; font-family: var(--font-body); font-size: .9375rem; line-height: 1.5; color: #6B6F8A; }
@@ -378,8 +408,8 @@
   }
 
   /* ════════════════ 4. FLEXIBLE ════════════════ */
-  #flexible { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 48px; background: var(--surface); --border: #D6DEF2; }
-  #flexible .head { display: flex; flex-direction: column; gap: 16px; }
+  #flexible { padding: 112px var(--gutter) 0; display: flex; flex-direction: column; gap: 48px; background: var(--surface); --border: #D6DEF2; }
+  #flexible .head { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
   #flexible .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
   #flexible .head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
 
@@ -390,17 +420,17 @@
   #flexible .card p { font-size: 1rem; line-height: 1.6; color: var(--text-mute); }
 
   @media (max-width: 1024px) {
-    #flexible { padding: 80px 32px; gap: 32px; }
+    #flexible { padding: 80px 32px 0; gap: 32px; }
     #flexible .grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 620px) {
-    #flexible { padding: 68px 20px; }
+    #flexible { padding: 68px 20px 0; }
     #flexible .head h2 { font-size: 1.75rem; }
     #flexible .grid { grid-template-columns: 1fr; }
   }
 
   /* ════════════════ 5. START ════════════════ */
-  #start { padding: 112px var(--gutter); display: flex; align-items: flex-start; justify-content: space-between; gap: 80px; background: var(--surface); }
+  #start { padding: 112px max(24px, calc((100% - 1088px) / 2)) 64px; display: flex; align-items: flex-start; justify-content: space-between; gap: 80px; background: var(--surface); }
 
   #start .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 120px; }
   #start .copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
@@ -418,53 +448,81 @@
   #start .result p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
 
   @media (max-width: 1024px) {
-    #start { flex-direction: column; padding: 80px 32px; gap: 40px; }
+    #start { flex-direction: column; padding: 80px 32px 48px; gap: 40px; }
     #start .copy { flex: none; max-width: 100%; text-align: center; align-items: center; position: static; }
     #start .result { margin-left: 0; width: 100%; }
   }
   @media (max-width: 620px) {
-    #start { padding: 68px 20px; }
+    #start { padding: 68px 20px 40px; }
     #start .copy h2 { font-size: 1.75rem; }
     #start .result { flex-direction: column; text-align: center; padding: 24px; }
   }
 
   /* ════════════════ 6. CYCLE ════════════════ */
-  #cycle { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 32px; background: var(--alt); }
-  #cycle .head { display: flex; flex-direction: column; gap: 12px; max-width: 820px; }
+  #cycle { padding: 64px var(--gutter) 112px; display: flex; flex-direction: column; gap: 64px; background: var(--surface); --border: #D6DEF2; }
+  #cycle .head { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 820px; margin: 0 auto; text-align: center; }
   #cycle .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; white-space: nowrap; }
-  #cycle .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); }
+  #cycle .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); max-width: 560px; margin: 0 auto; }
 
-  #cycle .ring { position: relative; width: 100%; max-width: 1248px; aspect-ratio: 1248 / 440; margin: 20px auto 0; }
+  #cycle .ring { position: relative; width: 100%; max-width: 1248px; aspect-ratio: 1248 / 440; margin: 0 auto; }
   #cycle .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #cycle .node-list { list-style: none; }
 
   #cycle .node {
     position: absolute; box-sizing: border-box; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
-    box-shadow: 0 12px 28px rgba(80,85,190,.1); color: var(--text); padding: 24px 40px;
-    display: flex; align-items: center; font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.3;
+    box-shadow: 0 12px 28px rgba(80,85,190,.1); color: var(--text); padding: 16px 28px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--font-head); font-weight: 600; font-size: 1.0625rem; line-height: 1.3;
   }
-  #cycle .node--top    { left: 34.2%; top: 0;      width: 31.65%; height: 34.1%; }
-  #cycle .node--right  { left: 68.35%; top: 32.95%; width: 31.65%; height: 34.1%; }
-  #cycle .node--bottom { left: 34.2%; top: 65.9%;  width: 31.65%; height: 34.1%; }
-  #cycle .node--left   { left: 0;     top: 32.95%; width: 31.65%; height: 34.1%; }
+  #cycle .node--top    { left: 38.782%; top: 0.455%;  width: 22.436%; height: 21.818%; }
+  #cycle .node--right  { left: 59.615%; top: 39.091%; width: 22.436%; height: 21.818%; }
+  #cycle .node--bottom { left: 38.782%; top: 77.727%; width: 22.436%; height: 21.818%; }
+  #cycle .node--left   { left: 17.949%; top: 39.091%; width: 22.436%; height: 21.818%; }
 
   #cycle .center {
-    position: absolute; left: 40.95%; top: 42.5%; width: 18.2%; height: 15%;
-    border-radius: 60px; background: var(--primary); color: #fff;
+    position: absolute; left: 43.99%; top: 32.955%; width: 12.019%; height: 34.091%;
+    border-radius: 999px; background: var(--primary); color: #fff;
+    box-shadow: 0 14px 34px rgba(80,85,190,.32);
     display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: var(--font-head); font-weight: 700; font-size: 1.0625rem; line-height: 1.2; padding: 4px 20px;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.125rem; line-height: 1.2; padding: 16px;
+  }
+
+  #cycle .cycle-panel {
+    width: 100%; max-width: 1088px; margin: 0 auto; box-sizing: border-box;
+    background: radial-gradient(320px 320px at 90% 10%, rgba(80,85,190,.55), rgba(80,85,190,0) 70%), linear-gradient(135deg, #1B1550, #332B7A);
+    border: 1px solid rgba(255,255,255,.08); border-radius: 32px; padding: 56px 64px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  #cycle .cycle-panel h3 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: #fff; }
+  #cycle .cycle-panel > div { flex: 1 1 auto; min-width: 0; }
+  #cycle .cycle-panel p { margin: 14px 0 0; font-size: 1.0625rem; line-height: 1.6; color: #FFFFFF; opacity: .92; white-space: nowrap; }
+  #cycle .cycle-panel .btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 999px;
+    padding: 20px 40px; font-family: var(--font-body); font-weight: 700; font-size: 1.125rem; line-height: 1; white-space: nowrap;
+    background: #fff; color: #1B1550; box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  #cycle .cycle-panel .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(0,0,0,.28); }
+  #cycle .cycle-panel .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { #cycle .cycle-panel .btn:hover { transform: none; } }
+  @media (max-width: 1024px) { #cycle .cycle-panel { padding: 48px 40px; flex-direction: column; text-align: center; gap: 24px; } #cycle .cycle-panel p { white-space: normal; } }
+  @media (max-width: 620px) {
+    #cycle .cycle-panel { padding: 40px 28px; border-radius: 24px; }
+    #cycle .cycle-panel h3 { font-size: 1.75rem; }
+    #cycle .cycle-panel .btn { width: 100%; }
   }
 
   @media (max-width: 1024px) {
-    #cycle { padding: 80px 32px; }
+    #cycle { padding: 48px 32px 80px; }
     #cycle .ring { aspect-ratio: auto; height: auto; display: flex; flex-direction: column; gap: 16px; }
     #cycle .ring svg { display: none; }
+    #cycle .node-list { display: contents; }
     #cycle .node, #cycle .center { position: static; width: 100%; height: auto; padding: 20px 28px; text-align: left; justify-content: flex-start; }
     #cycle .center { order: 5; margin-top: 4px; justify-content: center; text-align: center; }
   }
   @media (max-width: 620px) {
-    #cycle { padding: 68px 20px; }
+    #cycle { padding: 48px 20px 68px; }
     #cycle .head h2 { font-size: 1.75rem; white-space: normal; }
-    #cycle .node { font-size: 1.1rem; padding: 18px 22px; }
+    #cycle .node { font-size: 1.0625rem; padding: 18px 22px; }
   }
 
   /* ════════════════ 7. REQUEST ════════════════ */
@@ -559,35 +617,36 @@
   }
 
   /* ════════════════ 8. CTA ════════════════ */
-  #cta { padding: 64px var(--gutter); display: flex; align-items: center; background: var(--alt); }
+  #cta { padding: 0 max(24px, calc((100% - 1088px) / 2)) 112px; display: flex; align-items: center; background: var(--surface); }
 
-  #cta .panel { width: 100%; box-sizing: border-box; background: linear-gradient(135deg, var(--dark-1), var(--dark-2)); border-radius: 32px; padding: 56px 64px; display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
-  #cta .panel h2 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: #fff; }
-  #cta .panel h2 .hl { color: var(--primary-2); }
-  #cta .panel p { margin: 10px 0 0; font-size: 1.1875rem; line-height: 1.6; color: #C9CEF0; }
+  #cta .panel { width: 100%; box-sizing: border-box; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 14px 34px rgba(27,21,80,.07); border-radius: 32px; padding: 56px 64px; display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+  #cta .panel h2 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: var(--text); }
+  #cta .panel h2 .hl { color: var(--primary); }
+  #cta .panel p { margin: 10px 0 0; font-size: 1.1875rem; line-height: 1.6; color: var(--text-mute); }
 
   #cta .btn {
-    flex-shrink: 0; background: #fff; color: var(--dark-1); text-decoration: none; border-radius: 999px;
+    flex-shrink: 0; background: linear-gradient(135deg, var(--primary-2), var(--primary)); color: #fff; text-decoration: none; border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(80,85,190,.28);
     padding: 20px 40px; font-family: var(--font-body); font-weight: 700; font-size: 1.125rem; line-height: 1; white-space: nowrap;
     transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 12px 30px rgba(0,0,0,.18);
   }
-  #cta .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(0,0,0,.24); }
-  #cta .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  #cta .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(80,85,190,.35); }
+  #cta .btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) { #cta .btn:hover { transform: none; } }
 
   @media (max-width: 1024px) {
-    #cta { padding: 32px 32px; }
+    #cta { padding: 0 32px 80px; }
     #cta .panel { padding: 48px 40px; flex-direction: column; text-align: center; gap: 28px; }
   }
   @media (max-width: 620px) {
-    #cta { padding: 24px 20px; }
+    #cta { padding: 0 20px 68px; }
     #cta .panel { padding: 40px 28px; border-radius: 24px; }
     #cta .panel h2 { font-size: 1.75rem; }
     #cta .btn { width: 100%; text-align: center; }
   }
 
   /* ════════════════ 9. HELP ════════════════ */
-  #help { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 40px; background: var(--surface); }
+  #help { padding: 112px max(24px, calc((100% - 1088px) / 2)); display: flex; flex-direction: column; gap: 40px; background: var(--bg); }
   #help h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; }
 
   #help .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: stretch; }
@@ -614,49 +673,6 @@
   }
 
   /* ════════════════ 10. Telegram / Footer (ідентично основному ленду) ════════════════ */
-  footer { background: #F5F9FF; padding-block: 80px; padding-inline: 16px; }
-  .tg-card {
-    background: #FFFFFF; border: 1px solid #E3E8F7; border-radius: 24px;
-    box-shadow: 0 14px 34px rgba(27, 21, 80, .07);
-    padding: 28px 20px; max-width: 880px; margin: 0 auto;
-    display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 20px 14px;
-  }
-  .tg-logo { grid-column: 1; grid-row: 1; display: block; width: 56px; height: 56px; }
-  .tg-h2 {
-    grid-column: 2; grid-row: 1; margin: 0;
-    font-family: var(--font-head); font-weight: 700; font-size: 1.375rem; line-height: 1.2;
-    color: #1B1550; white-space: nowrap;
-  }
-  .tg-topics {
-    grid-column: 1 / -1; grid-row: 2;
-    display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; row-gap: 6px;
-    font-size: .875rem; font-weight: 700; color: #1B1550;
-  }
-  .tg-topic { display: flex; align-items: center; gap: 6px; }
-  .tg-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: #5055BE; }
-  .tg-btn {
-    grid-column: 1 / -1; grid-row: 3;
-    width: 100%; min-height: 52px; padding: 0;
-    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
-    color: #FFFFFF; text-decoration: none; border: none; cursor: pointer; border-radius: var(--r-pill);
-    background: linear-gradient(135deg, #4A6CF5, #5055BE); box-shadow: 0 10px 24px rgba(80, 85, 190, .28);
-    transition: transform .18s ease, opacity .18s ease;
-  }
-  .tg-btn:hover { color: #FFFFFF; transform: translateY(-2px); opacity: .92; }
-  @media (min-width: 900px) {
-    .tg-card {
-      border-radius: 28px; box-shadow: 0 18px 44px rgba(27, 21, 80, .07);
-      padding: 36px 44px;
-      grid-template-columns: 72px 1fr auto; grid-template-rows: auto auto;
-      column-gap: 28px; row-gap: 8px;
-    }
-    .tg-logo { grid-row: 1 / 3; width: 72px; height: 72px; }
-    .tg-h2 { font-size: 1.75rem; }
-    .tg-topics { grid-column: 2; grid-row: 2; flex-wrap: nowrap; column-gap: 10px; row-gap: 0; margin-top: 2px; }
-    .tg-btn { grid-column: 3; grid-row: 1 / 3; width: 207px; white-space: nowrap; }
-  }
-
   .ft { background: #EEF0FB; color: #1B1550; font-family: 'Nunito', sans-serif; padding: 48px 16px 24px; }
   .ft__in { max-width: 1088px; margin: 0 auto; }
   .ft__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
@@ -689,12 +705,23 @@
 
 <div id="hero">
   <nav>
+    <div class="nav-left">
     <a href="https://inakshi.in.ua" class="logo">
       <span class="mark">Інакші</span>
-      <span class="sub">— освітній проєкт психолога Віталія Медведєва</span>
     </a>
-    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
-    <a href="CONSULT_URL" class="btn btn--sm">Безкоштовна консультація</a>
+      <div class="aud-switch" aria-label="Оберіть напрям">
+        <a href="https://consultation-landing.vercel.app/">Для себе</a>
+        <a href="#" class="is-active" aria-current="page"><span class="s-full">Для освітян</span><span class="s-short">Освітянам</span></a>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="https://t.me/medvedmyself" class="nav-tg" target="_blank" rel="noopener" aria-label="Telegram-канал" title="Telegram-канал">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path fill="#fff" d="M5.4 11.8c3.5-1.5 5.8-2.5 7-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .5.1.1.1.2.2.2.3v.5c-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9l-2.7-1.8c-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2v-.2c-.1-.1-.2 0-.3 0-.1 0-1.8 1.1-5.1 3.4-.5.3-.9.5-1.3.5-.4 0-1.2-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z"/></svg><span>Telegram-канал</span>
+        
+      </a>
+      <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
+      <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn btn--sm"><span class="b-full">Безкоштовна консультація</span><span class="b-short">Консультація</span></a>
+    </div>
   </nav>
 
   <section class="hero">
@@ -708,7 +735,7 @@
         <span class="hf-tag">Керівництво</span>
       </div>
       <div class="fade-up" style="transition-delay:.25s">
-        <a href="CONSULT_URL" class="btn">Безкоштовна консультація</a>
+        <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
       </div>
     </div>
     <div class="hero-visual fade-up" style="transition-delay:.2s">
@@ -717,7 +744,7 @@
   </section>
 </div>
 
-<section id="request">
+<section id="request" class="soft-glow">
   <div class="req-visual">
   <div class="head fade-up">
     <div class="eyebrow">Запит вашого ліцею</div>
@@ -770,14 +797,15 @@
       <div class="fit-cta-count" id="reqCount" aria-live="polite">Нічого не обрано</div>
       <div class="fit-cta-hint" id="reqHint">Оберіть хоча б одну тему або «Інше»</div>
     </div>
-    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
-    <a href="CONSULT_URL" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+    <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
+    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
   </div>
   </div>
   </div>
 </section>
-<section id="timeline">
+<section id="timeline" class="soft-glow">
   <div class="tl-head">
+    <div class="eyebrow">Етапи співпраці</div>
     <h2>Від безкоштовної консультації<br>до стабільного колективу</h2>
     <p>Чотири етапи змін у вашому ліцеї</p>
   </div>
@@ -808,7 +836,7 @@
 
 
 
-<section id="flexible">
+<section id="flexible" class="soft-glow">
   <div class="head fade-up">
     <h2>Гнучкі рішення – суттєві зміни</h2>
     <p>Впровадження доказових методів підтримки для досягнення цілей</p>
@@ -845,27 +873,36 @@
   </div>
   <div class="ring fade-up" style="transition-delay:.1s">
     <svg viewBox="0 0 1248 440" aria-hidden="true">
-      <defs>
-        <marker id="arrK" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
-          <path d="M0,0 L18,9 L0,18 z" fill="#5055BE"></path>
-        </marker>
-      </defs>
-      <path d="M822,75 Q1100,75 1100,141" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
-      <path d="M1100,299 Q1100,365 826,365" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
-      <path d="M423,365 Q197,365 197,299" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
-      <path d="M197,141 Q197,75 423,75" fill="none" stroke="#5055BE" stroke-width="3" stroke-linecap="round" marker-end="url(#arrK)"></path>
+      <ellipse cx="624" cy="220" rx="260" ry="170" fill="none" stroke="#C9D0E6" stroke-width="2" stroke-dasharray="4 6"></ellipse>
+      <g transform="translate(807.8, 99.8) rotate(33.2)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
+      <g transform="translate(807.8, 340.2) rotate(147)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
+      <g transform="translate(440.2, 340.2) rotate(213)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
+      <g transform="translate(440.2, 99.8) rotate(326.8)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
     </svg>
-    <div class="node node--top">Педагоги мають мотивацію, а не вигорання</div>
-    <div class="node node--right">На уроках панує безпека та натхнення</div>
-    <div class="node node--bottom">Учні довіряють вашим педагогам</div>
-    <div class="node node--left">Ви отримуєте стабільність у житті ліцею</div>
+    <ol class="node-list">
+      <li class="node node--top">Мотивація та стійкість педагогів зростає</li>
+      <li class="node node--right">На уроках панує натхнення і довіра</li>
+      <li class="node node--bottom">Учні активніше залучаються в навчання</li>
+      <li class="node node--left">Стабільність у роботі команди та ліцею</li>
+    </ol>
     <div class="center">Психологічна підтримка</div>
+  </div>
+  <div class="cycle-panel fade-up" style="transition-delay:.16s">
+    <div>
+      <h3>Готові запустити цей цикл?</h3>
+      <p>Дізнайтеся, з чого почати у вашому ліцеї</p>
+    </div>
+    <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
+    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
   </div>
 </section>
 
 
-<section id="about">
+<section id="about" class="soft-glow">
   <div class="about-top">
+    <div class="about-visual fade-up">
+      <img src="assets/about-photo.jpg" alt="Портрет психолога Віталія Медведєва">
+    </div>
     <div class="about-copy fade-up" style="transition-delay:.08s">
       <div class="eyebrow">Про мене</div>
       <h2>Привіт, я Віталій</h2>
@@ -876,9 +913,6 @@
         <div class="principle"><span class="num">2</span><div><h3>Доказовий метод</h3><p class="nowrap-lg">КПТ — золотий стандарт терапії з +60 років клінічних досліджень</p></div></div>
         <div class="principle"><span class="num">3</span><div><h3>Навички на щодень</h3><p class="nowrap-lg">Навички, які учасники опановують, одразу застосовують у роботі та житті</p></div></div>
       </div>
-    </div>
-    <div class="about-visual fade-up">
-      <img src="assets/about-photo.jpg" alt="Портрет психолога Віталія Медведєва">
     </div>
   </div>
 
@@ -1207,7 +1241,7 @@
   <img id="lightboxImg" src="" alt="">
 </div>
 
-<section id="start">
+<section id="start" class="soft-glow">
   <div class="copy fade-up">
     <h2>Як почати</h2>
     <p>Три прості кроки від першої заявки до сесії</p>
@@ -1230,26 +1264,13 @@
       <h2>Почніть <span class="hl">сьогодні</span></h2>
       <p>Отримайте рекомендації, з чого почати зміни у вашому ліцеї.</p>
     </div>
-    <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
-    <a href="CONSULT_URL" class="btn">Безкоштовна консультація</a>
+    <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
+    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
   </div>
 </section>
 
 
-<footer>
-  <div class="tg-card">
-    <svg class="tg-logo" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="tgGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#tgGrad)"/><path fill="#FFFFFF" d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z"/></svg>
-    <h2 class="tg-h2">Приєднуйтесь</h2>
-    <div class="tg-topics">
-      <span class="tg-topic"><span class="tg-dot"></span>Психотерапія</span>
-      <span class="tg-topic"><span class="tg-dot"></span>Дослідження</span>
-      <span class="tg-topic"><span class="tg-dot"></span>Меми</span>
-    </div>
-    <a href="https://t.me/medvedmyself" class="tg-btn" target="_blank" rel="noopener">Приєднатися</a>
-  </div>
-</footer>
-
-<section id="help">
+<section id="help" class="soft-glow">
   <h2 class="fade-up">Служби допомоги у кризових ситуаціях</h2>
   <div class="grid fade-up" style="transition-delay:.08s">
     <div class="main-card">
@@ -1286,8 +1307,8 @@
       </div>
       <div class="ft__col" role="navigation" aria-label="Документи">
         <h4>Документи</h4>
-        <a href="terms.html">Договір оферти та політика<br>конфіденційності</a>
-        <a href="ethics.html">Етичні положення</a>
+        <a href="https://consultation-landing.vercel.app/terms.html">Договір оферти та політика<br>конфіденційності</a>
+        <a href="https://consultation-landing.vercel.app/ethics.html">Етичні положення</a>
       </div>
       <div class="ft__col">
         <h4>Контакти</h4>
@@ -1463,8 +1484,14 @@
       });
     });
     otherText.addEventListener('input', updateCta);
+    // Обрані теми передаємо в анкету через sessionStorage (не через URL).
     ctaBtn.addEventListener('click', (e) => {
-      if (ctaBtn.getAttribute('aria-disabled') === 'true') e.preventDefault();
+      if (ctaBtn.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
+      const topics = cards.filter(c => c !== otherCard && c.classList.contains('is-selected'))
+        .map(c => ({ id: c.dataset.id, label: c.dataset.label }));
+      const other = otherText.value.trim();
+      if (otherCard.classList.contains('is-selected') && other) topics.push({ id: 'other', label: other });
+      try { sessionStorage.setItem('lyceum.topics', JSON.stringify(topics)); } catch (err) {}
     });
     updateCta();
   })();
