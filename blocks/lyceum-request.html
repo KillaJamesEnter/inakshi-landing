@@ -27,6 +27,7 @@
   body { background: var(--bg); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
 
   .section { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 24px; background: var(--surface); }
+  .req-visual { width: 100%; display: flex; flex-direction: column; gap: 24px; }
 
   .eyebrow { font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
   .head { display: flex; flex-direction: column; gap: 12px; max-width: 1088px; width: 100%; margin: 0 auto; }
@@ -34,7 +35,8 @@
   .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); max-width: 560px; }
 
   /* Interactive multi-select — ідентично consultation-landing/index.html "Кому підійде" */
-  .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 1088px; width: 100%; margin: 0 auto; }
+  .req-body { max-width: 1088px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 808px; width: 100%; }
   .fitcard {
     appearance: none; -webkit-appearance: none;
     background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
@@ -60,7 +62,7 @@
   .fitcard.is-selected .fitcard-box { background: var(--primary); border-color: var(--primary); color: #fff; }
 
   .fit-other-input {
-    max-width: 1088px; width: 100%; margin-left: auto; margin-right: auto;
+    max-width: 808px; width: 100%;
     overflow: hidden; box-sizing: border-box; max-height: 0; opacity: 0;
     transition: max-height .25s ease, opacity .2s ease, margin .25s ease;
   }
@@ -74,7 +76,7 @@
   .fit-other-input textarea:focus { outline: none; }
 
   .fit-cta {
-    max-width: 1088px; width: 100%; margin: 0 auto;
+    max-width: 808px; width: 100%;
     display: flex; flex-direction: column; align-items: center; gap: 14px;
     padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center;
   }
@@ -105,6 +107,7 @@
     .fitcard { width: 400px; flex: 0 0 400px; padding: 10px 20px 10px 16px; min-height: 52px; gap: 12px; font-size: 1.0625rem; border-radius: 14px; white-space: nowrap; }
     .fitcard-box { width: 24px; height: 24px; }
     .fitcard-box svg { width: 14px; height: 14px; }
+    .req-visual { max-width: 840px; margin: 0 auto; }
   }
 
   @media (max-width: 1024px) {
@@ -121,12 +124,14 @@
 <body>
 
 <section class="section">
+  <div class="req-visual">
   <div class="head fade-up">
     <div class="eyebrow">Запит вашого ліцею</div>
     <h2 id="reqH2">Оберіть, які виклики існують у вашому ліцеї</h2>
     <p>Можна обрати кілька — це допоможе зрозуміти, як саме вам допомогти</p>
   </div>
 
+  <div class="req-body">
   <div class="fitgrid fade-up" id="reqGrid" style="transition-delay:.06s" role="group" aria-labelledby="reqH2">
     <button type="button" class="fitcard" aria-pressed="false" data-id="climate" data-label="Напружена атмосфера під час уроків">
       <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -174,6 +179,8 @@
     </div>
     <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
     <a href="CONSULT_URL" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+  </div>
+  </div>
   </div>
 </section>
 

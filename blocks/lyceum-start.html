@@ -25,9 +25,9 @@
 
   body { background: var(--surface); font-family: var(--font-body); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-  .section { padding: 112px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 80px; }
+  .section { padding: 112px var(--gutter); display: flex; align-items: flex-start; justify-content: space-between; gap: 80px; }
 
-  .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
+  .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 120px; }
   .copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
   .copy p { font-size: 1.0625rem; line-height: 1.6; color: var(--text-mute); }
 
@@ -37,8 +37,8 @@
   .step h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; }
   .step p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
 
-  .result { margin-top: 28px; margin-left: 72px; width: calc(100% - 72px); box-sizing: border-box; background: var(--alt); border-radius: 24px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; }
-  .result-icon { flex-shrink: 0; width: 56px; height: 56px; border-radius: 16px; background: rgba(80,85,190,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+  .result { margin-top: 28px; width: 100%; box-sizing: border-box; background: var(--alt); border-radius: 24px; padding: 28px 32px 28px 12px; display: flex; align-items: center; gap: 12px; }
+  .result-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 16px; background: rgba(80,85,190,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; }
   .result h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; color: var(--text); margin-bottom: 6px; }
   .result p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
 
@@ -48,7 +48,7 @@
 
   @media (max-width: 1024px) {
     .section { flex-direction: column; padding: 80px 32px; gap: 40px; }
-    .copy { flex: none; max-width: 100%; text-align: center; align-items: center; }
+    .copy { flex: none; max-width: 100%; text-align: center; align-items: center; position: static; }
     .result { margin-left: 0; width: 100%; }
   }
 

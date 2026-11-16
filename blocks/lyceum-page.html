@@ -146,7 +146,7 @@
   #about { padding: 112px var(--gutter) 120px; background: linear-gradient(180deg, #DDE8FB 0%, var(--bg) 420px, var(--bg) 100%); }
   #about .eyebrow { font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
 
-  #about .about-top { display: flex; gap: 64px; align-items: center; margin-bottom: 96px; }
+  #about .about-top { display: flex; gap: 64px; align-items: center; margin-bottom: 96px; max-width: 1088px; width: 100%; margin-left: auto; margin-right: auto; }
   #about .about-visual { flex: 0 0 400px; width: 400px; height: 520px; border-radius: 24px; background: linear-gradient(160deg, #C9D6F2, #8E9BD6); box-shadow: 0 24px 48px rgba(80,85,190,.16); overflow: hidden; }
   #about .about-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 18%; display: block; }
   #about .about-copy { flex: 1; max-width: 610px; display: flex; flex-direction: column; gap: 18px; }
@@ -400,9 +400,9 @@
   }
 
   /* ════════════════ 5. START ════════════════ */
-  #start { padding: 112px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 80px; background: var(--surface); }
+  #start { padding: 112px var(--gutter); display: flex; align-items: flex-start; justify-content: space-between; gap: 80px; background: var(--surface); }
 
-  #start .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
+  #start .copy { flex: 0 0 420px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 120px; }
   #start .copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
   #start .copy p { font-size: 1.0625rem; line-height: 1.6; color: var(--text-mute); }
 
@@ -412,14 +412,14 @@
   #start .step h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; }
   #start .step p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
 
-  #start .result { margin-top: 28px; margin-left: 72px; width: calc(100% - 72px); box-sizing: border-box; background: var(--alt); border-radius: 24px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; }
-  #start .result-icon { flex-shrink: 0; width: 56px; height: 56px; border-radius: 16px; background: rgba(80,85,190,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+  #start .result { margin-top: 28px; width: 100%; box-sizing: border-box; background: var(--alt); border-radius: 24px; padding: 28px 32px 28px 12px; display: flex; align-items: center; gap: 12px; }
+  #start .result-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 16px; background: rgba(80,85,190,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; }
   #start .result h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.375rem; color: var(--text); margin-bottom: 6px; }
   #start .result p { font-size: 1rem; line-height: 1.5; color: var(--text-mute); }
 
   @media (max-width: 1024px) {
     #start { flex-direction: column; padding: 80px 32px; gap: 40px; }
-    #start .copy { flex: none; max-width: 100%; text-align: center; align-items: center; }
+    #start .copy { flex: none; max-width: 100%; text-align: center; align-items: center; position: static; }
     #start .result { margin-left: 0; width: 100%; }
   }
   @media (max-width: 620px) {
@@ -469,6 +469,7 @@
 
   /* ════════════════ 7. REQUEST ════════════════ */
   #request { padding: 112px var(--gutter); display: flex; flex-direction: column; gap: 24px; background: var(--surface); }
+  #request .req-visual { width: 100%; display: flex; flex-direction: column; gap: 24px; }
 
   #request .eyebrow { font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
   #request .head { display: flex; flex-direction: column; gap: 12px; max-width: 1088px; width: 100%; margin: 0 auto; }
@@ -476,7 +477,8 @@
   #request .head p { font-size: 1rem; line-height: 1.65; color: var(--text-mute); max-width: 560px; }
 
   /* Interactive multi-select — ідентично consultation-landing/index.html "Кому підійде" */
-  #request .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 1088px; width: 100%; margin: 0 auto; }
+  #request .req-body { max-width: 1088px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  #request .fitgrid { display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 808px; width: 100%; }
   #request .fitcard {
     appearance: none; -webkit-appearance: none;
     background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
@@ -502,7 +504,7 @@
   #request .fitcard.is-selected .fitcard-box { background: var(--primary); border-color: var(--primary); color: #fff; }
 
   #request .fit-other-input {
-    max-width: 1088px; width: 100%; margin-left: auto; margin-right: auto;
+    max-width: 808px; width: 100%;
     overflow: hidden; box-sizing: border-box; max-height: 0; opacity: 0;
     transition: max-height .25s ease, opacity .2s ease, margin .25s ease;
   }
@@ -516,7 +518,7 @@
   #request .fit-other-input textarea:focus { outline: none; }
 
   #request .fit-cta {
-    max-width: 1088px; width: 100%; margin: 0 auto;
+    max-width: 808px; width: 100%;
     display: flex; flex-direction: column; align-items: center; gap: 14px;
     padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center;
   }
@@ -544,6 +546,7 @@
     #request .fitcard { width: 400px; flex: 0 0 400px; padding: 10px 20px 10px 16px; min-height: 52px; gap: 12px; font-size: 1.0625rem; border-radius: 14px; white-space: nowrap; }
     #request .fitcard-box { width: 24px; height: 24px; }
     #request .fitcard-box svg { width: 14px; height: 14px; }
+    #request .req-visual { max-width: 840px; margin: 0 auto; }
   }
 
   @media (max-width: 1024px) {
@@ -596,8 +599,7 @@
 
   #help .cards { display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 24px; }
   #help .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
-  #help .card h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.1875rem; line-height: 1.3; white-space: nowrap; }
-  #help .card h4.h4-long { font-size: .9375rem; }
+  #help .card h4 { font-family: var(--font-head); font-weight: 600; font-size: .9375rem; line-height: 1.3; white-space: nowrap; }
   #help .card .phone { font-family: var(--font-head); font-weight: 700; font-size: 1.375rem; line-height: 1.3; color: var(--primary); text-decoration: none; }
   #help .card p { font-size: .9375rem; line-height: 1.45; color: var(--text-mute); }
 
@@ -667,9 +669,6 @@
   .ft__col a:hover { color: #5055BE; }
   .ft__col svg { flex: none; width: 18px; height: 18px; }
   .ft__bot { margin-top: 32px; padding-top: 18px; border-top: 1px solid #D9DEF2; display: flex; flex-direction: column; gap: 12px; }
-  .ft__crisis { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; color: #3F43A0; }
-  .ft__tel { display: flex; gap: 8px; }
-  .ft__tel a { display: grid; place-items: center; width: 56px; height: 44px; border-radius: 999px; background: #5055BE; color: #fff; font-weight: 800; text-decoration: none; }
   .ft__legal { margin: 0; display: flex; flex-direction: column; gap: 12px; font-size: 13px; line-height: 1.4; color: #6B6F94; }
   .ft__copy { order: 2; font-size: 14px; }
   .ft__sep { display: none; }
@@ -681,10 +680,6 @@
     .ft__col { gap: 12px; }
     .ft__col a { padding: 0; min-height: 0; }
     .ft__bot { flex-direction: row; justify-content: space-between; align-items: center; }
-    .ft__crisis { order: 2; justify-content: flex-start; font-size: 14px; }
-    .ft__tel { gap: 4px; }
-    .ft__tel a { display: inline-block; width: auto; height: auto; background: none; color: #5055BE; text-decoration: underline; }
-    .ft__tel a + a::before { content: "/ "; color: #3F43A0; text-decoration: none; display: inline-block; margin-right: 4px; }
     .ft__legal { display: block; font-size: 14px; }
     .ft__sep { display: inline; }
   }
@@ -723,11 +718,13 @@
 </div>
 
 <section id="request">
+  <div class="req-visual">
   <div class="head fade-up">
     <div class="eyebrow">Запит вашого ліцею</div>
     <h2 id="reqH2">Оберіть, які виклики існують у вашому ліцеї</h2>
     <p>Можна обрати кілька — це допоможе зрозуміти, як саме вам допомогти</p>
   </div>
+  <div class="req-body">
   <div class="fitgrid fade-up" id="reqGrid" style="transition-delay:.06s" role="group" aria-labelledby="reqH2">
     <button type="button" class="fitcard" aria-pressed="false" data-id="climate" data-label="Напружена атмосфера під час уроків">
       <span class="fitcard-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -775,6 +772,8 @@
     </div>
     <!-- CONSULT_URL: підставити реальне посилання на безкоштовну консультацію -->
     <a href="CONSULT_URL" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+  </div>
+  </div>
   </div>
 </section>
 <section id="timeline">
@@ -870,7 +869,7 @@
     <div class="about-copy fade-up" style="transition-delay:.08s">
       <div class="eyebrow">Про мене</div>
       <h2>Привіт, я Віталій</h2>
-      <p class="intro">За 8 років практики, я бачу, що <span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де всім безпечно і куди хочеться повернутися.</p>
+      <p class="intro">За 8 років практики, я проаналізував, що <span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де всім безпечно і куди хочеться повернутися.</p>
       <p class="lead">Тому, під час співпраці, я дотримуюся трьох головних принципів:</p>
       <div class="principles">
         <div class="principle"><span class="num">1</span><div><h3>Фокус на цілях ліцею</h3><p class="nowrap-lg">Разом визначаємо, що саме ліцей хоче змінити, і рухаємося до цього</p></div></div>
@@ -1237,6 +1236,19 @@
 </section>
 
 
+<footer>
+  <div class="tg-card">
+    <svg class="tg-logo" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="tgGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#tgGrad)"/><path fill="#FFFFFF" d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z"/></svg>
+    <h2 class="tg-h2">Приєднуйтесь</h2>
+    <div class="tg-topics">
+      <span class="tg-topic"><span class="tg-dot"></span>Психотерапія</span>
+      <span class="tg-topic"><span class="tg-dot"></span>Дослідження</span>
+      <span class="tg-topic"><span class="tg-dot"></span>Меми</span>
+    </div>
+    <a href="https://t.me/medvedmyself" class="tg-btn" target="_blank" rel="noopener">Приєднатися</a>
+  </div>
+</footer>
+
 <section id="help">
   <h2 class="fade-up">Служби допомоги у кризових ситуаціях</h2>
   <div class="grid fade-up" style="transition-delay:.08s">
@@ -1257,26 +1269,13 @@
         <p>Психологічна підтримка та допомога у складних життєвих обставинах</p>
       </div>
       <div class="card">
-        <h4 class="h4-long">Психологічна підтримка та кризова допомога («Лінія Довіри»)</h4>
+        <h4>Психологічна підтримка та кризова допомога («Лінія Довіри»)</h4>
         <a href="tel:0800507750" class="phone">0 800 50 77 50</a>
         <p>Чат на сайті dovira.online/chat</p>
       </div>
     </div>
   </div>
 </section>
-
-<footer>
-  <div class="tg-card">
-    <svg class="tg-logo" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="tgGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#tgGrad)"/><path fill="#FFFFFF" d="M54.3,118.8c35-15.2,58.3-25.3,70-30.2c33.3-13.9,40.3-16.3,44.8-16.4c1,0,3.2,0.2,4.7,1.4c1.2,1,1.5,2.3,1.7,3.3s0.4,3.1,0.2,4.7c-1.8,19-9.6,65.1-13.6,86.3c-1.7,9-5,12-8.2,12.3c-7,0.6-12.3-4.6-19-9c-10.6-6.9-16.5-11.2-26.8-18c-11.9-7.8-4.2-12.1,2.6-19.1c1.8-1.8,32.5-29.8,33.1-32.3c0.1-0.3,0.1-1.5-0.6-2.1c-0.7-0.6-1.7-0.4-2.5-0.2c-1.1,0.2-17.9,11.4-50.6,33.5c-4.8,3.3-9.1,4.9-13,4.8c-4.3-0.1-12.5-2.4-18.7-4.4c-7.5-2.4-13.5-3.7-13-7.9C45.7,123.3,48.7,121.1,54.3,118.8z"/></svg>
-    <h2 class="tg-h2">Приєднуйтесь</h2>
-    <div class="tg-topics">
-      <span class="tg-topic"><span class="tg-dot"></span>Психотерапія</span>
-      <span class="tg-topic"><span class="tg-dot"></span>Дослідження</span>
-      <span class="tg-topic"><span class="tg-dot"></span>Меми</span>
-    </div>
-    <a href="https://t.me/medvedmyself" class="tg-btn" target="_blank" rel="noopener">Приєднатися</a>
-  </div>
-</footer>
 
 <footer class="ft">
   <div class="ft__in">
@@ -1287,7 +1286,8 @@
       </div>
       <div class="ft__col" role="navigation" aria-label="Документи">
         <h4>Документи</h4>
-        <a href="terms.html">Договір оферти та політика конфіденційності</a>
+        <a href="terms.html">Договір оферти та політика<br>конфіденційності</a>
+        <a href="ethics.html">Етичні положення</a>
       </div>
       <div class="ft__col">
         <h4>Контакти</h4>
@@ -1297,9 +1297,6 @@
       </div>
     </div>
     <div class="ft__bot">
-      <div class="ft__crisis">У кризі телефонуйте
-        <span class="ft__tel"><a href="tel:103">103</a><a href="tel:112">112</a></span>
-      </div>
       <p class="ft__legal">
         <span class="ft__copy">© 2026 Медведєв В. М.</span><span class="ft__sep"> · </span><span>Психологічні консультації не замінюють медичну допомогу.</span>
       </p>
