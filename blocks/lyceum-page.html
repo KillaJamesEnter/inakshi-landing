@@ -42,9 +42,17 @@
     padding: 16px 40px; background: rgba(245, 249, 255, .82); backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
   }
-  #hero .logo { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; }
-  #hero .logo .mark { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--primary); letter-spacing: -.01em; }
+  #hero .logo { display: inline-flex; flex-direction: column; line-height: 1.1; text-decoration: none; }
+  #hero .logo .role { font-family: var(--font-body); font-weight: 800; font-size: .62rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-mute); }
+  #hero .logo .name { font-family: var(--font-head); font-weight: 700; font-size: .98rem; color: var(--primary); letter-spacing: -.01em; }
   #hero .logo:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+  /* Ім'я | напрям — однаково в обох лендах */
+  #hero .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  #hero .brand-sep { width: 1px; height: 30px; background: #D3D9EE; flex-shrink: 0; }
+  #hero .brand-project { font-family: var(--font-head); font-weight: 700; font-size: .98rem; letter-spacing: -.01em; color: var(--text); white-space: nowrap; }
+  @media (max-width: 1100px) { #hero .brand-sep, #hero .brand-project { display: none; } }
+  @media (max-width: 620px) { #hero .logo .name { font-size: .88rem; } #hero .logo .role { font-size: .56rem; } }
+  @media (max-width: 400px) { #hero .logo .name { font-size: .76rem; } }
 
   #hero .btn {
     display: inline-flex; align-items: center; gap: 9px;
@@ -118,7 +126,7 @@
 
   @media (max-width: 1024px) {
     #hero header { padding: 20px 32px; }
-    #hero .hero { flex-direction: column-reverse; padding: 136px 32px 64px; gap: 48px; text-align: center; }
+    #hero .hero { flex-direction: column-reverse; justify-content: center; padding: 136px 32px 64px; gap: 48px; text-align: center; }
     #hero .hero-copy { align-items: center; max-width: 100%; }
     #hero .hero-visual { width: 100%; max-width: 480px; aspect-ratio: 640 / 400; }
   }
@@ -131,9 +139,28 @@
     #hero .aud-switch .s-full { display: none; }
     #hero .aud-switch .s-short { display: inline; }
     #hero .btn--sm { white-space: nowrap; }
-    #hero .hero { padding: 116px 20px 48px; }
+    #hero .hero { padding: 116px 20px 64px; }
     #hero .eyebrow { font-size: .7rem; letter-spacing: .1em; }
   }
+
+  /* Підказка гортати далі — внизу hero (як у головному ленді) */
+  #hero .scroll-cue {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-weight: 800; font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--text-mute); text-decoration: none; transition: color .18s ease;
+  }
+  #hero .scroll-cue:hover { color: var(--primary); }
+  #hero .scroll-cue:focus-visible { outline: 3px solid var(--primary); outline-offset: 4px; border-radius: 8px; }
+  #hero .scroll-cue-icon {
+    width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+    border: 1.5px solid rgba(80,85,190,.3); background: rgba(255,255,255,.7); color: var(--primary);
+    animation: cue-bob 1.8s ease-in-out infinite;
+  }
+  #hero .scroll-cue-icon svg { width: 18px; height: 18px; }
+  @keyframes cue-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  @media (prefers-reduced-motion: reduce) { #hero .scroll-cue-icon { animation: none; } }
+  @media (max-width: 768px) { #hero .scroll-cue { bottom: 8px; } #hero .scroll-cue-label { display: none; } }
 
   /* ════════════════ 2. TIMELINE ════════════════ */
   #timeline { padding: 112px var(--gutter); display: flex; gap: 64px; align-items: flex-start; background: var(--alt); }
@@ -181,9 +208,9 @@
   #about .about-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 18%; display: block; }
   #about .about-copy { flex: 1; max-width: 610px; display: flex; flex-direction: column; gap: 18px; }
   #about .about-copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: var(--text); margin-top: 6px; }
-  #about .about-copy .intro { font-family: var(--font-head); font-weight: 500; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
-  #about .about-copy .intro .accent { color: var(--primary); font-weight: 500; }
-  #about .about-copy .lead { font-family: var(--font-head); font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text); }
+  #about .about-copy .intro { font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
+  #about .about-copy .intro .accent { color: var(--primary); font-weight: 400; }
+  #about .about-copy .lead { font-family: var(--font-head); font-weight: 400; font-size: 1.25rem; line-height: 1.4; color: var(--text); }
 
   #about .principles { display: flex; flex-direction: column; }
   #about .principle { display: flex; gap: 20px; padding: 24px 0; border-top: 1px solid var(--border); }
@@ -365,8 +392,9 @@
 
   #about .dopusk-row { max-width: 1088px; margin: 24px auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   #about .dopusk-plate {
-    width: 100%; height: 112px; box-sizing: border-box;
-    background: #FFFFFF; border: 1px solid #E3E8F7; border-radius: 20px; padding: 0 28px;
+    /* Відступ 24px з усіх боків — як від краю освітньої панелі до карток */
+    width: 100%; height: 142px; box-sizing: border-box;
+    background: #FFFFFF; border: 1px solid #E3E8F7; border-radius: 20px; padding: 0 24px;
     display: flex; align-items: center; gap: 20px; text-align: left;
   }
   #about .dopusk-plate-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -410,6 +438,8 @@
   /* ════════════════ 4. FLEXIBLE ════════════════ */
   #flexible { padding: 112px var(--gutter) 0; display: flex; flex-direction: column; gap: 48px; background: var(--surface); --border: #D6DEF2; }
   #flexible .head { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  #flexible .eyebrow { font-family: var(--font-body); font-size: .8125rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin-bottom: -4px; }
+  #flexible .head h2 .hl { color: var(--primary); }
   #flexible .head h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; letter-spacing: -.01em; }
   #flexible .head p { font-size: 1.125rem; line-height: 1.6; color: var(--text-mute); }
 
@@ -706,9 +736,14 @@
 <div id="hero">
   <nav>
     <div class="nav-left">
-    <a href="https://inakshi.in.ua" class="logo">
-      <span class="mark">Інакші</span>
-    </a>
+    <div class="brand">
+      <a href="https://inakshi.in.ua" class="logo">
+        <span class="role">Психолог</span>
+        <span class="name">Віталій Медведєв</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true"></span>
+      <span class="brand-project">Інакші</span>
+    </div>
       <div class="aud-switch" aria-label="Оберіть напрям">
         <a href="https://consultation-landing.vercel.app/">Для себе</a>
         <a href="#" class="is-active" aria-current="page"><span class="s-full">Для освітян</span><span class="s-short">Освітянам</span></a>
@@ -741,6 +776,10 @@
     <div class="hero-visual fade-up" style="transition-delay:.2s">
       <video src="assets/hero-video.mp4" autoplay muted loop playsinline aria-label="Ленд ліцей"></video>
     </div>
+    <a href="#request" class="scroll-cue" aria-label="Гортати далі">
+      <span class="scroll-cue-label">Гортайте</span>
+      <span class="scroll-cue-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+    </a>
   </section>
 </div>
 
@@ -838,13 +877,14 @@
 
 <section id="flexible" class="soft-glow">
   <div class="head fade-up">
-    <h2>Гнучкі рішення – суттєві зміни</h2>
+    <div class="eyebrow">Послуги</div>
+    <h2>Інструменти надання <span class="hl">психологічної підтримки</span></h2>
     <p>Впровадження доказових методів підтримки для досягнення цілей</p>
   </div>
   <div class="grid">
     <div class="card fade-up" style="transition-delay:.05s">
       <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M15 14.2c2.6 0 5 2 5 5"></path></svg></div>
-      <h3>Практичні групи</h3>
+      <h3>Групові тренінги</h3>
       <p>Щоб мати навички, які можна застосувати в житті</p>
     </div>
     <div class="card fade-up" style="transition-delay:.1s">
@@ -1244,7 +1284,7 @@
 <section id="start" class="soft-glow">
   <div class="copy fade-up">
     <h2>Як почати</h2>
-    <p>Три прості кроки від першої заявки до сесії</p>
+    <p>Три прості кроки: від заявки до плану</p>
   </div>
   <div class="steps fade-up" style="transition-delay:.1s">
     <div class="step"><div class="no">01</div><div><h3>Заявка</h3><p>Коротка форма з запитом</p></div></div>
@@ -1319,7 +1359,7 @@
     </div>
     <div class="ft__bot">
       <p class="ft__legal">
-        <span class="ft__copy">© 2026 Медведєв В. М.</span><span class="ft__sep"> · </span><span>Психологічні консультації не замінюють медичну допомогу.</span>
+        <span class="ft__copy">© 2026 Медведєв В. М.</span>
       </p>
     </div>
   </div>
@@ -1494,6 +1534,27 @@
       try { sessionStorage.setItem('lyceum.topics', JSON.stringify(topics)); } catch (err) {}
     });
     updateCta();
+  })();
+
+  // «Гортайте»: повільна плавна прокрутка до наступного блоку (ease-in-out, ~1 с)
+  (function () {
+    const cue = document.querySelector('.scroll-cue');
+    if (!cue) return;
+    cue.addEventListener('click', (e) => {
+      const target = document.querySelector(cue.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const to = target.getBoundingClientRect().top + window.scrollY;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo(0, to); return; }
+      const from = window.scrollY, dist = to - from, dur = 1000, t0 = performance.now();
+      const ease = (t) => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const step = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        window.scrollTo(0, from + dist * ease(p));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
   })();
 </script>
 </body>
