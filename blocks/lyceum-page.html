@@ -519,7 +519,7 @@
   }
   #cycle .center:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
   #cycle .ring-svg-m { display: none; }
-  #hero .br-m, #hero .hero-logo-m, #hero .hf-break { display: none; }
+  #hero .br-m, #hero .hf-break { display: none; }
 
   #cycle .cycle-panel {
     width: 100%; max-width: 1088px; margin: 0 auto; box-sizing: border-box;
@@ -760,25 +760,26 @@
     #hero .aud-switch a { position: relative; display: inline-flex; align-items: center; height: 26px; padding: 0 14px; font-size: 12px; }
     #hero .aud-switch a::after { content: ""; position: absolute; left: 0; right: 0; top: -7px; bottom: -7px; }
 
-    /* Hero A (ТЗ 19.11, макет 390px): «Інакші» → надпис → відео з пілюлями → H1 → CTA */
+    /* Hero A (ТЗ 19.11, макет 390px): надпис → відео з пілюлями → H1 → CTA */
     #hero .hero { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 36px; align-content: start; min-height: 0; padding: 80px 20px 32px; text-align: left; background: #F5F9FF; }
     #hero .hero-copy { display: contents; }
     #hero .hero > *, #hero .hero-copy > * { grid-column: 1; }
     #hero .br-m { display: inline; }
     #hero .hl-m { color: var(--primary); }
-    #hero .hero-logo-m { display: block; grid-row: 1; font-family: var(--font-head); font-weight: 700; font-size: 22px; line-height: 1; color: #14132B; }
-    #hero .eyebrow { grid-row: 2; font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: .14em; line-height: 1.5; white-space: normal; color: #5055BE; }
-    #hero .hero-visual { grid-row: 3; width: 100%; max-width: none; height: 260px; aspect-ratio: auto; border-radius: 24px; background: #EBEEF8; box-shadow: none; }
+    /* Надпис в один рядок на всю ширину: розмір від ширини екрана (29.8 — ширина тексту на 1px шрифту) */
+    #hero .eyebrow { grid-row: 1; font-family: var(--font-body); font-weight: 800; font-size: calc((100vw - 40px) / 29.8); letter-spacing: .14em; line-height: 1.5; white-space: nowrap; color: #5055BE; }
+    #hero .eyebrow .br-m { display: none; }
+    #hero .hero-visual { grid-row: 2; width: 100%; max-width: none; height: 260px; aspect-ratio: auto; border-radius: 24px; background: #EBEEF8; box-shadow: none; }
     #hero .hero-visual video { position: absolute; inset: 0; }
     /* Пілюлі лежать поверх відео: ліворуч унизу, два ряди по два */
-    #hero .hero-features { grid-row: 3; align-self: end; justify-self: start; position: relative; z-index: 2; margin: 0 0 12px 12px; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 24px); }
+    #hero .hero-features { grid-row: 2; align-self: end; justify-self: start; position: relative; z-index: 2; margin: 0 0 12px 12px; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 24px); }
     #hero .hf-break { display: block; flex-basis: 100%; height: 0; }
-    #hero .hf-tag { padding: 4px 10px; border-radius: 999px; background: #FFFFFF; font-family: var(--font-body); font-weight: 700; font-size: 12px; line-height: 1.5; color: #565B7E; text-transform: lowercase; white-space: nowrap; box-shadow: none; }
-    #hero .hf-tag:hover { transform: none; background: #FFFFFF; box-shadow: none; }
-    #hero h1 { grid-row: 4; margin: 0; font-size: 28px; line-height: 1.15; color: #14132B; }
-    #hero .hero-copy > div:last-child { grid-row: 5; }
+    #hero .hf-tag { padding: 4px 10px; border-radius: 999px; background: #F5F9FF; font-family: var(--font-body); font-weight: 700; font-size: 12px; line-height: 1.5; color: #565B7E; text-transform: lowercase; white-space: nowrap; box-shadow: none; }
+    #hero .hf-tag:hover { transform: none; background: #F5F9FF; box-shadow: none; }
+    #hero h1 { grid-row: 3; margin: 0; font-size: 28px; line-height: 1.15; color: #14132B; }
+    #hero .hero-copy > div:last-child { grid-row: 4; }
     #hero .hero-copy > div:last-child .btn { width: 100%; justify-content: center; padding: 18px; font-size: 16px; font-weight: 700; line-height: 1.2; }
-    #hero .scroll-cue { position: static; transform: none; grid-row: 6; justify-self: center; margin-top: -16px; }
+    #hero .scroll-cue { position: static; transform: none; grid-row: 5; justify-self: center; margin-top: -16px; }
 
     /* Етапи: лінія зліва, вузли 1–4, картки однакової висоти, без прогрес-барів */
     #timeline { gap: 32px; }
@@ -889,7 +890,6 @@
 
   <section class="hero">
     <div class="hero-copy">
-      <div class="hero-logo-m">Інакші</div>
       <div class="eyebrow fade-up">Психологічна турбота <br class="br-m">для ліцеїв онлайн</div>
       <h1 class="fade-up" style="transition-delay:.05s">Опора там, де <br class="br-m"><span class="hl-m">зростає</span> <span class="hl">покоління</span></h1>
       <div class="hero-features fade-up" style="transition-delay:.15s">
