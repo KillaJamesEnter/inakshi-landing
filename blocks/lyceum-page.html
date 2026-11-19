@@ -519,7 +519,7 @@
   }
   #cycle .center:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
   #cycle .ring-svg-m { display: none; }
-  #hero .br-m, #hero .hf-break { display: none; }
+  #hero .br-m, #hero .hf-break, #cycle .br-m { display: none; }
 
   #cycle .cycle-panel {
     width: 100%; max-width: 1088px; margin: 0 auto; box-sizing: border-box;
@@ -752,7 +752,8 @@
 
     /* Шапка: 56px, ім'я, перемикач 30px на вигляд і 44px для дотику */
     #hero nav { height: 56px; padding: 0 16px; }
-    #hero .logo .role { display: none; }
+    #hero .logo { align-items: flex-end; }
+    #hero .logo .role { font-size: 10px; }
     #hero .logo .name { font-size: calc(18 * var(--k)); white-space: nowrap; }
     #hero nav { gap: 10px; }
     #hero .nav-actions .btn--sm { display: none; }
@@ -776,7 +777,7 @@
     #hero .hf-break { display: block; flex-basis: 100%; height: 0; }
     #hero .hf-tag { padding: 4px 10px; border-radius: 999px; background: #F5F9FF; font-family: var(--font-body); font-weight: 700; font-size: 12px; line-height: 1.5; color: #565B7E; text-transform: lowercase; white-space: nowrap; box-shadow: none; }
     #hero .hf-tag:hover { transform: none; background: #F5F9FF; box-shadow: none; }
-    #hero h1 { grid-row: 3; margin: 0; font-size: 28px; line-height: 1.15; color: #14132B; }
+    #hero h1 { grid-row: 3; margin: 0; font-size: 30px; line-height: 1.12; color: #14132B; }
     #hero .hero-copy > div:last-child { grid-row: 4; }
     #hero .hero-copy > div:last-child .btn { width: 100%; justify-content: center; padding: 18px; font-size: 16px; font-weight: 700; line-height: 1.2; }
     #hero .scroll-cue { position: static; transform: none; grid-row: 5; justify-self: center; margin-top: -16px; }
@@ -807,9 +808,10 @@
     #cycle .node {
       position: absolute; height: 21.765%; padding: 2.21cqw 1.66cqw; border: 1px solid #E1E6F2;
       box-shadow: 0 8px 18px rgba(80,85,190,.10); justify-content: center; text-align: center;
-      font-family: var(--font-head); font-weight: 600; font-size: 3.04cqw; line-height: 1.25;
+      font-family: var(--font-head); font-weight: 400; font-size: 3.04cqw; line-height: 1.25;
     }
     #cycle .node--top    { left: 31.768%; top: 4.412%;  width: 35.912%; }
+    #cycle .br-m { display: inline; }
     #cycle .node--right  { left: 66.022%; top: 40.294%; width: 30.11%; }
     #cycle .node--bottom { left: 31.768%; top: 75.882%; width: 35.912%; }
     #cycle .node--left   { left: 3.315%;  top: 40.294%; width: 29.834%; }
@@ -1059,7 +1061,7 @@
     </svg>
     <ol class="node-list">
       <li class="node node--top">Мотивація та стійкість педагогів зростає</li>
-      <li class="node node--right">На уроках панує натхнення і довіра</li>
+      <li class="node node--right">На уроках <br class="br-m">панує натхнення <br class="br-m">і довіра</li>
       <li class="node node--bottom">Учні активніше залучаються в навчання</li>
       <li class="node node--left">Стабільність у роботі команди та ліцею</li>
     </ol>
