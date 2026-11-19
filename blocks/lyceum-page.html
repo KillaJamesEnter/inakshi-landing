@@ -515,7 +515,11 @@
     box-shadow: 0 14px 34px rgba(80,85,190,.32);
     display: flex; align-items: center; justify-content: center; text-align: center;
     font-family: var(--font-head); font-weight: 700; font-size: 1.125rem; line-height: 1.2; padding: 16px;
+    text-decoration: none;
   }
+  #cycle .center:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+  #cycle .ring-svg-m { display: none; }
+  #hero .br-m { display: none; }
 
   #cycle .cycle-panel {
     width: 100%; max-width: 1088px; margin: 0 auto; box-sizing: border-box;
@@ -730,6 +734,124 @@
     .ft__legal { display: block; font-size: 14px; }
     .ft__sep { display: inline; }
   }
+
+  /* ════════════════ МОБІЛЬНА ВЕРСІЯ ≤480px (ТЗ, iPhone 402pt) ════════════════
+     Лише розкладка: тексти ті самі. Секції 56/20px, усе ліворуч, без переносів слів. */
+  @media (max-width: 480px) {
+    html, body { overflow-x: clip; }
+    /* Масштаб відносно макета 402pt: 1px на 402, менше на вужчих екранах */
+    :root { --k: min(1px, (100vw - 40px) / 362); }
+    body { hyphens: none; -webkit-hyphens: none; }
+
+    #request, #timeline, #cycle, #about, #help { padding: 56px 20px; }
+    #flexible { padding: 56px 20px 0; }
+    #start { padding-top: 56px; }
+    #request .eyebrow, #timeline .eyebrow, #flexible .eyebrow, #about .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+    #request .head, #flexible .head, #cycle .head, #start .copy, #about .edu-head { align-items: flex-start; text-align: left; }
+    #cycle .head p, #request .head p { margin: 0; }
+
+    /* Шапка: 56px, ім'я, перемикач 30px на вигляд і 44px для дотику */
+    #hero nav { height: 56px; padding: 0 16px; }
+    #hero .logo .role { display: none; }
+    #hero .logo .name { font-size: calc(18 * var(--k)); white-space: nowrap; }
+    #hero nav { gap: 10px; }
+    #hero .nav-actions .btn--sm { display: none; }
+    #hero .aud-switch { padding: 2px; }
+    #hero .aud-switch a { position: relative; display: inline-flex; align-items: center; height: 26px; padding: 0 14px; font-size: 12px; }
+    #hero .aud-switch a::after { content: ""; position: absolute; left: 0; right: 0; top: -7px; bottom: -7px; }
+
+    /* Hero: [надпис + заголовок | відео] → теги → CTA */
+    #hero .hero { display: grid; grid-template-columns: minmax(0, 1fr) calc(180 * var(--k)); gap: 0 calc(14 * var(--k)); align-content: start; min-height: 0; padding: 76px 20px 40px; text-align: left; }
+    #hero .hero-copy { display: contents; }
+    #hero .br-m { display: inline; }
+    #hero .hl-m { color: var(--primary); }
+    #hero .eyebrow { grid-column: 1; grid-row: 1; font-size: calc(10 * var(--k)); letter-spacing: .08em; white-space: normal; line-height: 1.4; }
+    #hero h1 { grid-column: 1; grid-row: 2; margin-top: 6px; font-size: calc(28 * var(--k)); line-height: 1.15; }
+    #hero .hero-visual { grid-column: 2; grid-row: 1 / 3; width: 100%; max-width: none; height: auto; aspect-ratio: auto; border-radius: 24px; align-self: stretch; }
+    #hero .hero-visual video { position: absolute; inset: 0; }
+    #hero .hero-features { grid-column: 1 / -1; grid-row: 3; margin-top: 20px; flex-wrap: nowrap; gap: calc(6 * var(--k)); justify-content: flex-start; }
+    #hero .hf-tag { padding: 6px calc(9 * var(--k)); font-size: calc(13 * var(--k)); font-weight: 700; white-space: nowrap; }
+    #hero .hero-copy > div:last-child { grid-column: 1 / -1; grid-row: 4; margin-top: 24px; }
+    #hero .hero-copy > div:last-child .btn { width: 100%; min-height: 56px; justify-content: center; padding: 0 24px; font-size: 17px; }
+    #hero .scroll-cue { position: static; transform: none; grid-column: 1 / -1; grid-row: 5; justify-self: center; margin-top: 16px; }
+
+    /* Етапи: лінія зліва, вузли 1–4, картки однакової висоти, без прогрес-барів */
+    #timeline { gap: 32px; }
+    #timeline .tl-list { display: grid; grid-auto-rows: 1fr; padding-left: 40px; gap: 16px; counter-reset: tl; }
+    #timeline .tl-list::before { left: 11px; top: 12px; bottom: 12px; width: 2px; background: #DDE2F4; }
+    #timeline .tl-item { counter-increment: tl; padding: 20px; gap: 8px; border-radius: 16px; border: 1px solid #DDE2F4; }
+    #timeline .tl-item::before {
+      content: counter(tl); left: -40px; top: 0; margin-top: 0; width: 24px; height: 24px; background: var(--primary);
+      color: #fff; font: 700 12px/1 var(--font-head); display: flex; align-items: center; justify-content: center;
+    }
+    #timeline .tl-item--final { border: none; }
+    #timeline .tl-item--final::before { background: var(--primary); }
+    #timeline .tl-item h3 { font-family: var(--font-head); font-size: 19px; font-weight: 700; line-height: 1.3; }
+    #timeline .tl-item p { font-size: 15px; line-height: 1.5; color: #565B7E; min-height: 68px; }
+    #timeline .tl-item--final h3 { color: #fff; }
+    #timeline .tl-item--final p { color: #D6D9F5; font-weight: 400; }
+    #timeline .tl-bar { display: none; }
+
+    /* Цикл: «хаб і еліпс» у контейнері 362×340 (масштабується від ширини) */
+    #cycle { gap: 32px; }
+    #cycle .ring { display: block; position: relative; width: 100%; max-width: 362px; height: auto; aspect-ratio: 362 / 340; margin: 0; container-type: inline-size; }
+    #cycle .ring .ring-svg-d { display: none; }
+    #cycle .ring .ring-svg-m { display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    #cycle .node-list { display: block; }
+    #cycle .node {
+      position: absolute; height: 21.765%; padding: 2.21cqw 1.66cqw; border: 1px solid #E1E6F2;
+      box-shadow: 0 8px 18px rgba(80,85,190,.10); justify-content: center; text-align: center;
+      font-family: var(--font-head); font-weight: 600; font-size: 3.04cqw; line-height: 1.25;
+    }
+    #cycle .node--top    { left: 31.768%; top: 4.412%;  width: 35.912%; }
+    #cycle .node--right  { left: 66.022%; top: 40.294%; width: 30.11%; }
+    #cycle .node--bottom { left: 31.768%; top: 75.882%; width: 35.912%; }
+    #cycle .node--left   { left: 3.315%;  top: 40.294%; width: 29.834%; }
+    #cycle .center {
+      position: absolute; order: 0; margin: 0; left: 37.293%; top: 37.941%; width: 24.586%; height: 26.176%;
+      padding: 1.1cqw; justify-content: center; text-align: center;
+      font-family: var(--font-head); font-weight: 700; font-size: 2.9cqw; line-height: 1.2;
+      box-shadow: 0 8px 20px rgba(80,85,190,.32);
+    }
+
+    /* CTA «Готові запустити цей цикл?» */
+    #cycle .cycle-panel { flex-direction: column; align-items: stretch; text-align: left; gap: 0; padding: 36px 20px; border-radius: 24px; }
+    #cycle .cycle-panel h3 { font-size: calc(20 * var(--k)); white-space: nowrap; }
+    #cycle .cycle-panel p { margin: 12px 0 24px; font-size: 16px; line-height: 1.5; color: #D6D9F5; opacity: 1; white-space: normal; }
+    #cycle .cycle-panel .btn { width: 100%; min-height: 56px; padding: 0 24px; font-size: 17px; }
+
+    /* Про мене: надпис → H2 → [фото | текст] → абзац → принципи */
+    #about { background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 420px, var(--bg) 100%); }
+    #about .about-top { display: grid; grid-template-columns: 120px minmax(0, 1fr); column-gap: 16px; align-items: start; text-align: left; gap: 0 16px; margin-bottom: 56px; }
+    #about .about-copy { display: contents; }
+    #about .about-copy .eyebrow { grid-column: 1 / -1; grid-row: 1; }
+    #about .about-copy h2 { grid-column: 1 / -1; grid-row: 2; margin: 12px 0 20px; font-size: 28px; }
+    #about .about-visual { grid-column: 1; grid-row: 3; flex: none; width: 120px; height: 150px; border-radius: 16px; box-shadow: none; }
+    #about .about-visual img { object-position: 96% 20%; }
+    #about .about-copy .intro { grid-column: 2; grid-row: 3; font-family: var(--font-body); font-size: 15px; line-height: 1.5; color: #14132B; text-align: left; }
+    #about .about-copy .lead { grid-column: 1 / -1; grid-row: 4; margin: 20px 0 24px; font-family: var(--font-body); font-size: 16px; line-height: 1.5; color: #14132B; text-align: justify; }
+    #about .principles { grid-column: 1 / -1; grid-row: 5; }
+    #about .principle { gap: 16px; padding: 18px 0; border-color: #DDE2F4; }
+    #about .num { flex: 0 0 48px; border-radius: 14px; background: #EBEEF8; }
+    #about .principle h3 { font-size: 19px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
+    #about .principle p { font-size: 15px; line-height: 1.5; color: #565B7E; white-space: normal; }
+
+    /* Кризова допомога */
+    #help { gap: 28px; }
+    #help .grid { gap: 16px; }
+    #help .main-card { padding: 24px 20px; border-radius: 24px; gap: 12px; justify-content: flex-start; background: #EEF0FB; }
+    #help .main-card h3 { font-size: 19px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+    #help .main-card .phone { font-size: 28px; overflow-wrap: anywhere; }
+    #help .main-card .badge { padding: 8px 14px; background: #E0E2F6; font-size: 14px; }
+    #help .cards { display: flex; flex-direction: column; gap: 12px; }
+    #help .card { padding: 18px 20px; border-radius: 16px; border-color: #DDE2F4; gap: 6px; justify-content: flex-start; }
+    #help .card h4 { font-size: 17px; font-weight: 700; white-space: normal; }
+    #help .card .phone { font-size: 19px; }
+    #help .card p { font-size: 15px; line-height: 1.5; }
+
+    /* Футер: слова не рвуться посередині; довгий email може перенестись будь-де */
+    .ft__col a { word-break: normal; overflow-wrap: anywhere; }
+  }
 </style>
 </head>
 <body>
@@ -762,8 +884,8 @@
 
   <section class="hero">
     <div class="hero-copy">
-      <div class="eyebrow fade-up">Психологічна турбота для ліцеїв онлайн</div>
-      <h1 class="fade-up" style="transition-delay:.05s">Опора там, де зростає <span class="hl">покоління</span></h1>
+      <div class="eyebrow fade-up">Психологічна турбота <br class="br-m">для ліцеїв онлайн</div>
+      <h1 class="fade-up" style="transition-delay:.05s">Опора там, де <span class="hl-m">зростає</span> <span class="hl">покоління</span></h1>
       <div class="hero-features fade-up" style="transition-delay:.15s">
         <span class="hf-tag">Учні</span>
         <span class="hf-tag">Педагоги</span>
@@ -913,7 +1035,15 @@
     <p>Як психологічна підтримка змінює ліцей</p>
   </div>
   <div class="ring fade-up" style="transition-delay:.1s">
-    <svg viewBox="0 0 1248 440" aria-hidden="true">
+    <!-- Телефон (≤480px): еліпс і стрілки під контейнер 362×340 з ТЗ -->
+    <svg class="ring-svg-m" viewBox="0 0 362 340" aria-hidden="true">
+      <ellipse cx="181" cy="170" rx="114" ry="130" fill="none" stroke="#C9D0E6" stroke-width="2" stroke-dasharray="4 6"></ellipse>
+      <path d="M-5,-4 L5,0 L-5,4 z" fill="#5055BE" transform="translate(262,262) rotate(131)"></path>
+      <path d="M-5,-4 L5,0 L-5,4 z" fill="#5055BE" transform="translate(100,262) rotate(229)"></path>
+      <path d="M-5,-4 L5,0 L-5,4 z" fill="#5055BE" transform="translate(100,78) rotate(311)"></path>
+      <path d="M-5,-4 L5,0 L-5,4 z" fill="#5055BE" transform="translate(262,78) rotate(49)"></path>
+    </svg>
+    <svg class="ring-svg-d" viewBox="0 0 1248 440" aria-hidden="true">
       <ellipse cx="624" cy="220" rx="260" ry="170" fill="none" stroke="#C9D0E6" stroke-width="2" stroke-dasharray="4 6"></ellipse>
       <g transform="translate(807.8, 99.8) rotate(33.2)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
       <g transform="translate(807.8, 340.2) rotate(147)"><path d="M-7,-6 L7,0 L-7,6 Z" fill="#5055BE"></path></g>
@@ -926,7 +1056,7 @@
       <li class="node node--bottom">Учні активніше залучаються в навчання</li>
       <li class="node node--left">Стабільність у роботі команди та ліцею</li>
     </ol>
-    <div class="center">Психологічна підтримка</div>
+    <a class="center" href="#flexible">Психологічна підтримка</a>
   </div>
   <div class="cycle-panel fade-up" style="transition-delay:.16s">
     <div>
