@@ -892,6 +892,8 @@
     #about .about-copy .intro { order: 3; font-family: var(--font-head); font-weight: 400; font-size: 18px; line-height: 1.45; color: #1B1550; }
     #about .about-copy .lead { order: 4; margin: 0; font-family: var(--font-head); font-weight: 400; font-size: 18px; line-height: 1.45; color: #1B1550; text-align: left; }
     #about .principles { order: 5; }
+    /* Текст «За роки практики…» і «У роботі я дотримуюся…» — по обох краях */
+    #about .about-copy .intro, #about .about-copy .lead { text-align: justify; hyphens: none; }
     #about .principle { gap: 14px; padding: 16px 0; border-color: #D6DDF2; }
     #about .num { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 13px; background: #EEF0FB; font-size: 22px; }
     #about .principle h3 { font-size: 18px; font-weight: 700; line-height: 1.4; color: #1B1550; margin-bottom: 2px; }
@@ -1180,7 +1182,7 @@
     <div class="about-copy fade-up" style="transition-delay:.08s">
       <div class="eyebrow">Про мене</div>
       <h2>Привіт, я Віталій</h2>
-      <p class="intro">За роки практики з освітянами, я проаналізував, що&nbsp;<span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де&nbsp;всім безпечно і куди хочеться повернутися.</p>
+      <p class="intro">За роки практики з освітянами, я проаналізував, що&nbsp;там, де <span class="accent">учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де&nbsp;всім безпечно і куди хочеться повернутися.</p>
       <p class="lead">У роботі я дотримуюся трьох головних принципів</p>
       <div class="principles">
         <div class="principle"><span class="num">1</span><div><h3>Фокус на цілях ліцею</h3><p class="nowrap-lg">Разом визначаємо, що саме ліцей хоче змінити, і рухаємося до цього</p></div></div>
@@ -1599,10 +1601,9 @@
 </footer>
 <!-- Мобільний футер (≤480px, footer_final_v3); на десктопі показується .ft вище -->
 <footer class="ft-m">
-  <div class="ft-m__role">психолог</div>
   <div class="ft-m__name">Віталій Медведєв</div>
   <div class="ft-m__tag">Психолог • онлайн</div>
-  <div class="ft-m__tag ft-m__tag--2">когнітивно-поведінкова терапія</div>
+  <div class="ft-m__tag ft-m__tag--2">Когнітивно-поведінкова терапія</div>
   <div class="ft-m__social">
     <a href="mailto:medvediev.vitalii.ua@gmail.com" aria-label="Написати на пошту"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a>
     <a href="https://t.me/medvedmyself" target="_blank" rel="noopener" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 4.3c.3-.1.6.1.5.5l-2.9 13.9c-.1.6-.8.8-1.3.5l-4.2-3.1-2.1 2c-.2.2-.6.1-.6-.2l.2-3.2 7.4-6.7c.2-.2 0-.4-.3-.3l-9.1 5.7-3.9-1.2c-.7-.2-.7-.9.1-1.2z"/></svg></a>
