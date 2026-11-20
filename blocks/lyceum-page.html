@@ -903,6 +903,7 @@
     /* Футер v3: замість .ft — центрований блок з круглими кнопками і списком документів */
     .ft { display: none; }
     .ft-m { display: block; background: #EBEEF8; border-radius: 24px 24px 0 0; padding: 32px 20px 24px; font-family: var(--font-body); color: #14132B; text-align: center; }
+    .ft-m__role { font-weight: 800; font-size: 10px; line-height: 1.2; text-transform: uppercase; letter-spacing: .12em; color: #565B7E; margin-bottom: 4px; }
     .ft-m__name { font-family: var(--font-head); font-weight: 700; font-size: 20px; line-height: 1.2; }
     .ft-m__tag { margin-top: 6px; font-size: 14px; line-height: 1.4; color: #565B7E; }
     .ft-m__tag--2 { margin-top: 2px; }
@@ -912,6 +913,18 @@
     .ft-m__docs { display: block; margin-top: 24px; border-top: 1px solid #E1E6F2; text-align: left; }
     .ft-m__docs a { display: block; padding: 14px 0; border-bottom: 1px solid #E1E6F2; font-size: 14px; font-weight: 600; color: #14132B; text-decoration: none; white-space: nowrap; }
     .ft-m__copy { margin-top: 18px; font-size: 12px; color: #565B7E; }
+
+    /* Усі заголовки секцій одного розміру, щоб «Шлях до сильного колективу» став в один рядок (14.95 — його ширина на 1px шрифту) */
+    #request .head h2, #timeline .tl-head h2, #flexible .head h2, #cycle .head h2, #about .about-copy h2, #about .edu-head h2, #start .copy h2, #cta .panel h2, #help h2 { font-size: min(28px, (100vw - 40px) / 14.95); }
+    #timeline .tl-head h2 .m-only { white-space: nowrap; }
+
+    /* Послуги: компактні рядки «іконка + текст» замість великих порожніх карток */
+    #flexible .grid { gap: 12px; }
+    #flexible .card { display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; row-gap: 2px; align-items: center; padding: 16px 18px; border-radius: 16px; box-shadow: 0 6px 18px rgba(27,21,80,.06); }
+    #flexible .card-icon { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 14px; }
+    #flexible .card-icon svg { width: 24px; height: 24px; }
+    #flexible .card h3 { align-self: end; font-size: 17px; line-height: 1.3; }
+    #flexible .card p { align-self: start; font-size: 14px; line-height: 1.45; }
   }
 </style>
 </head>
@@ -1030,13 +1043,13 @@
 <section id="timeline" class="soft-glow">
   <div class="tl-head">
     <div class="eyebrow">Етапи співпраці</div>
-    <h2>Від безкоштовної консультації<br>до стабільного колективу</h2>
+    <h2><span class="d-only">Від безкоштовної консультації<br>до стабільного колективу</span><span class="m-only">Шлях до сильного колективу</span></h2>
     <p>Чотири етапи змін у вашому ліцеї</p>
   </div>
   <div class="tl-list">
     <div class="tl-item">
       <h3>Інтеграція в середовище</h3>
-      <p>Групові зустрічі на психологічні теми для усіх учасників освітнього процесу</p>
+      <p><span class="d-only">Групові зустрічі на психологічні теми для усіх учасників освітнього процесу</span><span class="m-only">Тематичні заходи на психологічні теми для формування глибших знань та навичок самодопомоги</span></p>
       <div class="tl-bar"></div>
     </div>
     <div class="tl-item">
@@ -1050,7 +1063,7 @@
       <div class="tl-bar"></div>
     </div>
     <div class="tl-item tl-item--final">
-      <h3>Стабільний колектив</h3>
+      <h3><span class="d-only">Стабільний колектив</span><span class="m-only">Сильний колектив</span></h3>
       <p>Психологічне зростання команди педагогів і учнів знижує операційні витрати ліцею</p>
       <div class="tl-bar"></div>
     </div>
@@ -1559,9 +1572,10 @@
 </footer>
 <!-- Мобільний футер (≤480px, footer_final_v3); на десктопі показується .ft вище -->
 <footer class="ft-m">
+  <div class="ft-m__role">психолог</div>
   <div class="ft-m__name">Віталій Медведєв</div>
-  <div class="ft-m__tag">Психолог · онлайн</div>
-  <div class="ft-m__tag ft-m__tag--2">КПТ-терапія</div>
+  <div class="ft-m__tag">Психолог • онлайн</div>
+  <div class="ft-m__tag ft-m__tag--2">когнітивно-поведінкова терапія</div>
   <div class="ft-m__social">
     <a href="mailto:medvediev.vitalii.ua@gmail.com" aria-label="Написати на пошту"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a>
     <a href="https://t.me/medvedmyself" target="_blank" rel="noopener" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 4.3c.3-.1.6.1.5.5l-2.9 13.9c-.1.6-.8.8-1.3.5l-4.2-3.1-2.1 2c-.2.2-.6.1-.6-.2l.2-3.2 7.4-6.7c.2-.2 0-.4-.3-.3l-9.1 5.7-3.9-1.2c-.7-.2-.7-.9.1-1.2z"/></svg></a>
