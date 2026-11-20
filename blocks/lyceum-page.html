@@ -520,6 +520,8 @@
   #cycle .center:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
   #cycle .ring-svg-m { display: none; }
   #hero .br-m, #hero .hf-break, #cycle .br-m { display: none; }
+  /* ═══ Мобільний футер (footer_final_v3) — лише ≤480px ═══ */
+  .ft-m { display: none; }
   /* Мобільні варіанти текстів (≤480px) — на десктопі приховані */
   .m-only { display: none; }
   .crisis-link { color: inherit; text-decoration: none; }
@@ -898,6 +900,18 @@
     #help .main-card h3, #help .card h4 { font-family: var(--font-head); font-weight: 600; font-size: min(17px, (100vw - 82px) / 19.6); line-height: 1.3; }
     #help .card h4 .m-only { white-space: nowrap; }
     .crisis-link { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+    /* Футер v3: замість .ft — центрований блок з круглими кнопками і списком документів */
+    .ft { display: none; }
+    .ft-m { display: block; background: #EBEEF8; border-radius: 24px 24px 0 0; padding: 32px 20px 24px; font-family: var(--font-body); color: #14132B; text-align: center; }
+    .ft-m__name { font-family: var(--font-head); font-weight: 700; font-size: 20px; line-height: 1.2; }
+    .ft-m__tag { margin-top: 6px; font-size: 14px; line-height: 1.4; color: #565B7E; }
+    .ft-m__tag--2 { margin-top: 2px; }
+    .ft-m__social { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+    .ft-m__social a { width: 44px; height: 44px; border-radius: 999px; background: #5055BE; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+    .ft-m__social svg { width: 20px; height: 20px; }
+    .ft-m__docs { display: block; margin-top: 24px; border-top: 1px solid #E1E6F2; text-align: left; }
+    .ft-m__docs a { display: block; padding: 14px 0; border-bottom: 1px solid #E1E6F2; font-size: 14px; font-weight: 600; color: #14132B; text-decoration: none; white-space: nowrap; }
+    .ft-m__copy { margin-top: 18px; font-size: 12px; color: #565B7E; }
   }
 </style>
 </head>
@@ -1542,6 +1556,22 @@
       </p>
     </div>
   </div>
+</footer>
+<!-- Мобільний футер (≤480px, footer_final_v3); на десктопі показується .ft вище -->
+<footer class="ft-m">
+  <div class="ft-m__name">Віталій Медведєв</div>
+  <div class="ft-m__tag">Психолог · онлайн</div>
+  <div class="ft-m__tag ft-m__tag--2">КПТ-терапія</div>
+  <div class="ft-m__social">
+    <a href="mailto:medvediev.vitalii.ua@gmail.com" aria-label="Написати на пошту"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a>
+    <a href="https://t.me/medvedmyself" target="_blank" rel="noopener" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 4.3c.3-.1.6.1.5.5l-2.9 13.9c-.1.6-.8.8-1.3.5l-4.2-3.1-2.1 2c-.2.2-.6.1-.6-.2l.2-3.2 7.4-6.7c.2-.2 0-.4-.3-.3l-9.1 5.7-3.9-1.2c-.7-.2-.7-.9.1-1.2z"/></svg></a>
+    <a href="https://www.youtube.com/@%D0%92%D1%96%D1%82%D0%B0%D0%BB%D1%96%D0%B9%D0%9C%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%94%D0%B2-%D0%BF4%D0%BF" target="_blank" rel="noopener" aria-label="YouTube-канал"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+  </div>
+  <div class="ft-m__docs" role="navigation" aria-label="Документи">
+    <a href="https://consultation-landing.vercel.app/terms.html">Оферта та політика конфіденційності</a>
+    <a href="https://consultation-landing.vercel.app/ethics.html">Етичні положення</a>
+  </div>
+  <div class="ft-m__copy">© 2026 Медведєв В. М.</div>
 </footer>
 
 
