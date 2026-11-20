@@ -216,8 +216,8 @@
   #about .principle { display: flex; gap: 20px; padding: 24px 0; border-top: 1px solid var(--border); }
   #about .principle:last-child { border-bottom: 1px solid var(--border); }
   #about .num { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; background: #EEF2FF; color: var(--primary); font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; }
-  /* Назва принципу — того ж розміру, що й опис (гарнітура й жирність — заголовкові) */
-  #about .principle h3 { font-family: var(--font-head); font-weight: 600; font-size: .9375rem; line-height: 1.45; color: var(--text); margin-bottom: 2px; }
+  /* Назва принципу — тим самим шрифтом і розміром, що й опис, лише жирна */
+  #about .principle h3 { font-family: var(--font-body); font-weight: 700; font-size: .9375rem; line-height: 1.45; color: var(--text); margin-bottom: 2px; }
   #about .principle p { font-size: .9375rem; line-height: 1.45; color: var(--text-mute); }
   @media (min-width: 621px) { #about .principle p.nowrap-lg { white-space: nowrap; } }
 
@@ -860,7 +860,7 @@
     #about .principles { grid-column: 1 / -1; grid-row: 5; }
     #about .principle { gap: 16px; padding: 18px 0; border-color: #DDE2F4; }
     #about .num { flex: 0 0 48px; border-radius: 14px; background: #EBEEF8; }
-    #about .principle h3 { font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 2px; }
+    #about .principle h3 { font-size: 15px; font-weight: 700; line-height: 1.5; margin-bottom: 2px; }
     #about .principle p { font-size: 15px; line-height: 1.5; color: #565B7E; white-space: normal; }
 
     /* Кризова допомога */
@@ -894,7 +894,7 @@
     #about .principles { order: 5; }
     #about .principle { gap: 14px; padding: 16px 0; border-color: #D6DDF2; }
     #about .num { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 13px; background: #EEF0FB; font-size: 22px; }
-    #about .principle h3 { font-size: 15px; font-weight: 600; line-height: 1.5; color: #1B1550; margin-bottom: 2px; }
+    #about .principle h3 { font-size: 15px; font-weight: 700; line-height: 1.5; color: #1B1550; margin-bottom: 2px; }
     #about .principle p { font-size: 15px; line-height: 1.5; color: #4A4E6A; }
 
     /* Освіта: помітна кнопка документів, більше кольору в картках, «2030» не впирається в коло */
@@ -1181,7 +1181,7 @@
       <div class="eyebrow">Про мене</div>
       <h2>Привіт, я Віталій</h2>
       <p class="intro">За роки практики з освітянами, я проаналізував, що&nbsp;<span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де&nbsp;всім безпечно і куди хочеться повернутися.</p>
-      <p class="lead">Тому, під час співпраці, я дотримуюся трьох головних принципів:</p>
+      <p class="lead">У роботі я дотримуюся трьох головних принципів</p>
       <div class="principles">
         <div class="principle"><span class="num">1</span><div><h3>Фокус на цілях ліцею</h3><p class="nowrap-lg">Разом визначаємо, що саме ліцей хоче змінити, і рухаємося до цього</p></div></div>
         <div class="principle"><span class="num">2</span><div><h3>Доказовий метод</h3><p class="nowrap-lg">КПТ — золотий стандарт терапії з +60 років клінічних досліджень</p></div></div>
