@@ -380,18 +380,18 @@
     #about .proof-arrow svg { width: 18px; height: 18px; }
     #about .proof-dots { display: none; }
   }
-  #about .lightbox {
+  .lightbox {
     position: fixed; inset: 0; background: rgba(15,12,40,.86); z-index: 200;
     display: grid; place-items: center; padding: 5vh 5vw;
   }
-  #about .lightbox[hidden] { display: none; }
-  #about .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
-  #about .lightbox-close {
+  .lightbox[hidden] { display: none; }
+  .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
+  .lightbox-close {
     position: absolute; top: 22px; right: 26px; width: 40px; height: 40px; border-radius: 50%;
     border: none; background: rgba(255,255,255,.14); color: #fff; font-size: 1.4rem; line-height: 1;
     cursor: pointer; display: grid; place-items: center;
   }
-  #about .lightbox-close:hover { background: rgba(255,255,255,.24); }
+  .lightbox-close:hover { background: rgba(255,255,255,.24); }
 
   #about .dopusk-row { max-width: 1088px; margin: 24px auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   #about .dopusk-plate {
@@ -933,6 +933,8 @@
     /* Усі заголовки секцій одного розміру, щоб «Шлях до сильного колективу» став в один рядок (14.95 — його ширина на 1px шрифту) */
     #request .head h2, #timeline .tl-head h2, #flexible .head h2, #cycle .head h2, #about .about-copy h2, #about .edu-head h2, #start .copy h2, #cta .panel h2, #help h2 { font-size: min(28px, (100vw - 40px) / 14.95); }
     #timeline .tl-head h2 .m-only { white-space: nowrap; }
+    /* «Компетенція за європейським / стандартом EABCT» — рівно у 2 рядки (15.9 — ширина першого рядка на 1px шрифту) */
+    #about .edu-head .edu-title { font-size: min(28px, (100vw - 40px) / 15.9); }
 
     /* Послуги: компактні рядки «іконка + текст» замість великих порожніх карток */
     #flexible .grid { gap: 12px; }
@@ -976,7 +978,7 @@
         
       </a>
       <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
-      <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn btn--sm"><span class="b-full">Безкоштовна консультація</span><span class="b-short">Консультація</span></a>
+      <a href="/anketa-lyceum.html" class="btn btn--sm"><span class="b-full">Безкоштовна консультація</span><span class="b-short">Консультація</span></a>
     </div>
   </nav>
 
@@ -992,7 +994,7 @@
         <span class="hf-tag">Керівництво</span>
       </div>
       <div class="fade-up" style="transition-delay:.25s">
-        <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
+        <a href="/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
       </div>
     </div>
     <div class="hero-visual fade-up" style="transition-delay:.2s">
@@ -1059,7 +1061,7 @@
       <div class="fit-cta-hint" id="reqHint">Оберіть хоча б одну тему або «Інше»</div>
     </div>
     <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
-    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
+    <a href="/anketa-lyceum.html" id="reqCtaBtn" class="fit-cta-btn" aria-disabled="true">Подати заявку</a>
   </div>
   </div>
   </div>
@@ -1163,7 +1165,7 @@
       <p>Дізнайтеся, з чого почати у вашому ліцеї</p>
     </div>
     <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
-    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
+    <a href="/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
   </div>
 </section>
 
@@ -1381,6 +1383,16 @@
         </button>
         <button class="proof-slot" data-cat="navchannya" type="button">
           <span class="proof-thumb">
+            <img src="assets/edu/diplomas/navchannya/thumbs/panika.jpg" data-full="assets/edu/diplomas/navchannya/panika.jpg" alt="КПТ панічного розладу, розладу тривоги за здоров’я, УІКПТ, 2026">
+            <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
+          </span>
+          <span class="proof-info">
+            <span class="proof-name">КПТ панічного розладу і тривоги за здоров’я</span>
+            <span class="proof-year">2026</span>
+          </span>
+        </button>
+        <button class="proof-slot" data-cat="navchannya" type="button">
+          <span class="proof-thumb">
             <img src="assets/edu/diplomas/navchannya/thumbs/self.jpg" data-full="assets/edu/diplomas/navchannya/self.jpg" alt="Консультування в роботі практичного психолога, SELF, 2018">
             <span class="proof-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.5-4.5"></path></svg>Відкрити</span>
           </span>
@@ -1540,7 +1552,7 @@
       <p>Отримайте рекомендації, з чого почати зміни у вашому ліцеї.</p>
     </div>
     <!-- Безкоштовна консультація: анкета без оплати (consultation-landing/anketa-lyceum.html) -->
-    <a href="https://consultation-landing.vercel.app/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
+    <a href="/anketa-lyceum.html" class="btn">Безкоштовна консультація</a>
   </div>
 </section>
 
@@ -1582,8 +1594,8 @@
       </div>
       <div class="ft__col" role="navigation" aria-label="Документи">
         <h4>Інформація</h4>
-        <a href="https://consultation-landing.vercel.app/terms.html">Договір оферти та політика<br>конфіденційності</a>
-        <a href="https://consultation-landing.vercel.app/ethics.html">Етичні положення</a>
+        <a href="/terms.html">Договір оферти та політика<br>конфіденційності</a>
+        <a href="/ethics.html">Етичні положення</a>
       </div>
       <div class="ft__col">
         <h4>Контакти</h4>
@@ -1610,8 +1622,8 @@
     <a href="https://www.youtube.com/@%D0%92%D1%96%D1%82%D0%B0%D0%BB%D1%96%D0%B9%D0%9C%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%94%D0%B2-%D0%BF4%D0%BF" target="_blank" rel="noopener" aria-label="YouTube-канал"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
   </div>
   <div class="ft-m__docs" role="navigation" aria-label="Документи">
-    <a href="https://consultation-landing.vercel.app/terms.html">Оферта та політика конфіденційності</a>
-    <a href="https://consultation-landing.vercel.app/ethics.html">Етичні положення</a>
+    <a href="/terms.html">Оферта та політика конфіденційності</a>
+    <a href="/ethics.html">Етичні положення</a>
   </div>
   <div class="ft-m__copy">© 2026 Медведєв В. М.</div>
 </footer>
