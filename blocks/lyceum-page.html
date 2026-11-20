@@ -209,8 +209,8 @@
   #about .about-copy { flex: 1; max-width: 610px; display: flex; flex-direction: column; gap: 18px; }
   #about .about-copy h2 { font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: var(--text); margin-top: 6px; }
   #about .about-copy .intro { font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
-  #about .about-copy .intro .accent { color: var(--primary); font-weight: 400; }
-  #about .about-copy .lead { font-family: var(--font-head); font-weight: 400; font-size: 1.25rem; line-height: 1.4; color: var(--text); }
+  #about .about-copy .intro .accent { color: var(--primary); font-weight: 600; }
+  #about .about-copy .lead { font-family: var(--font-head); font-weight: 400; font-size: 1.375rem; line-height: 1.45; color: var(--text); }
 
   #about .principles { display: flex; flex-direction: column; }
   #about .principle { display: flex; gap: 20px; padding: 24px 0; border-top: 1px solid var(--border); }
@@ -336,10 +336,12 @@
     box-sizing: border-box; min-height: 44px; padding: 0 24px;
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     font-family: var(--font-body); font-weight: 700; font-size: .875rem; white-space: nowrap;
-    background: #fff; color: #1B1550; border: 1.5px solid #D9DCF5; border-radius: 999px; cursor: pointer;
-    transition: color .18s ease, border-color .18s ease;
+    /* Помітна кнопка: фіолетова рамка й текст (раніше бліда сіра рамка) */
+    background: #fff; color: var(--primary); border: 2px solid var(--primary); border-radius: 999px; cursor: pointer;
+    box-shadow: 0 6px 16px rgba(80,85,190,.14);
+    transition: color .18s ease, border-color .18s ease, background .18s ease;
   }
-  #about .proof-toggle:hover { border-color: var(--primary); color: var(--text); }
+  #about .proof-toggle:hover { background: #EEF0FB; }
   #about .proof-toggle:focus { outline: none; }
   #about .proof-toggle:focus-visible { outline: 3px solid #5055BE; outline-offset: 2px; }
   #about .proof-toggle svg { width: 18px; height: 18px; flex-shrink: 0; }
@@ -398,7 +400,7 @@
     display: flex; align-items: center; gap: 20px; text-align: left;
   }
   #about .dopusk-plate-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-  #about .dopusk-plate-title { font-family: var(--font-body); font-weight: 800; font-size: 1.0625rem; line-height: 1.3; color: #1B1550; white-space: nowrap; }
+  #about .dopusk-plate-title { font-family: var(--font-body); font-weight: 800; font-size: 1.0625rem; line-height: 1.3; color: #1B1550; white-space: normal; }
   #about .dopusk-plate-desc { font-family: var(--font-body); font-weight: 400; font-size: .9375rem; line-height: 1.4; color: #4A4F7A; white-space: nowrap; }
   #about .dopusk-plate-link {
     background: none; border: none; padding: 0; color: #3F43A0;
@@ -502,7 +504,7 @@
     position: absolute; box-sizing: border-box; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
     box-shadow: 0 12px 28px rgba(80,85,190,.1); color: var(--text); padding: 16px 28px;
     display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: var(--font-head); font-weight: 600; font-size: 1.0625rem; line-height: 1.3;
+    font-family: var(--font-head); font-weight: 400; font-size: 1.0625rem; line-height: 1.3;
   }
   #cycle .node--top    { left: 38.782%; top: 0.455%;  width: 22.436%; height: 21.818%; }
   #cycle .node--right  { left: 59.615%; top: 39.091%; width: 22.436%; height: 21.818%; }
@@ -531,6 +533,12 @@
     width: 100%; max-width: 1088px; margin: 0 auto; box-sizing: border-box;
     background: radial-gradient(320px 320px at 90% 10%, rgba(80,85,190,.55), rgba(80,85,190,0) 70%), linear-gradient(135deg, #1B1550, #332B7A);
     border: 1px solid rgba(255,255,255,.08); border-radius: 32px; padding: 56px 64px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  /* Десктоп: ширина плашки = ширина заголовка «Інструменти надання психологічної підтримки» */
+  @media (min-width: 1025px) {
+    #cycle .cycle-panel { max-width: 860px; padding: 48px; gap: 28px; }
+    #cycle div.cycle-panel h3 { font-size: 1.625rem; white-space: nowrap; }
+    #cycle div.cycle-panel .btn { padding: 18px 28px; font-size: 1.0625rem; }
   }
   #cycle .cycle-panel h3 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 2.25rem; line-height: 1.2; color: #fff; }
   #cycle .cycle-panel > div { flex: 1 1 auto; min-width: 0; }
@@ -1052,7 +1060,7 @@
 <section id="timeline" class="soft-glow">
   <div class="tl-head">
     <div class="eyebrow">Етапи співпраці</div>
-    <h2><span class="d-only">Від безкоштовної консультації<br>до стабільного колективу</span><span class="m-only">Шлях до сильного колективу</span></h2>
+    <h2><span class="d-only">Від безкоштовної консультації<br>до сильного колективу</span><span class="m-only">Шлях до сильного колективу</span></h2>
     <p>Чотири етапи змін у вашому ліцеї</p>
   </div>
   <div class="tl-list">
@@ -1072,7 +1080,7 @@
       <div class="tl-bar"></div>
     </div>
     <div class="tl-item tl-item--final">
-      <h3><span class="d-only">Стабільний колектив</span><span class="m-only">Сильний колектив</span></h3>
+      <h3>Сильний колектив</h3>
       <p>Психологічне зростання команди педагогів і учнів знижує операційні витрати ліцею</p>
       <div class="tl-bar"></div>
     </div>
@@ -1167,7 +1175,7 @@
     <div class="about-copy fade-up" style="transition-delay:.08s">
       <div class="eyebrow">Про мене</div>
       <h2>Привіт, я Віталій</h2>
-      <p class="intro">За 8 років практики, я проаналізував, що <span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де всім безпечно і куди хочеться повернутися.</p>
+      <p class="intro">За роки практики з освітянами, я проаналізував, що <span class="accent">коли учні довіряють педагогам, а педагоги об’єднуються і не вигорають</span>, ліцей стає місцем, де всім безпечно і куди хочеться повернутися.</p>
       <p class="lead">Тому, під час співпраці, я дотримуюся трьох головних принципів:</p>
       <div class="principles">
         <div class="principle"><span class="num">1</span><div><h3>Фокус на цілях ліцею</h3><p class="nowrap-lg">Разом визначаємо, що саме ліцей хоче змінити, і рухаємося до цього</p></div></div>
@@ -1179,7 +1187,7 @@
 
   <div class="edu-head fade-up" style="transition-delay:.06s">
     <span class="eyebrow">Освіта і спеціалізація</span>
-    <h2 class="edu-title">Терапія за європейським стандартом <span class="hl">EABCT</span></h2>
+    <h2 class="edu-title">Компетенція за європейським стандартом <span class="hl">EABCT</span></h2>
     <p class="edu-sub">EABCT — Європейська асоціація поведінкових та когнітивних терапій</p>
   </div>
 
@@ -1480,8 +1488,8 @@
         <span class="dopusk-stamp-cap">Діє до</span>
       </div>
       <div class="dopusk-plate-body">
-        <div class="dopusk-plate-title"><span class="d-only">Допуск практики КПТ в Україні</span><span class="m-only">Дозвіл практикувати метод КПТ в Україні</span></div>
-        <div class="dopusk-plate-desc"><span class="d-only">Сертифікат УІКПТ · </span><button type="button" class="dopusk-plate-link" id="dopuskDocBtn">Відкрити документ →</button></div>
+        <div class="dopusk-plate-title">Дозвіл практикувати метод КПТ в Україні</div>
+        <div class="dopusk-plate-desc"><button type="button" class="dopusk-plate-link" id="dopuskDocBtn">Відкрити документ →</button></div>
       </div>
     </div>
     <div class="dopusk-plate">
@@ -1490,8 +1498,7 @@
         <span class="dopusk-stamp-cap">На рік</span>
       </div>
       <div class="dopusk-plate-body">
-        <div class="dopusk-plate-title"><span class="d-only">Супервізія для контролю якості</span><span class="m-only">Супервізія з акредитованими психотерапевтами КПТ</span></div>
-        <div class="dopusk-plate-desc d-only">Сесії з акредитованими психотерапевтами КПТ</div>
+        <div class="dopusk-plate-title">Супервізія з акредитованими психотерапевтами КПТ</div>
       </div>
     </div>
   </div>
@@ -1567,7 +1574,7 @@
         <span class="ft__tag">Психолог · КПТ-терапія · онлайн</span>
       </div>
       <div class="ft__col" role="navigation" aria-label="Документи">
-        <h4>Документи</h4>
+        <h4>Інформація</h4>
         <a href="https://consultation-landing.vercel.app/terms.html">Договір оферти та політика<br>конфіденційності</a>
         <a href="https://consultation-landing.vercel.app/ethics.html">Етичні положення</a>
       </div>
